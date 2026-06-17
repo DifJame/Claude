@@ -1,0 +1,170 @@
+/* =========================================================================
+   ADS · «Реклама в Москва-Сити» — premium city-tech, dark.
+   Полностью изолировано под .ads-city. Без золота. Подключать отдельным файлом.
+   ========================================================================= */
+.ads-city, .ads-city * { box-sizing: border-box; }
+.ads-city {
+  /* — палитра — */
+  --ac-bg:#0B1020; --ac-bg-2:#07111F; --ac-surface:#111827; --ac-surface-2:#161F33;
+  --ac-ink:#FFFFFF; --ac-ink-2:#AAB3C0; --ac-ink-3:rgba(170,179,192,.72);
+  --ac-line:rgba(255,255,255,.10); --ac-line-2:rgba(255,255,255,.18);
+  --ac-accent:#3B82F6;        /* electric blue — текст/линии/glow */
+  --ac-accent-strong:#2563EB; /* кнопка (бел. текст = 5.1:1 AA)   */
+  --ac-accent-hover:#1D4ED8;
+  --ac-cyan:#22D3EE;          /* световой акцент (точечно)        */
+  /* — система — */
+  --ac-r:14px; --ac-r-sm:10px; --ac-r-lg:20px; --ac-r-pill:999px;
+  --ac-wrap:1200px; --ac-pad:clamp(1.25rem,4vw,3rem); --ac-sec:clamp(3.5rem,8vw,7rem);
+  --ac-shadow:0 18px 50px rgba(0,0,0,.45);
+  --ac-glow:0 0 0 1px var(--ac-accent), 0 10px 34px rgba(59,130,246,.20);
+  --ac-ease:cubic-bezier(.22,1,.36,1); --ac-dur:.3s;
+  --ac-font:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  background:var(--ac-bg); color:var(--ac-ink); font-family:var(--ac-font);
+  line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased;
+}
+.ads-city img{max-width:100%;display:block}
+.ads-city a{color:inherit;text-decoration:none}
+.ads-city__wrap{max-width:var(--ac-wrap);margin-inline:auto;padding-inline:var(--ac-pad)}
+.ads-city-section{padding-block:var(--ac-sec)}
+.ads-city-section--alt{background:linear-gradient(180deg,var(--ac-bg),var(--ac-bg-2))}
+
+/* — типографика — */
+.ads-city-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;
+  font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ac-accent);margin-bottom:1rem}
+.ads-city-eyebrow::before{content:"";width:26px;height:1px;background:var(--ac-accent)}
+.ads-city-h1{font-size:clamp(2rem,5.2vw,3.75rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:18ch}
+.ads-city-h2{font-size:clamp(1.6rem,3.4vw,2.6rem);font-weight:600;line-height:1.12;letter-spacing:-.02em}
+.ads-city-h3{font-size:1.125rem;font-weight:600;line-height:1.25}
+.ads-city-lead{font-size:clamp(1.0625rem,1.4vw,1.3rem);color:var(--ac-ink-2);max-width:60ch;margin-top:1rem}
+.ads-city-sub{color:var(--ac-ink-2);margin-top:.5rem;max-width:62ch}
+.ads-city-head{max-width:760px;margin-bottom:clamp(2rem,4vw,3rem)}
+
+/* — кнопки — */
+.ads-city-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:54px;padding-inline:1.75rem;border-radius:var(--ac-r-sm);border:1px solid transparent;
+  font-weight:600;font-size:.95rem;cursor:pointer;text-align:center;
+  transition:background var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),
+             transform var(--ac-dur) var(--ac-ease),box-shadow var(--ac-dur)}
+.ads-city-btn--primary{background:var(--ac-accent-strong);color:#fff;box-shadow:var(--ac-shadow)}
+.ads-city-btn--ghost{background:rgba(255,255,255,.04);border-color:var(--ac-line-2);color:var(--ac-ink)}
+.ads-city-btn svg{width:18px;height:18px;flex:0 0 auto}
+.ads-city-btn:focus-visible{outline:2px solid var(--ac-cyan);outline-offset:3px}
+@media (hover:hover){
+  .ads-city-btn--primary:hover{background:var(--ac-accent-hover);transform:translateY(-2px)}
+  .ads-city-btn--ghost:hover{border-color:var(--ac-accent);color:#fff}
+}
+
+/* — иконка-плитка — */
+.ads-city-ico{width:46px;height:46px;border-radius:var(--ac-r-sm);display:grid;place-items:center;
+  background:rgba(59,130,246,.12);border:1px solid var(--ac-line);color:var(--ac-accent);margin-bottom:1rem}
+.ads-city-ico svg{width:24px;height:24px}
+
+/* — сетки — */
+.ads-city-grid{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-grid--2,.ads-city-grid--3,.ads-city-grid--4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-grid--3{grid-template-columns:repeat(3,1fr)}
+  .ads-city-grid--4{grid-template-columns:repeat(4,1fr)}}
+
+/* — стеклянная карточка — */
+.ads-city-card{background:rgba(255,255,255,.04);border:1px solid var(--ac-line);
+  border-radius:var(--ac-r);padding:clamp(1.25rem,2vw,1.75rem);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
+.ads-city-card p{color:var(--ac-ink-2);font-size:.95rem;margin-top:.5rem}
+@media (hover:hover){.ads-city-card:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}}
+.ads-city-card__link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;
+  color:var(--ac-accent);font-weight:600;font-size:.9rem;min-height:44px}
+
+/* — карточка-поверхность с фото — */
+.ads-city-surface{position:relative;overflow:hidden;border-radius:var(--ac-r);border:1px solid var(--ac-line);
+  min-height:clamp(220px,26vw,300px);display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(1.1rem,2vw,1.6rem);isolation:isolate;
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur)}
+.ads-city-surface__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  transform:scale(1.02);transition:transform .8s var(--ac-ease);filter:saturate(.95) contrast(1.04)}
+.ads-city-surface::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(7,17,31,.20),rgba(7,17,31,.55) 55%,rgba(7,17,31,.92))}
+.ads-city-surface h3{font-size:1.2rem;font-weight:600}
+.ads-city-surface p{color:var(--ac-ink-2);font-size:.9rem;margin-top:.35rem}
+@media (hover:hover){.ads-city-surface:hover{transform:translateY(-4px);border-color:var(--ac-accent)}
+  .ads-city-surface:hover .ads-city-surface__img{transform:scale(1.07)}}
+
+/* — чипы «кому подходит» — */
+.ads-city-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.ads-city-chip{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.6rem 1.1rem;
+  border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);background:rgba(255,255,255,.03);
+  color:var(--ac-ink);font-weight:500;font-size:.95rem}
+.ads-city-chip svg{width:18px;height:18px;color:var(--ac-accent)}
+
+/* — «почему» — */
+.ads-city-why{display:grid;gap:.75rem}
+.ads-city-why__row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+  padding:1.1rem 0;border-top:1px solid var(--ac-line)}
+.ads-city-why__row svg{width:24px;height:24px;color:var(--ac-cyan)}
+.ads-city-why__row b{font-weight:600}
+.ads-city-why__row span{display:block;color:var(--ac-ink-2);font-size:.95rem;margin-top:.25rem}
+
+/* — шаги — */
+.ads-city-steps{display:grid;gap:.85rem;grid-template-columns:1fr;counter-reset:s}
+@media (min-width:760px){.ads-city-steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ads-city-steps{grid-template-columns:repeat(4,1fr)}}
+.ads-city-step{background:var(--ac-surface);border:1px solid var(--ac-line);border-radius:var(--ac-r);
+  padding:1.4rem 1.25rem;position:relative}
+.ads-city-step__n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ac-accent);font-size:.85rem;letter-spacing:.1em}
+.ads-city-step h3{margin:.6rem 0 .35rem;font-size:1.05rem}
+.ads-city-step p{color:var(--ac-ink-2);font-size:.9rem}
+
+/* — FAQ (нативный, под Schema FAQPage) — */
+.ads-city-faq{border-top:1px solid var(--ac-line)}
+.ads-city-faq__item{border-bottom:1px solid var(--ac-line)}
+.ads-city-faq__item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;
+  gap:1rem;align-items:center;padding:1.15rem .25rem;font-weight:600;font-size:clamp(1rem,1.6vw,1.15rem);min-height:56px}
+.ads-city-faq__item summary::-webkit-details-marker{display:none}
+.ads-city-faq__item summary::after{content:"+";display:grid;place-items:center;flex:0 0 auto;
+  width:30px;height:30px;border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);
+  color:var(--ac-accent);font-size:20px;transition:transform var(--ac-dur) var(--ac-ease),background var(--ac-dur)}
+.ads-city-faq__item[open] summary::after{transform:rotate(45deg);background:var(--ac-accent-strong);color:#fff;border-color:transparent}
+.ads-city-faq__a{color:var(--ac-ink-2);padding:0 .25rem 1.2rem;max-width:80ch}
+
+/* — формы — */
+.ads-city-form{background:var(--ac-surface);border:1px solid var(--ac-line);border-radius:var(--ac-r-lg);
+  padding:clamp(1.25rem,3vw,2rem);display:grid;gap:1rem}
+.ads-city-form__grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:680px){.ads-city-form__grid{grid-template-columns:1fr 1fr}}
+.ads-city-field{display:grid;gap:.45rem}
+.ads-city-field--full{grid-column:1/-1}
+.ads-city-field label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ac-ink-3)}
+.ads-city-field .req{color:#F87171}
+.ads-city-input,.ads-city-select,.ads-city-textarea{width:100%;min-height:52px;padding:.7rem 1rem;
+  background:var(--ac-bg-2);border:1px solid var(--ac-line-2);border-radius:var(--ac-r-sm);
+  color:var(--ac-ink);font-size:1rem;font-family:inherit;transition:border-color var(--ac-dur),box-shadow var(--ac-dur)}
+.ads-city-textarea{min-height:104px;resize:vertical}
+.ads-city-input::placeholder,.ads-city-textarea::placeholder{color:var(--ac-ink-3)}
+.ads-city-input:focus,.ads-city-select:focus,.ads-city-textarea:focus{outline:0;border-color:var(--ac-accent);box-shadow:0 0 0 3px rgba(59,130,246,.25)}
+.ads-city-input[aria-invalid="true"]{border-color:#F87171}
+.ads-city-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23AAB3C0' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.ads-city-form__note{color:var(--ac-ink-3);font-size:.8rem}
+.ads-city-form__ok{display:none;padding:1.5rem;text-align:center;border:1px solid var(--ac-accent);border-radius:var(--ac-r);background:rgba(59,130,246,.08)}
+.ads-city-form.is-sent .ads-city-form__ok{display:block}
+.ads-city-form.is-sent .ads-city-form__grid,.ads-city-form.is-sent .ads-city-form__submit{display:none}
+
+/* — HERO — */
+.ads-city-hero{position:relative;overflow:hidden;isolation:isolate;
+  padding-block:clamp(4rem,12vh,8rem);min-height:clamp(520px,80vh,820px);display:flex;align-items:center}
+.ads-city-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.ads-city-hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(120% 90% at 80% 10%,rgba(34,211,238,.10),transparent 55%),
+             linear-gradient(180deg,rgba(7,17,31,.55) 0%,rgba(7,17,31,.78) 60%,rgba(11,16,32,.96) 100%)}
+.ads-city-hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.ads-city-hero__formwrap{margin-top:clamp(2rem,4vw,3rem);max-width:920px}
+
+/* — финальный CTA — */
+.ads-city-final{background:radial-gradient(120% 100% at 50% 0%,rgba(37,99,235,.16),transparent 60%),var(--ac-bg-2)}
+.ads-city-final__inner{display:grid;gap:clamp(1.5rem,4vw,3rem);grid-template-columns:1fr}
+@media (min-width:900px){.ads-city-final__inner{grid-template-columns:1fr 1fr;align-items:center}}
+
+@media (prefers-reduced-motion:reduce){
+  .ads-city *{transition-duration:.001ms!important;animation-duration:.001ms!important}
+  .ads-city-surface__img{transform:none}
+}
