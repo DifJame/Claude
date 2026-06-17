@@ -48,76 +48,10 @@
     </div>
   </header>
 
-  <!-- 2. ФОРМА РАСЧЁТА -->
-  <section class="ads-city-section ads-city-section--alt" id="ads-city-calc" aria-labelledby="ac-calc-t">
-    <div class="ads-city__wrap">
-      <div class="ads-city-head">
-        <p class="ads-city-eyebrow">Расчёт за 1 день</p>
-        <h2 class="ads-city-h2" id="ac-calc-t">Рассчитаем стоимость размещения</h2>
-        <p class="ads-city-sub">Заполните бриф — подберём поверхности, период и форматы под задачу и бюджет.</p>
-      </div>
-      <form class="ads-city-form" data-ads-form action="" method="post" autocomplete="on">
-        <input type="hidden" name="service" value="[Реклама в Москва-Сити]">
-        <input type="hidden" name="format_selected" data-ads-format-target value="">
-        <div class="ads-city-form__grid">
-          <div class="ads-city-field"><label for="ac-company">Компания / бренд</label>
-            <input class="ads-city-input" id="ac-company" name="company" type="text" placeholder="Название" autocomplete="organization"></div>
-          <div class="ads-city-field"><label for="ac-format">Формат рекламы</label>
-            <select class="ads-city-select" id="ac-format" name="format">
-              <option value="">Пока не знаю</option><option>Медиафасад</option><option>Digital-экран</option><option>Indoor</option><option>Промо</option>
-            </select></div>
-          <div class="ads-city-field"><label for="ac-period">Период размещения</label>
-            <input class="ads-city-input" id="ac-period" name="period" type="text" placeholder="Напр. 2 недели в сентябре"></div>
-          <div class="ads-city-field"><label for="ac-creative">Готовый ролик</label>
-            <select class="ads-city-select" id="ac-creative" name="creative"><option>Да</option><option>Нет</option><option>Нужна помощь с креативом</option></select></div>
-          <div class="ads-city-field"><label for="ac-budget">Бюджет (если есть)</label>
-            <input class="ads-city-input" id="ac-budget" name="budget" type="text" inputmode="numeric" placeholder="₽"></div>
-          <div class="ads-city-field"><label for="ac-name">Имя <span class="req">*</span></label>
-            <input class="ads-city-input" id="ac-name" name="name" type="text" required autocomplete="name" placeholder="Как к вам обращаться"></div>
-          <div class="ads-city-field ads-city-field--full"><label for="ac-phone">Телефон <span class="req">*</span></label>
-            <input class="ads-city-input" id="ac-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+7 ___ ___ __ __"></div>
-        </div>
-        <button class="ads-city-btn ads-city-btn--primary ads-city-form__submit" type="submit">Получить расчёт размещения</button>
-        <p class="ads-city-form__note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
-        <div class="ads-city-form__ok" role="status" aria-live="polite"><strong>Заявка принята.</strong> Менеджер свяжется с вами и пришлёт расчёт.</div>
-      </form>
-    </div>
-  </section>
-
-  <!-- 3. КАКИЕ ЗАДАЧИ РЕШАЕМ -->
-  <section class="ads-city-section" aria-labelledby="ac-tasks-t">
-    <div class="ads-city__wrap">
-      <div class="ads-city-head"><p class="ads-city-eyebrow">Задачи</p><h2 class="ads-city-h2" id="ac-tasks-t">Какие задачи решаем</h2></div>
-      <div class="ads-city-grid ads-city-grid--3">
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-rocket"/></svg></div><h3 class="ads-city-h3">Запуск бренда или продукта</h3><p>Громкий старт с заметным охватом в деловом центре города.</p></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-star"/></svg></div><h3 class="ads-city-h3">Имиджевая кампания</h3><p>Ассоциация бренда с масштабом и статусом Москва-Сити.</p></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-building"/></svg></div><h3 class="ads-city-h3">Продвижение недвижимости</h3><p>Показ объектов и проектов платёжеспособной аудитории.</p></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-promo"/></svg></div><h3 class="ads-city-h3">Анонс мероприятия</h3><p>Привлечение внимания к событию, премьере или открытию.</p></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-users"/></svg></div><h3 class="ads-city-h3">Премиальная аудитория</h3><p>Контакт с топ-менеджментом, резидентами и гостями башен.</p></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-eye"/></svg></div><h3 class="ads-city-h3">Информирование в Сити</h3><p>Сообщения для резидентов и гостей делового кластера.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. ФОРМАТЫ РЕКЛАМЫ -->
-  <section class="ads-city-section ads-city-section--alt" aria-labelledby="ac-formats-t">
-    <div class="ads-city__wrap">
-      <div class="ads-city-head"><p class="ads-city-eyebrow">Форматы</p><h2 class="ads-city-h2" id="ac-formats-t">Форматы рекламы</h2></div>
-      <div class="ads-city-grid ads-city-grid--3">
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-facade"/></svg></div><h3 class="ads-city-h3">Медиафасады</h3><p>Крупноформатные экраны на фасадах башен — максимальная видимость.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Медиафасад">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-screen"/></svg></div><h3 class="ads-city-h3">Digital-экраны</h3><p>Видеоэкраны в деловых башнях и общественных зонах.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Digital-экран">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-indoor"/></svg></div><h3 class="ads-city-h3">Indoor-реклама в башнях</h3><p>Холлы, лифтовые группы и входные зоны бизнес-центров.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Indoor">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-promo"/></svg></div><h3 class="ads-city-h3">Промоакции</h3><p>Активности и промо-зоны в проходимых точках Сити.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Промо">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-mail"/></svg></div><h3 class="ads-city-h3">Рассылки по резидентам</h3><p>Адресные коммуникации с аудиторией деловых башен.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Рассылка">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-layers"/></svg></div><h3 class="ads-city-h3">Комплексное размещение</h3><p>Связка форматов под единую кампанию и сценарий показа.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Комплексное">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
-      </div>
-    </div>
-  </section>
-
   <!-- 5. РЕКЛАМНЫЕ ПОВЕРХНОСТИ -->
   <section class="ads-city-section" aria-labelledby="ac-surf-t">
     <div class="ads-city__wrap">
-      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Рекламные поверхности в Москва-Сити</h2>
+      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Варианты фасадов и рекламных поверхностей</h2>
         <p class="ads-city-sub">Подберём медиафасад, медиакуб, indoor-экран или комплексное размещение под вашу задачу, период кампании и бюджет.</p></div>
 
       <!-- 5.1 Популярные поверхности (крупные карточки) -->
@@ -396,6 +330,72 @@
         <p>Доступность поверхностей, сроки размещения, технические требования и стоимость уточняются под конкретную кампанию. Мы подберём формат под задачу, период и бюджет.</p>
         <a class="ads-city-btn ads-city-btn--ghost" href="#ads-city-calc">Подобрать поверхность для рекламы</a>
       </div>
+    </div>
+  </section>
+
+  <!-- 3. КАКИЕ ЗАДАЧИ РЕШАЕМ -->
+  <section class="ads-city-section" aria-labelledby="ac-tasks-t">
+    <div class="ads-city__wrap">
+      <div class="ads-city-head"><p class="ads-city-eyebrow">Задачи</p><h2 class="ads-city-h2" id="ac-tasks-t">Какие задачи решаем</h2></div>
+      <div class="ads-city-grid ads-city-grid--3">
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-rocket"/></svg></div><h3 class="ads-city-h3">Запуск бренда или продукта</h3><p>Громкий старт с заметным охватом в деловом центре города.</p></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-star"/></svg></div><h3 class="ads-city-h3">Имиджевая кампания</h3><p>Ассоциация бренда с масштабом и статусом Москва-Сити.</p></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-building"/></svg></div><h3 class="ads-city-h3">Продвижение недвижимости</h3><p>Показ объектов и проектов платёжеспособной аудитории.</p></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-promo"/></svg></div><h3 class="ads-city-h3">Анонс мероприятия</h3><p>Привлечение внимания к событию, премьере или открытию.</p></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-users"/></svg></div><h3 class="ads-city-h3">Премиальная аудитория</h3><p>Контакт с топ-менеджментом, резидентами и гостями башен.</p></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-eye"/></svg></div><h3 class="ads-city-h3">Информирование в Сити</h3><p>Сообщения для резидентов и гостей делового кластера.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. ФОРМАТЫ РЕКЛАМЫ -->
+  <section class="ads-city-section ads-city-section--alt" aria-labelledby="ac-formats-t">
+    <div class="ads-city__wrap">
+      <div class="ads-city-head"><p class="ads-city-eyebrow">Форматы</p><h2 class="ads-city-h2" id="ac-formats-t">Форматы рекламы</h2></div>
+      <div class="ads-city-grid ads-city-grid--3">
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-facade"/></svg></div><h3 class="ads-city-h3">Медиафасады</h3><p>Крупноформатные экраны на фасадах башен — максимальная видимость.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Медиафасад">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-screen"/></svg></div><h3 class="ads-city-h3">Digital-экраны</h3><p>Видеоэкраны в деловых башнях и общественных зонах.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Digital-экран">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-indoor"/></svg></div><h3 class="ads-city-h3">Indoor-реклама в башнях</h3><p>Холлы, лифтовые группы и входные зоны бизнес-центров.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Indoor">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-promo"/></svg></div><h3 class="ads-city-h3">Промоакции</h3><p>Активности и промо-зоны в проходимых точках Сити.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Промо">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-mail"/></svg></div><h3 class="ads-city-h3">Рассылки по резидентам</h3><p>Адресные коммуникации с аудиторией деловых башен.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Рассылка">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+        <article class="ads-city-card"><div class="ads-city-ico"><svg aria-hidden="true"><use href="#ac-layers"/></svg></div><h3 class="ads-city-h3">Комплексное размещение</h3><p>Связка форматов под единую кампанию и сценарий показа.</p><a class="ads-city-card__link" href="#ads-city-calc" data-ads-format="Комплексное">Уточнить условия <svg aria-hidden="true"><use href="#ac-arrow"/></svg></a></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ФОРМА РАСЧЁТА -->
+  <section class="ads-city-section ads-city-section--alt" id="ads-city-calc" aria-labelledby="ac-calc-t">
+    <div class="ads-city__wrap">
+      <div class="ads-city-head">
+        <p class="ads-city-eyebrow">Расчёт за 1 день</p>
+        <h2 class="ads-city-h2" id="ac-calc-t">Рассчитаем стоимость размещения</h2>
+        <p class="ads-city-sub">Заполните бриф — подберём поверхности, период и форматы под задачу и бюджет.</p>
+      </div>
+      <form class="ads-city-form" data-ads-form action="" method="post" autocomplete="on">
+        <input type="hidden" name="service" value="[Реклама в Москва-Сити]">
+        <input type="hidden" name="format_selected" data-ads-format-target value="">
+        <div class="ads-city-form__grid">
+          <div class="ads-city-field"><label for="ac-company">Компания / бренд</label>
+            <input class="ads-city-input" id="ac-company" name="company" type="text" placeholder="Название" autocomplete="organization"></div>
+          <div class="ads-city-field"><label for="ac-format">Формат рекламы</label>
+            <select class="ads-city-select" id="ac-format" name="format">
+              <option value="">Пока не знаю</option><option>Медиафасад</option><option>Digital-экран</option><option>Indoor</option><option>Промо</option>
+            </select></div>
+          <div class="ads-city-field"><label for="ac-period">Период размещения</label>
+            <input class="ads-city-input" id="ac-period" name="period" type="text" placeholder="Напр. 2 недели в сентябре"></div>
+          <div class="ads-city-field"><label for="ac-creative">Готовый ролик</label>
+            <select class="ads-city-select" id="ac-creative" name="creative"><option>Да</option><option>Нет</option><option>Нужна помощь с креативом</option></select></div>
+          <div class="ads-city-field"><label for="ac-budget">Бюджет (если есть)</label>
+            <input class="ads-city-input" id="ac-budget" name="budget" type="text" inputmode="numeric" placeholder="₽"></div>
+          <div class="ads-city-field"><label for="ac-name">Имя <span class="req">*</span></label>
+            <input class="ads-city-input" id="ac-name" name="name" type="text" required autocomplete="name" placeholder="Как к вам обращаться"></div>
+          <div class="ads-city-field ads-city-field--full"><label for="ac-phone">Телефон <span class="req">*</span></label>
+            <input class="ads-city-input" id="ac-phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+7 ___ ___ __ __"></div>
+        </div>
+        <button class="ads-city-btn ads-city-btn--primary ads-city-form__submit" type="submit">Получить расчёт размещения</button>
+        <p class="ads-city-form__note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+        <div class="ads-city-form__ok" role="status" aria-live="polite"><strong>Заявка принята.</strong> Менеджер свяжется с вами и пришлёт расчёт.</div>
+      </form>
     </div>
   </section>
 
