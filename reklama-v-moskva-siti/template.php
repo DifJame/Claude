@@ -118,18 +118,87 @@ $APPLICATION->AddHeadScript("/local/ads-city/ads-city.js");
     </div>
   </section>
 
-  <!-- 5. РЕКЛАМНЫЕ ПОВЕРХНОСТИ -->
+  <!-- 5. КЛЮЧЕВЫЕ РЕКЛАМНЫЕ ПОВЕРХНОСТИ -->
   <section class="ads-city-section" aria-labelledby="ac-surf-t">
     <div class="ads-city__wrap">
-      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Рекламные поверхности в Москва-Сити</h2>
-        <p class="ads-city-sub">Подберём поверхности под задачу, период кампании, формат материалов и бюджет. Доступность поверхностей и условия размещения уточняются под конкретную кампанию.</p></div>
-      <div class="ads-city-grid ads-city-grid--3">
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-facade.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-facade.jpg" alt="Медиафасады Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Медиафасады Москва-Сити</h3><p>Крупный формат на фасадах башен.</p></article>
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-screens.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-screens.jpg" alt="Digital-экраны в деловых башнях Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Digital-экраны в башнях</h3><p>Видеоэкраны в деловых пространствах.</p></article>
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-indoor.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-indoor.jpg" alt="Indoor-реклама в холлах башен Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Indoor-реклама в холлах</h3><p>Лобби и общественные зоны.</p></article>
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-entrance.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-entrance.jpg" alt="Реклама во входных группах Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Входные группы</h3><p>Точки входа и потоки трафика.</p></article>
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-promo.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-promo.jpg" alt="Промо-зоны Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Промо-зоны</h3><p>Площадки под активации и сэмплинг.</p></article>
-        <article class="ads-city-surface"><picture><source srcset="/upload/ads-city/s-complex.webp" type="image/webp"><img class="ads-city-surface__img" src="/upload/ads-city/s-complex.jpg" alt="Комплексные рекламные кампании в Москва-Сити" loading="lazy" decoding="async" width="800" height="600"></picture><h3>Комплексные кампании</h3><p>Несколько форматов в одной кампании.</p></article>
+      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Ключевые рекламные поверхности в Москва-Сити</h2>
+        <p class="ads-city-sub">Показываем несколько самых заметных форматов размещения: медиакубы, высотные медиафасады и экраны с большим охватом деловой аудитории.</p></div>
+      <div class="ads-city-surfaces">
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media">
+            <picture><source srcset="/upload/ads-city/surf-catcher.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-catcher.jpg" alt="Медиакуб «Кэтчер» возле башен «Город Столиц», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
+            <span class="ads-city-surf__badge">Медиакуб</span>
+          </div>
+          <div class="ads-city-surf__body">
+            <h3 class="ads-city-surf__name">Медиакуб «Кэтчер» / Catcher</h3>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>У башен «Город Столиц»</b></li>
+              <li><span>Формат</span><b>Медиакуб</b></li>
+              <li><span>Площадь</span><b>304 м²</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Отдельно стоящий медиакуб рядом с «Городом Столиц»: трансляция на четыре стороны света. Подходит для имиджевых кампаний, запусков брендов и заметных городских сообщений.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Медиакуб Кэтчер">Получить расчёт</a>
+          </div>
+        </article>
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media">
+            <picture><source srcset="/upload/ads-city/surf-eurasia.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-eurasia.jpg" alt="3D-медиакуб у башни «Евразия», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
+            <span class="ads-city-surf__badge">3D-медиакуб</span>
+          </div>
+          <div class="ads-city-surf__body">
+            <h3 class="ads-city-surf__name">3D-медиакуб у башни «Евразия»</h3>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>У башен «Евразия» и «Федерация»</b></li>
+              <li><span>Формат</span><b>3D-медиакуб</b></li>
+              <li><span>Площадь</span><b>370 м²</b></li>
+              <li><span>Охват</span><b>&gt; 185 000 / сутки</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Эффектный 3D-формат для ярких роликов, презентаций продуктов, мероприятий и премиальных кампаний — когда нужен визуальный wow-эффект.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="3D медиакуб Евразия">Получить расчёт</a>
+          </div>
+        </article>
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media">
+            <picture><source srcset="/upload/ads-city/surf-mercury.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-mercury.jpg" alt="Высотный медиафасад башни «Меркурий», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
+            <span class="ads-city-surf__badge">Медиафасад</span>
+          </div>
+          <div class="ads-city-surf__body">
+            <h3 class="ads-city-surf__name">Медиафасад башни «Меркурий»</h3>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>Башня «Меркурий»</b></li>
+              <li><span>Формат</span><b>Высотный медиафасад</b></li>
+              <li><span>Площадь</span><b>1350 м² · 60–68 этаж</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Один из самых заметных высотных медиафасадов Сити. Видимость с набережной, Нового Арбата, ТТК, Кутузовского проспекта и центральных направлений Москвы.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Медиафасад Меркурий">Получить расчёт</a>
+          </div>
+        </article>
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media">
+            <picture><source srcset="/upload/ads-city/surf-severnaya.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-severnaya.jpg" alt="Вертикальный медиафасад Северной Башни, Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
+            <span class="ads-city-surf__badge">Вертикальный экран</span>
+          </div>
+          <div class="ads-city-surf__body">
+            <h3 class="ads-city-surf__name">Северная Башня</h3>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>Северная Башня</b></li>
+              <li><span>Формат</span><b>Вертикальный экран / медиафасад</b></li>
+              <li><span>Охват</span><b>&gt; 1 000 000 / сутки</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Экран с сильным охватом автомобильного и пешеходного трафика. Для крупных кампаний, которым нужна высокая заметность на въездах и транспортных артериях Сити.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Северная Башня">Получить расчёт</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="ads-city-surfaces-foot">
+        <p>Это не полный список доступных поверхностей. Подберём формат под задачу, период кампании и бюджет.</p>
+        <a class="ads-city-btn ads-city-btn--ghost" href="#ads-city-calc">Подобрать поверхность для рекламы</a>
       </div>
     </div>
   </section>

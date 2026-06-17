@@ -31,6 +31,19 @@
     });
   });
 
+  /* 1b. «Получить расчёт» на карточке поверхности -> метка с поверхностью + скролл */
+  var serviceField = document.querySelector('#ads-city-calc [name="service"]');
+  root.querySelectorAll('[data-ads-surface]').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var s = link.getAttribute('data-ads-surface') || '';
+      if (serviceField) serviceField.value = '[Реклама в Москва-Сити]' + (s ? ' / ' + s : '');
+      if (formatHidden) formatHidden.value = s;            // поверхность уедет и в format_selected
+      e.preventDefault();
+      scrollTo(calc);
+      setTimeout(function () { var n = document.getElementById('ac-name'); if (n) n.focus({ preventScroll: true }); }, REDUCE ? 0 : 420);
+    });
+  });
+
   /* 2. Плавный скролл для остальных внутренних якорей (#ads-city-calc и т.п.) */
   root.querySelectorAll('a[href^="#ads-city"]').forEach(function (a) {
     if (a.hasAttribute('data-ads-format')) return;
