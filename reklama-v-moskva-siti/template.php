@@ -118,55 +118,49 @@ $APPLICATION->AddHeadScript("/local/ads-city/ads-city.js");
     </div>
   </section>
 
-  <!-- 5. КЛЮЧЕВЫЕ РЕКЛАМНЫЕ ПОВЕРХНОСТИ -->
+  <!-- 5. РЕКЛАМНЫЕ ПОВЕРХНОСТИ -->
   <section class="ads-city-section" aria-labelledby="ac-surf-t">
     <div class="ads-city__wrap">
-      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Ключевые рекламные поверхности в Москва-Сити</h2>
-        <p class="ads-city-sub">Показываем несколько самых заметных форматов размещения: медиакубы, высотные медиафасады и экраны с большим охватом деловой аудитории.</p></div>
+      <div class="ads-city-head"><p class="ads-city-eyebrow">Поверхности</p><h2 class="ads-city-h2" id="ac-surf-t">Рекламные поверхности в Москва-Сити</h2>
+        <p class="ads-city-sub">Подберём медиафасад, медиакуб, indoor-экран или комплексное размещение под вашу задачу, период кампании и бюджет.</p></div>
+
+      <!-- 5.1 Популярные поверхности (крупные карточки) -->
+      <h3 class="ads-city-surf-subhead">Популярные поверхности</h3>
       <div class="ads-city-surfaces">
 
         <article class="ads-city-surf">
-          <div class="ads-city-surf__media">
-            <picture><source srcset="/upload/ads-city/surf-catcher.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-catcher.jpg" alt="Медиакуб «Кэтчер» возле башен «Город Столиц», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
-            <span class="ads-city-surf__badge">Медиакуб</span>
-          </div>
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/surf-catcher.jpg" alt="Медиакуб «Кэтчер» возле башен «Город Столиц», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">Медиакуб</span></div>
           <div class="ads-city-surf__body">
-            <h3 class="ads-city-surf__name">Медиакуб «Кэтчер» / Catcher</h3>
+            <h4 class="ads-city-surf__name">Медиакуб «Кэтчер» / Catcher</h4>
             <ul class="ads-city-surf__meta">
               <li><span>Локация</span><b>У башен «Город Столиц»</b></li>
               <li><span>Формат</span><b>Медиакуб</b></li>
               <li><span>Площадь</span><b>304 м²</b></li>
             </ul>
-            <p class="ads-city-surf__desc">Отдельно стоящий медиакуб рядом с «Городом Столиц»: трансляция на четыре стороны света. Подходит для имиджевых кампаний, запусков брендов и заметных городских сообщений.</p>
+            <p class="ads-city-surf__desc">Отдельно стоящий медиакуб рядом с «Городом Столиц»: трансляция на четыре стороны света. Подходит для заметных городских кампаний.</p>
             <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Медиакуб Кэтчер">Получить расчёт</a>
           </div>
         </article>
 
         <article class="ads-city-surf">
-          <div class="ads-city-surf__media">
-            <picture><source srcset="/upload/ads-city/surf-eurasia.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-eurasia.jpg" alt="3D-медиакуб у башни «Евразия», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
-            <span class="ads-city-surf__badge">3D-медиакуб</span>
-          </div>
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/surf-eurasia.jpg" alt="3D-медиакуб у башни «Евразия», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">3D-медиакуб</span></div>
           <div class="ads-city-surf__body">
-            <h3 class="ads-city-surf__name">3D-медиакуб у башни «Евразия»</h3>
+            <h4 class="ads-city-surf__name">3D-медиакуб, Башня Евразия</h4>
             <ul class="ads-city-surf__meta">
               <li><span>Локация</span><b>У башен «Евразия» и «Федерация»</b></li>
               <li><span>Формат</span><b>3D-медиакуб</b></li>
               <li><span>Площадь</span><b>370 м²</b></li>
               <li><span>Охват</span><b>&gt; 185 000 / сутки</b></li>
             </ul>
-            <p class="ads-city-surf__desc">Эффектный 3D-формат для ярких роликов, презентаций продуктов, мероприятий и премиальных кампаний — когда нужен визуальный wow-эффект.</p>
+            <p class="ads-city-surf__desc">3D-формат для ярких роликов, запусков брендов, мероприятий и имиджевых кампаний.</p>
             <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="3D медиакуб Евразия">Получить расчёт</a>
           </div>
         </article>
 
         <article class="ads-city-surf">
-          <div class="ads-city-surf__media">
-            <picture><source srcset="/upload/ads-city/surf-mercury.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-mercury.jpg" alt="Высотный медиафасад башни «Меркурий», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
-            <span class="ads-city-surf__badge">Медиафасад</span>
-          </div>
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/surf-mercury.jpg" alt="Высотный медиафасад башни «Меркурий», Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">Медиафасад</span></div>
           <div class="ads-city-surf__body">
-            <h3 class="ads-city-surf__name">Медиафасад башни «Меркурий»</h3>
+            <h4 class="ads-city-surf__name">Медиафасад башни «Меркурий»</h4>
             <ul class="ads-city-surf__meta">
               <li><span>Локация</span><b>Башня «Меркурий»</b></li>
               <li><span>Формат</span><b>Высотный медиафасад</b></li>
@@ -178,26 +172,232 @@ $APPLICATION->AddHeadScript("/local/ads-city/ads-city.js");
         </article>
 
         <article class="ads-city-surf">
-          <div class="ads-city-surf__media">
-            <picture><source srcset="/upload/ads-city/surf-severnaya.webp" type="image/webp"><img class="ads-city-surf__img" src="/upload/ads-city/surf-severnaya.jpg" alt="Вертикальный медиафасад Северной Башни, Москва-Сити" loading="lazy" decoding="async" width="800" height="500"></picture>
-            <span class="ads-city-surf__badge">Вертикальный экран</span>
-          </div>
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/surf-severnaya.jpg" alt="Северный медиафасад Северной Башни, Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">Медиафасад</span></div>
           <div class="ads-city-surf__body">
-            <h3 class="ads-city-surf__name">Северная Башня</h3>
+            <h4 class="ads-city-surf__name">Северная Башня, Северный медиафасад</h4>
             <ul class="ads-city-surf__meta">
               <li><span>Локация</span><b>Северная Башня</b></li>
-              <li><span>Формат</span><b>Вертикальный экран / медиафасад</b></li>
+              <li><span>Формат</span><b>Медиафасад</b></li>
+              <li><span>Площадь</span><b>936 м²</b></li>
               <li><span>Охват</span><b>&gt; 1 000 000 / сутки</b></li>
             </ul>
-            <p class="ads-city-surf__desc">Экран с сильным охватом автомобильного и пешеходного трафика. Для крупных кампаний, которым нужна высокая заметность на въездах и транспортных артериях Сити.</p>
-            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Северная Башня">Получить расчёт</a>
+            <p class="ads-city-surf__desc">Крупный цифровой фасад для имиджевых кампаний, медиа-событий и размещений с wow-эффектом.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Северная Башня — Северный медиафасад">Получить расчёт</a>
+          </div>
+        </article>
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/s-facade.jpg" alt="Медиафасад ОКО II, Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">Медиафасад</span></div>
+          <div class="ads-city-surf__body">
+            <h4 class="ads-city-surf__name">Медиафасад ОКО II</h4>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>ОКО II</b></li>
+              <li><span>Формат</span><b>3D / фасадные экраны</b></li>
+              <li><span>Площадь</span><b>1 275 м²</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Два фасадных экрана 50×25,5 м работают как единая поверхность. Подходит для масштабных роликов и крупных кампаний.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Медиафасад ОКО II">Получить расчёт</a>
+          </div>
+        </article>
+
+        <article class="ads-city-surf">
+          <div class="ads-city-surf__media"><img class="ads-city-surf__img" src="/upload/ads-city/s-indoor.jpg" alt="Главный холл башни «Федерация», синхронные экраны, Москва-Сити" loading="lazy" decoding="async" width="800" height="500"><span class="ads-city-surf__badge">Indoor · Холл</span></div>
+          <div class="ads-city-surf__body">
+            <h4 class="ads-city-surf__name">Башня Федерация, главный холл</h4>
+            <ul class="ads-city-surf__meta">
+              <li><span>Локация</span><b>Башня «Федерация»</b></li>
+              <li><span>Формат</span><b>4 синхронных экрана</b></li>
+              <li><span>Размер</span><b>6×3 м каждый</b></li>
+            </ul>
+            <p class="ads-city-surf__desc">Одна из самых узнаваемых indoor-площадок Сити — в общем лобби башен Федерация Восток и Запад.</p>
+            <a class="ads-city-btn ads-city-btn--primary ads-city-surf__cta" href="#ads-city-calc" data-ads-surface="Башня Федерация — главный холл">Получить расчёт</a>
           </div>
         </article>
 
       </div>
 
+      <!-- 5.2 Все поверхности + фильтры (без перезагрузки) -->
+      <h3 class="ads-city-surf-subhead">Все поверхности</h3>
+      <div class="ads-city-filters" role="group" aria-label="Фильтр поверхностей по типу">
+        <button class="ads-city-filter" type="button" data-filter="all" aria-pressed="true">Все</button>
+        <button class="ads-city-filter" type="button" data-filter="mediafasady" aria-pressed="false">Медиафасады</button>
+        <button class="ads-city-filter" type="button" data-filter="mediakuby" aria-pressed="false">Медиакубы</button>
+        <button class="ads-city-filter" type="button" data-filter="indoor" aria-pressed="false">Indoor</button>
+        <button class="ads-city-filter" type="button" data-filter="holly" aria-pressed="false">Холлы</button>
+        <button class="ads-city-filter" type="button" data-filter="lifty" aria-pressed="false">Лифты</button>
+        <button class="ads-city-filter" type="button" data-filter="promo" aria-pressed="false">Промо</button>
+      </div>
+
+      <div class="ads-city-catalog" id="ads-city-catalog">
+
+        <article class="ads-city-cat" data-cat="mediakuby mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/surf-catcher.jpg" alt="Медиакуб «Кэтчер», Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиакуб</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Медиакуб «Кэтчер» / Catcher</h4>
+            <p class="ads-city-cat__loc">У башен «Город Столиц»</p>
+            <p class="ads-city-cat__info">304 м²</p>
+            <p class="ads-city-cat__desc">Отдельно стоящий медиакуб: трансляция на четыре стороны света. Для заметных городских кампаний.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Медиакуб Кэтчер">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediakuby">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/surf-eurasia.jpg" alt="3D-медиакуб, Башня Евразия, Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">3D-медиакуб</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">3D-медиакуб, Башня Евразия</h4>
+            <p class="ads-city-cat__loc">У башен «Евразия» и «Федерация»</p>
+            <p class="ads-city-cat__info">370 м² · &gt; 185 000 / сутки</p>
+            <p class="ads-city-cat__desc">3D-формат для ярких роликов, запусков брендов, мероприятий и имиджевых кампаний.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="3D медиакуб Евразия">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/surf-severnaya.jpg" alt="Северная Башня, вертикальный экран, Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасад</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Северная Башня, вертикальный экран</h4>
+            <p class="ads-city-cat__loc">Северная Башня</p>
+            <p class="ads-city-cat__info">&gt; 1 000 000 / сутки</p>
+            <p class="ads-city-cat__desc">Охватывает ключевые транспортные артерии Сити: ТТК, Красногвардейский проезд, Кутузовский проспект и Звенигородское шоссе.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Северная Башня — вертикальный экран">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/surf-severnaya.jpg" alt="Северная Башня, Северный медиафасад, Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасад</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Северная Башня, Северный медиафасад</h4>
+            <p class="ads-city-cat__loc">Северная Башня</p>
+            <p class="ads-city-cat__info">936 м² · &gt; 1 000 000 / сутки</p>
+            <p class="ads-city-cat__desc">Крупный цифровой фасад для имиджевых кампаний, медиа-событий и размещений с wow-эффектом.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Северная Башня — Северный медиафасад">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-facade.jpg" alt="Медиафасад ОКО II, Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасад</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Медиафасад ОКО II</h4>
+            <p class="ads-city-cat__loc">ОКО II</p>
+            <p class="ads-city-cat__info">1 275 м² · 3D / фасадные экраны</p>
+            <p class="ads-city-cat__desc">Два экрана 50×25,5 м работают как единая поверхность. Для масштабных роликов и крупных кампаний.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Медиафасад ОКО II">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/surf-mercury.jpg" alt="Медиафасад башни «Меркурий», Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасад</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Медиафасад башни «Меркурий»</h4>
+            <p class="ads-city-cat__loc">Башня «Меркурий»</p>
+            <p class="ads-city-cat__info">1350 м² · 60–68 этаж</p>
+            <p class="ads-city-cat__desc">Один из самых заметных высотных медиафасадов Сити. Видимость с набережной, Нового Арбата, ТТК, Кутузовского.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Медиафасад Меркурий">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-screens.jpg" alt="Медиафасад «Федерация-Запад», Москва-Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасад</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Медиафасад «Федерация-Запад»</h4>
+            <p class="ads-city-cat__loc">Башня «Федерация»</p>
+            <p class="ads-city-cat__info">90 м²</p>
+            <p class="ads-city-cat__desc">Уличный экран на «Федерации-Запад», ориентированный на жильцов и посетителей делового квартала.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Медиафасад Федерация-Запад">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="mediafasady">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-screens.jpg" alt="Новотель Москва-Сити, два медиафасада на Афимолл Сити" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Медиафасады</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Новотель Москва-Сити, 2 медиафасада</h4>
+            <p class="ads-city-cat__loc">Афимолл Сити · Пресненская наб., 2</p>
+            <p class="ads-city-cat__info">2 медиаэкрана</p>
+            <p class="ads-city-cat__desc">Два экрана на западной стороне Афимолл Сити. Автомобильный трафик ТТК и пешеходный трафик центра.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Новотель — 2 медиафасада">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="indoor holly">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-indoor.jpg" alt="Главный холл башни «Федерация», синхронные экраны" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Indoor · Холл</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Башня Федерация, главный холл</h4>
+            <p class="ads-city-cat__loc">Башня «Федерация»</p>
+            <p class="ads-city-cat__info">4 синхронных экрана · 6×3 м</p>
+            <p class="ads-city-cat__desc">Узнаваемая indoor-площадка в общем лобби башен Федерация Восток и Запад.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Башня Федерация — главный холл">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="indoor">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-indoor.jpg" alt="Межэтажные экраны в башне «Федерация»" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Indoor</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Межэтажные экраны, Федерация</h4>
+            <p class="ads-city-cat__loc">Башня «Федерация»</p>
+            <p class="ads-city-cat__info">4 экрана</p>
+            <p class="ads-city-cat__desc">Экраны на -1 этаже на межэтажной секции, распределены по четырём углам пространства.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Федерация — межэтажные экраны">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="indoor holly">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-indoor.jpg" alt="3D-пилоны в холле башни «Федерация»" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Indoor · Холл</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Башня Федерация, 3D-пилоны в холле</h4>
+            <p class="ads-city-cat__loc">Башня «Федерация»</p>
+            <p class="ads-city-cat__info">3D · 5 экранов</p>
+            <p class="ads-city-cat__desc">Медиа-сеть Федерации: экран в переходе в Афимолл и четыре медиапилона на входных группах холла.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Федерация — 3D-пилоны">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="indoor">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-indoor.jpg" alt="Горизонтальный экран в башне «Евразия»" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Indoor</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Башня Евразия, горизонтальный экран</h4>
+            <p class="ads-city-cat__loc">Башня «Евразия»</p>
+            <p class="ads-city-cat__desc">Горизонтальный экран в переходе на -1 этаже между башнями Федерация, Империя и Город Столиц.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Евразия — горизонтальный экран">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="lifty indoor">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-indoor.jpg" alt="Экраны в лифтовом холле башни «Федерация»" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Лифты</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Федерация, экраны в лифтовом холле</h4>
+            <p class="ads-city-cat__loc">Башня «Федерация»</p>
+            <p class="ads-city-cat__info">4 группы лифтов · 7 экранов</p>
+            <p class="ads-city-cat__desc">Медиаэкраны в лифтовых зонах — контакт с аудиторией в момент ожидания лифта.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Федерация — лифтовый холл">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="indoor">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-promo.jpg" alt="Экран на входе в бизнес-центр Neva Towers" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Indoor</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Neva Towers, бизнес-центр</h4>
+            <p class="ads-city-cat__loc">Neva Towers</p>
+            <p class="ads-city-cat__desc">Экран на входе в бизнес-центр: посетители ресторанов, офисов, банка и фитнес-клуба.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Neva Towers — бизнес-центр">Получить расчёт →</a>
+          </div>
+        </article>
+
+        <article class="ads-city-cat" data-cat="holly indoor">
+          <div class="ads-city-cat__media"><img class="ads-city-cat__img" src="/upload/ads-city/s-promo.jpg" alt="Экран в главном холле МФК Neva Towers" loading="lazy" decoding="async" width="640" height="360"><span class="ads-city-cat__badge">Холл</span></div>
+          <div class="ads-city-cat__body">
+            <h4 class="ads-city-cat__name">Neva Towers, холл</h4>
+            <p class="ads-city-cat__loc">Neva Towers</p>
+            <p class="ads-city-cat__desc">Экран в главном холле МФК Neva Towers на пути посетителей ресторанов, офисов, банка и бутиков.</p>
+            <a class="ads-city-cat__cta" href="#ads-city-calc" data-ads-surface="Neva Towers — холл">Получить расчёт →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="ads-city-catalog-empty" data-catalog-empty hidden role="status" aria-live="polite">В этой категории пока нет поверхностей. Опишите задачу в форме — подберём формат вручную.</p>
+
       <div class="ads-city-surfaces-foot">
-        <p>Это не полный список доступных поверхностей. Подберём формат под задачу, период кампании и бюджет.</p>
+        <p>Доступность поверхностей, сроки размещения, технические требования и стоимость уточняются под конкретную кампанию. Мы подберём формат под задачу, период и бюджет.</p>
         <a class="ads-city-btn ads-city-btn--ghost" href="#ads-city-calc">Подобрать поверхность для рекламы</a>
       </div>
     </div>

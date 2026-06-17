@@ -44,6 +44,27 @@
     });
   });
 
+  /* 1c. Каталог поверхностей: фильтры без перезагрузки */
+  var catalog = document.getElementById('ads-city-catalog');
+  if (catalog) {
+    var cards = Array.prototype.slice.call(catalog.querySelectorAll('[data-cat]'));
+    var empty = root.querySelector('[data-catalog-empty]');
+    var filters = Array.prototype.slice.call(root.querySelectorAll('[data-filter]'));
+    filters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var f = btn.getAttribute('data-filter');
+        filters.forEach(function (b) { b.setAttribute('aria-pressed', b === btn ? 'true' : 'false'); });
+        var shown = 0;
+        cards.forEach(function (c) {
+          var ok = f === 'all' || (' ' + c.getAttribute('data-cat') + ' ').indexOf(' ' + f + ' ') > -1;
+          c.classList.toggle('is-hidden', !ok);
+          if (ok) shown++;
+        });
+        if (empty) empty.hidden = shown !== 0;
+      });
+    });
+  }
+
   /* 2. Плавный скролл для остальных внутренних якорей (#ads-city-calc и т.п.) */
   root.querySelectorAll('a[href^="#ads-city"]').forEach(function (a) {
     if (a.hasAttribute('data-ads-format')) return;
