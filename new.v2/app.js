@@ -1,0 +1,137 @@
+/* =========================================================================
+   TOP AGENCY — DESIGN TOKENS (single source of truth)
+   Подключать ПЕРВЫМ, до app.css. Меняем дизайн здесь — меняется весь сайт.
+   ========================================================================= */
+
+/* ---------- Theme-agnostic tokens ---------- */
+:root {
+  /* Type family */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Type scale (fluid) */
+  --fs-display: clamp(44px, 7vw, 116px);   /* hero */
+  --fs-h1:      clamp(40px, 6vw, 96px);
+  --fs-h2:      clamp(28px, 3.6vw, 52px);
+  --fs-h3:      clamp(22px, 2vw, 30px);
+  --fs-lead:    clamp(16px, 1.35vw, 20px);
+  --fs-body:    16px;
+  --fs-sm:      14px;
+  --fs-caption: 11.5px;                     /* eyebrow / labels, uppercase */
+
+  /* Weights — вес создаётся размером и воздухом, не жирностью */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Tracking */
+  --tr-display: -.035em;
+  --tr-tight:   -.03em;
+  --tr-head:    -.02em;
+  --tr-body:    0;
+  --tr-caption: .2em;                        /* uppercase labels */
+
+  /* Line heights */
+  --lh-display: .95;
+  --lh-tight:   1.02;
+  --lh-head:    1.1;
+  --lh-body:    1.6;
+  --lh-relaxed: 1.74;
+
+  /* Spacing scale (8px base) */
+  --space-1: 8px;  --space-2: 16px; --space-3: 24px; --space-4: 32px;
+  --space-6: 48px; --space-8: 64px; --space-12: 96px; --space-16: 128px;
+
+  /* Layout */
+  --container: 100%;
+  --pad-x: clamp(22px, 5vw, 96px);
+  --section-y: clamp(72px, 10vh, 144px);
+
+  /* Radius */
+  --radius: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+  /* Motion — «замедленное время» */
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --dur-fast: .3s;
+  --dur: .4s;
+  --dur-slow: .8s;
+}
+
+/* ---------- Theme 01 · OBSIDIAN (база) ---------- */
+:root,
+[data-theme="obsidian"] {
+  --bg:        #1A1B1D;
+  --bg-rgb:    26, 27, 29;
+  --bg-2:      #161718;
+  --bg-3:      #0F1011;
+  --surface:   #222426;
+  --surface-2: #2A2D30;
+
+  --ink:    #ECEFF3;
+  --ink-2:  rgba(236, 239, 243, .64);
+  --ink-3:  rgba(236, 239, 243, .42);
+  --paper:  #ECEFF3;
+
+  --line:   rgba(160, 185, 215, .14);
+  --line-2: rgba(160, 185, 215, .24);
+  --line-3: rgba(160, 185, 215, .38);
+
+  --accent:      #6F9BD1;
+  --accent-rgb:  111, 155, 209;
+  --accent-deep: #A9C9EC;
+  --accent-soft: rgba(111, 155, 209, .10);
+  --on-accent:   #0E1116;
+
+  --pos: #6E9C84;
+  --photo-filter: grayscale(.12) saturate(.8) brightness(.84) contrast(1.03);
+}
+
+/* ---------- Theme 02 · MIDNIGHT (альт. тёмная) ---------- */
+[data-theme="midnight"] {
+  --bg:        #0B1226;
+  --bg-rgb:    11, 18, 38;
+  --bg-2:      #091020;
+  --bg-3:      #060B17;
+  --surface:   #111A32;
+  --surface-2: #16203D;
+  --ink:    #EAF0FA;
+  --ink-2:  rgba(234, 240, 250, .66);
+  --ink-3:  rgba(234, 240, 250, .44);
+  --paper:  #EAF0FA;
+  --line:   rgba(150, 180, 220, .16);
+  --line-2: rgba(150, 180, 220, .28);
+  --line-3: rgba(150, 180, 220, .42);
+  --accent:      #7FAEE0;
+  --accent-rgb:  127, 174, 224;
+  --accent-deep: #B6D5F4;
+  --accent-soft: rgba(127, 174, 224, .12);
+  --on-accent:   #07111F;
+  --pos: #6E9C84;
+  --photo-filter: grayscale(.1) saturate(.82) brightness(.84) contrast(1.03);
+}
+
+/* ---------- Theme 03 · QUIET CAPITAL (светлый резерв) ---------- */
+[data-theme="quiet"] {
+  --bg:        #F7F5F1;
+  --bg-rgb:    247, 245, 241;
+  --bg-2:      #F1EEE7;
+  --bg-3:      #E9E5DB;
+  --surface:   #FFFFFF;
+  --surface-2: #FBFAF6;
+  --ink:    #14171A;
+  --ink-2:  rgba(20, 23, 26, .66);
+  --ink-3:  rgba(20, 23, 26, .46);
+  --paper:  #14171A;
+  --line:   rgba(20, 23, 26, .12);
+  --line-2: rgba(20, 23, 26, .20);
+  --line-3: rgba(20, 23, 26, .32);
+  --accent:      #A9824C;
+  --accent-rgb:  169, 130, 76;
+  --accent-deep: #8A6A3C;
+  --accent-soft: rgba(169, 130, 76, .10);
+  --on-accent:   #FFFFFF;
+  --pos: #5B7B5E;
+  --photo-filter: saturate(.86) brightness(.98) contrast(1.01);
+}

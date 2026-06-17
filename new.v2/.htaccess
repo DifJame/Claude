@@ -1,0 +1,23 @@
+# /new.v2/ — тестовая live-демо. Принудительный UTF-8 + закрытие от индексации.
+# Боевой сайт это не затрагивает (правило действует только в папке /new.v2/).
+
+# Точка входа: при открытии /new.v2/ открывается live-демо, а не список файлов
+DirectoryIndex index.php index.html live.php
+
+# Не показывать листинг каталога (чтобы не открывались .md/служебные файлы)
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+AddDefaultCharset UTF-8
+
+<IfModule mod_headers.c>
+  # Вся папка /new.v2/ — не индексировать (тестовая версия)
+  Header set X-Robots-Tag "noindex, nofollow"
+
+  # Content-Type text/html; charset=UTF-8 — ТОЛЬКО для PHP-страниц,
+  # чтобы не сломать отдачу css/js/изображений в /new.v2/assets/.
+  <FilesMatch "\.php$">
+    Header set Content-Type "text/html; charset=UTF-8"
+  </FilesMatch>
+</IfModule>

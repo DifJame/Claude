@@ -1,0 +1,595 @@
+<?php
+/* ZHIVAYA DEMO (/new.v2/live.php). Only READ from Bitrix. Production not touched:
+   /bitrix/header.php and /bitrix/footer.php are NOT included. */
+header('Content-Type: text/html; charset=UTF-8');
+require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
+header('Content-Type: text/html; charset=UTF-8');
+@ini_set('display_errors', '0');
+require_once(__DIR__ . "/_live-lib.php");
+
+$MCO_PRESET = ["limit" => 6];
+/* Glavnaya: posledniye aktivnyye obyekty (bez sdelki/tipa). */
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Moscow-City.online — недвижимость со смыслом</title>
+  <meta name="description" content="Премиальная и инвестиционная недвижимость: Москва-Сити, Москва, Рублёвка, Крым, Дубай. Подбор под сценарий владения, честный расчёт, сопровождение после сделки." />
+  <meta name="theme-color" content="#1A1B1D" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <meta property="og:site_name" content="Moscow-City.online" />
+  <meta property="og:title" content="Moscow-City.online — недвижимость со смыслом" />
+  <meta property="og:description" content="Подбираем недвижимость как актив и как сценарий — для жизни, дохода и капитала. Москва-Сити, Москва, Рублёвка, Крым, Дубай." />
+  <meta property="og:image" content="/new.v2/assets/hero/slide-4.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script>(function(){try{document.documentElement.setAttribute('data-theme',localStorage.getItem('mco-theme')||'obsidian');}catch(e){document.documentElement.setAttribute('data-theme','obsidian');}})();</script>
+  <link rel="stylesheet" href="/new.v2/assets/tokens.css?v=live1" />
+  <link rel="stylesheet" href="/new.v2/assets/app.css?v=live1" />
+</head>
+<body>
+  <!-- BITRIX:HEADER START · include header (шапка + меню + переключатель тем) -->
+  <header class="header" id="header">
+    <div class="wrap header__bar">
+      <a href="#top" class="brand">Moscow-City<span>.</span>online</a>
+      <nav class="nav" aria-label="Главная навигация">
+        <a href="#directions">Направления</a>
+        <a href="#scenarios">Сценарии</a>
+        <a href="#collections">Подборки</a>
+        <a href="#objects">Объекты</a>
+        <a href="#process">Как работаем</a>
+        <a href="#market">Рынок</a>
+      </nav>
+      <div class="header__right">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Переключить тему">
+          <span class="theme-toggle__dot" aria-hidden="true"></span>
+          <span class="theme-toggle__label" data-theme-label>Obsidian</span>
+        </button>
+        <a class="header__phone mono" href="tel:+79998258888">+7 999 825 88 88</a>
+        <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+      </div>
+    </div>
+  </header>
+  <!-- BITRIX:HEADER END -->
+
+  <!-- BITRIX:MOBILE-MENU START · повторяемый include -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="#directions" data-menu-close>Направления</a>
+    <a href="#scenarios" data-menu-close>Сценарии</a>
+    <a href="#collections" data-menu-close>Подборки</a>
+    <a href="#objects" data-menu-close>Объекты</a>
+    <a href="#process" data-menu-close>Как работаем</a>
+    <a href="#market" data-menu-close>Рынок</a>
+    <button class="theme-toggle theme-toggle--mobile" type="button" data-theme-toggle aria-label="Переключить тему">
+      <span class="theme-toggle__dot" aria-hidden="true"></span>
+      <span class="theme-toggle__label" data-theme-label>Obsidian</span>
+    </button>
+  </div>
+
+  <!-- BITRIX:MOBILE-MENU END -->
+
+  <main id="top">
+
+    <!-- BITRIX:HERO START -->
+    <section class="hero hero--type">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata" poster="/new.v2/assets/hero/slide-4.jpg" aria-hidden="true">
+        <source src="/new.v2/assets/hero/city-hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero__video-veil" aria-hidden="true"></div>
+      <div class="hero__vlabel" aria-hidden="true">Private · Real Estate</div>
+      <div class="wrap hero__inner">
+        <div class="hero__kicker">Moscow-City.online · Закрытая экспертиза</div>
+        <h1 class="hero__title">Недвижимость <em>со смыслом</em></h1>
+        <p class="hero__lede">Подбираем недвижимость как актив и как сценарий — для жизни, дохода и капитала. Сначала задача и цифры, потом адрес. И сопровождение после сделки.</p>
+        <div class="hero__cta">
+          <button class="btn btn--primary" type="button" data-modal-open>Обсудить задачу</button>
+          <a href="#objects" class="btn btn--ghost">Смотреть объекты <span class="ar">→</span></a>
+        </div>
+        <div class="hero__dirs">
+          <span>Направления</span>
+          <a href="#directions">Москва-Сити</a><i>/</i>
+          <a href="moskva.html">Москва</a><i>/</i>
+          <a href="rublevka.html">Рублёвка</a><i>/</i>
+          <a href="krym.html">Крым</a><i>/</i>
+          <a href="dubai.html">Дубай</a>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:HERO END -->
+
+    <!-- BITRIX:CURRENT-OFFERS START -->
+    <section class="section section--compact" id="catalog">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>01</span> Аренда и продажа</div>
+            <h2 class="h2">Актуальные варианты</h2>
+          </div>
+          <p class="lede">Начните с типа сделки: аренда, покупка, апартаменты или офисы. Дальше соберём подборку под вашу задачу, бюджет и сценарий владения.</p>
+        </div>
+        <div class="segment-grid" data-reveal>
+          <!-- PROD URL (Bitrix): будущая посадочная аренды апартаментов · статика: arenda-apartamentov-live.php -->
+          <a class="segment-card" href="arenda-apartamentov-live.php">
+            <span class="segment-card__media"><img src="/new.v2/assets/segments/rent-apartments.jpg" alt="Видовые апартаменты в аренду" loading="lazy" decoding="async"></span>
+            <span class="segment-card__overlay" aria-hidden="true"></span>
+            <span class="segment-card__content">
+              <span class="segment-card__label">01 · Аренда</span>
+              <h3>Аренда апартаментов</h3>
+              <p>Видовые апартаменты для жизни, командировок и длительного проживания.</p>
+              <span class="segment-card__tags"><span>Сити</span><span>Москва</span><span>от 1 месяца</span></span>
+              <span class="segment-card__go">Смотреть <span class="ar">→</span></span>
+            </span>
+          </a>
+          <!-- PROD URL (Bitrix): /arenda-ofisa/ · статика: arenda-ofisov-live.php -->
+          <a class="segment-card" href="arenda-ofisov-live.php">
+            <span class="segment-card__media"><img src="/new.v2/assets/segments/rent-offices.jpg" alt="Офисы и переговорные в аренду" loading="lazy" decoding="async"></span>
+            <span class="segment-card__overlay" aria-hidden="true"></span>
+            <span class="segment-card__content">
+              <span class="segment-card__label">02 · Аренда</span>
+              <h3>Аренда офисов</h3>
+              <p>Офисы и представительские пространства для команды, штаба или клиентской зоны.</p>
+              <span class="segment-card__tags"><span>Башни</span><span>Готовые блоки</span><span>Переговорные</span></span>
+              <span class="segment-card__go">Смотреть <span class="ar">→</span></span>
+            </span>
+          </a>
+          <!-- PROD URL (Bitrix): /kupit-kvartiru-prodazha-apartamentov/ · статика: prodazha-apartamentov-live.php -->
+          <a class="segment-card" href="prodazha-apartamentov-live.php">
+            <span class="segment-card__media"><img src="/new.v2/assets/segments/sale-apartments.jpg" alt="Видовые апартаменты на продажу" loading="lazy" decoding="async"></span>
+            <span class="segment-card__overlay" aria-hidden="true"></span>
+            <span class="segment-card__content">
+              <span class="segment-card__label">03 · Продажа</span>
+              <h3>Продажа апартаментов</h3>
+              <p>Апартаменты для жизни, капитала и последующей аренды.</p>
+              <span class="segment-card__tags"><span>Видовые лоты</span><span>Новые башни</span><span>Вторичный рынок</span></span>
+              <span class="segment-card__go">Смотреть <span class="ar">→</span></span>
+            </span>
+          </a>
+          <!-- PROD URL (Bitrix): /kupit-ofis-prodazha-ofisov/ · статика: prodazha-ofisov-live.php -->
+          <a class="segment-card" href="prodazha-ofisov-live.php">
+            <span class="segment-card__media"><img src="/new.v2/assets/segments/sale-offices.jpg" alt="Офисная башня и деловое пространство" loading="lazy" decoding="async"></span>
+            <span class="segment-card__overlay" aria-hidden="true"></span>
+            <span class="segment-card__content">
+              <span class="segment-card__label">04 · Продажа</span>
+              <h3>Продажа офисов</h3>
+              <p>Офисы и коммерческие площади для владения, бизнеса и арендного дохода.</p>
+              <span class="segment-card__tags"><span>Собственный офис</span><span>Инвестиции</span><span>Арендный поток</span></span>
+              <span class="segment-card__go">Смотреть <span class="ar">→</span></span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:CURRENT-OFFERS END -->
+
+    <!-- BITRIX:START-GUIDE START -->
+    <section class="section section--compact" id="start">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>02</span> С чего начать</div>
+            <h2 class="h2">Четыре входа — по вашей задаче</h2>
+          </div>
+          <p class="lede">Выберите, что вам нужно от недвижимости. Дальше подключается эксперт: подбор, аналитика и сопровождение.</p>
+        </div>
+        <div class="index-list" data-reveal>
+          <button class="index-row" type="button" data-modal-open data-selection="Купить для себя">
+            <span class="index-row__num">01</span>
+            <span class="index-row__main"><h3>Купить для себя</h3><p>Видовые квартиры и дома для жизни и статуса — в России и за рубежом.</p></span>
+            <span class="index-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="index-row" type="button" data-modal-open data-selection="Инвестировать">
+            <span class="index-row__num">02</span>
+            <span class="index-row__main"><h3>Инвестировать</h3><p>Арендный доход, рост стоимости и понятный горизонт выхода — с честным расчётом.</p></span>
+            <span class="index-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="index-row" type="button" data-modal-open data-selection="Вести бизнес">
+            <span class="index-row__num">03</span>
+            <span class="index-row__main"><h3>Вести бизнес</h3><p>Офисы и коммерция как штаб-квартира или актив с денежным потоком.</p></span>
+            <span class="index-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="index-row" type="button" data-modal-open data-selection="Передать в управление">
+            <span class="index-row__num">04</span>
+            <span class="index-row__main"><h3>Передать в управление</h3><p>Ваш объект работает и приносит доход — операционную рутину берём на себя.</p></span>
+            <span class="index-row__arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:START-GUIDE END -->
+
+    <!-- BITRIX:DIRECTIONS START -->
+    <section class="section section--alt" id="directions">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>03</span> Направления</div>
+            <h2 class="h2">Пять адресов — один уровень экспертизы</h2>
+          </div>
+          <p class="lede">Москва-Сити — наша сильная витрина, но не весь горизонт. Мы работаем там, где у недвижимости есть смысл: для жизни, дохода и капитала.</p>
+        </div>
+        <div class="dir-grid" data-reveal>
+          <a class="dir-card" href="#objects">
+            <span class="dir-card__media" style="background-image:url('/new.v2/assets/hero/slide-4.jpg')"></span>
+            <span class="dir-card__num">01</span>
+            <h3>Москва-Сити</h3>
+            <p>Видовые апартаменты и офисы в башнях. Наша сильная сторона.</p>
+            <span class="dir-card__go">Смотреть объекты <span class="ar">→</span></span>
+          </a>
+          <a class="dir-card" href="moskva.html">
+            <span class="dir-card__media" style="background-image:url('/new.v2/assets/hero/slide-2.jpg')"></span>
+            <span class="dir-card__num">02</span>
+            <h3>Москва</h3>
+            <p>Клубные дома и премиальные квартиры в центре и у воды.</p>
+            <span class="dir-card__go">Смотреть Москву <span class="ar">→</span></span>
+          </a>
+          <a class="dir-card dir-card--plate" href="rublevka.html">
+            <span class="dir-card__num">03</span>
+            <h3>Рублёвка</h3>
+            <p>Частная жизнь и закрытые посёлки западного направления.</p>
+            <span class="dir-card__go">Смотреть Рублёвку <span class="ar">→</span></span>
+          </a>
+          <a class="dir-card dir-card--plate" href="krym.html">
+            <span class="dir-card__num">04</span>
+            <h3>Крым</h3>
+            <p>Море, видовые резиденции и курортный сценарий владения.</p>
+            <span class="dir-card__go">Смотреть Крым <span class="ar">→</span></span>
+          </a>
+          <a class="dir-card dir-card--plate" href="dubai.html">
+            <span class="dir-card__num">05</span>
+            <h3>Дубай</h3>
+            <p>Международный портфель, аренда в валюте, растущий рынок.</p>
+            <span class="dir-card__go">Смотреть Дубай <span class="ar">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:DIRECTIONS END -->
+
+    <!-- BITRIX:SCENARIOS START -->
+    <section class="section" id="scenarios">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div class="eyebrow"><span>04</span> Сценарии владения</div>
+          <h2 class="h2">Один объект — дом, доход или капитал</h2>
+          <p class="lede">Мы подбираем недвижимость под сценарий, а не «вообще». Сначала задача и цифры — потом адрес.</p>
+        </div>
+        <div class="scn" data-reveal>
+          <div class="scn__feature">
+            <span class="scn__media" style="background-image:url('/new.v2/assets/hero/slide-1.jpg')" aria-hidden="true"></span>
+            <span class="tag">Сценарий 01</span>
+            <h3>Для жизни</h3>
+            <p>Видовые квартиры и дома, где решают свет, тишина и ощущение «это моё». Подбираем под образ жизни, а не под прайс.</p>
+            <button class="btn btn--ghost btn--sm" type="button" data-modal-open data-selection="Сценарий: Для жизни">Выбрать сценарий <span class="ar">→</span></button>
+          </div>
+          <div class="scn__list">
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Под аренду">
+              <span>02</span><div><h4>Под аренду</h4><p>Считаем ставку, простой и чистую доходность. При желании берём в управление.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Под бизнес">
+              <span>03</span><div><h4>Под бизнес</h4><p>Офис или коммерция как штаб-квартира и как актив на балансе.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Сохранение капитала">
+              <span>04</span><div><h4>Сохранение капитала</h4><p>Ликвидные адреса, которые держат стоимость в любом цикле рынка.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Перепродажа">
+              <span>05</span><div><h4>Под перепродажу</h4><p>Вход на раннем этапе, расчёт маржи и горизонта выхода.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Международный портфель">
+              <span>06</span><div><h4>Международный портфель</h4><p>Дубай и побережье: диверсификация и доход в валюте.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+            <button class="scn__item" type="button" data-modal-open data-selection="Сценарий: Отдых и курорт">
+              <span>07</span><div><h4>Для отдыха</h4><p>Курортная резиденция, которая часть года работает на аренду.</p></div><span class="ar" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:SCENARIOS END -->
+
+    <!-- BITRIX:COLLECTIONS START -->
+    <section class="section section--alt" id="collections">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>05</span> Подборки под задачу</div>
+            <h2 class="h2">Собрано вручную под конкретный запрос</h2>
+          </div>
+          <p class="lede">Каждую подборку готовит эксперт — с короткой аналитикой и честным расчётом. Выберите направление, пришлём релевантные объекты.</p>
+        </div>
+        <div class="idx" data-reveal>
+          <button class="idx-row" type="button" data-modal-open data-selection="Видовые квартиры для жизни">
+            <span class="idx-row__num">01</span>
+            <span class="idx-row__main"><h3>Видовые квартиры для жизни</h3><p>Там, где решают вид, свет и тишина — для себя, без компромиссов.</p></span>
+            <span class="idx-row__tags"><span>Для себя</span><span>7 объектов</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="idx-row" type="button" data-modal-open data-selection="Арендные апартаменты с прогнозируемой ставкой">
+            <span class="idx-row__num">02</span>
+            <span class="idx-row__main"><h3>Арендные апартаменты с прогнозируемой ставкой</h3><p>Понятный спрос, расчёт доходности и сценарий управления.</p></span>
+            <span class="idx-row__tags"><span>Аренда</span><span>5 объектов</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="idx-row" type="button" data-modal-open data-selection="Офисы и коммерция с денежным потоком">
+            <span class="idx-row__num">03</span>
+            <span class="idx-row__main"><h3>Офисы и коммерция с денежным потоком</h3><p>Объекты с арендатором и прозрачной экономикой.</p></span>
+            <span class="idx-row__tags"><span>Инвестиции</span><span>10 объектов</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </button>
+          <button class="idx-row" type="button" data-modal-open data-selection="Зарубежный портфель: Дубай и побережье">
+            <span class="idx-row__num">04</span>
+            <span class="idx-row__main"><h3>Зарубежный портфель: Дубай и побережье</h3><p>Диверсификация, доход в валюте и рост рынка.</p></span>
+            <span class="idx-row__tags"><span>Портфель</span><span>8 объектов</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:COLLECTIONS END -->
+
+    <!-- BITRIX:OBJECTS-LIST START -->
+    <section class="section" id="objects">
+      <div class="wrap">
+        <div class="listings__top" data-reveal>
+          <div>
+            <div class="eyebrow"><span>06</span> Избранные объекты</div>
+            <h2 class="h2">Лоты под разные сценарии</h2>
+          </div>
+          <button class="text-link" type="button" data-modal-open>Получить закрытую подборку →</button>
+        </div>
+                <!-- TODO BITRIX FILTER: na glavnoy mozhno pokazyvat izbrannyye (dop. svoystvo-flag). Seychas - posledniye aktivnyye. -->
+        <!-- BITRIX-COMPONENT: mco:element.list (IBLOCK_ID=10) | fields: ID,NAME,PRICE,TOTAL_PRICE,KVAD,TOWER,FLOOR_,ADRESS,PHOTO,URL_DETAIL | FILTER: recent/featured (последние/избранные) -->
+        <div class="cards" id="cards" data-reveal>
+<?php
+$mco_items = getLiveObjects($MCO_PRESET); // один запрос к Bitrix
+if (!empty($mco_items)) {
+  mco_render_items($mco_items);
+} else {
+  // Пустое состояние: объекты ещё не загрузились/нет под фильтр — показываем смысл + CTA, а не пустоту.
+?>
+          <div class="cards-empty">
+            <div class="eyebrow eyebrow--plain"><span>—</span> Подборка готовится</div>
+            <h3>Свежие объекты подбираем вручную</h3>
+            <p>Актуальные лоты под аренду, покупку и инвестиции эксперт соберёт под вашу задачу и бюджет — с честным расчётом доходности.</p>
+            <button class="btn btn--primary" type="button" data-modal-open>Получить подборку <span class="ar">&#8594;</span></button>
+          </div>
+<?php
+}
+?>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:OBJECTS-LIST END -->
+
+    <!-- BITRIX:FEATURED-OBJECT START -->
+    <section class="section section--alt" id="feature">
+      <div class="wrap feature" data-reveal>
+        <div class="feature__media"><i style="background-image:url('/new.v2/assets/hero/slide-4.jpg')"></i></div>
+        <div>
+          <div class="eyebrow"><span>07</span> Объект в фокусе</div>
+          <h2 class="h2 feature__head">Park Tower, 43 этаж. Панорамный апартамент 53 м²</h2>
+          <p class="body">Готовый к заселению лот с дизайнерской отделкой, мебелью и встроенной техникой. Подойдёт для жизни или как арендный актив с первого дня.</p>
+          <div class="feature__specs">
+            <div><span>Ставка аренды</span><b>₽ 250 000 /мес</b></div>
+            <div><span>Потолки</span><b>3,1 м</b></div>
+            <div><span>Вид</span><b>На Сити и набережную</b></div>
+            <div><span>Окупаемость</span><b>≈ 9,4 года</b></div>
+          </div>
+          <a href="object-live.php?id=44163" class="btn btn--primary">Изучить объект <span class="ar">→</span></a>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:FEATURED-OBJECT END -->
+
+    <!-- BITRIX:MEANING START -->
+    <section class="section" id="meaning">
+      <div class="wrap manifesto" data-reveal>
+        <div class="manifesto__text">
+          <div class="eyebrow"><span>08</span> Недвижимость со смыслом</div>
+          <p>Мы не показываем «объекты». Мы подбираем недвижимость как актив и как сценарий.</p>
+          <p class="body">Для жизни, аренды, бизнеса, сохранения капитала, перепродажи, международного портфеля или отдыха. Сначала — задача и цифры, потом — адрес. И сопровождение после сделки, потому что владение начинается там, где заканчивается продажа.</p>
+        </div>
+        <div class="manifesto__media"><i style="background-image:url('/new.v2/assets/hero/slide-1.jpg')"></i></div>
+      </div>
+    </section>
+    <!-- BITRIX:MEANING END -->
+
+    <!-- BITRIX:METHOD START -->
+    <section class="section section--alt" id="method">
+      <div class="wrap method" data-reveal>
+        <div>
+          <div class="eyebrow"><span>09</span> Как мы отбираем</div>
+          <h2 class="h2">В подборку попадает не всё</h2>
+          <blockquote>Мы оцениваем не только бетон, но и право, экономику здания и потенциал адреса.</blockquote>
+        </div>
+        <div class="crit">
+          <div class="crit__item"><span>01</span><div><h3>Локация и ликвидность</h3><p>Спрос, соседство, перспектива адреса и то, насколько легко объект будет продать или сдать завтра.</p></div></div>
+          <div class="crit__item"><span>02</span><div><h3>Здание и инженерия</h3><p>То, что не видно на фото, но определяет жизнь и цену: вентиляция, мощности, лифты, управление.</p></div></div>
+          <div class="crit__item"><span>03</span><div><h3>Право</h3><p>Чистота, структура сделки и риски — до того, как вы влюбитесь в вид из окна.</p></div></div>
+          <div class="crit__item"><span>04</span><div><h3>Экономика</h3><p>Расчёт в двух сценариях — осторожном и реалистичном — с расходами и налогами, без приукрашивания.</p></div></div>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:METHOD END -->
+
+    <!-- BITRIX:PROCESS START -->
+    <section class="section" id="process">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>10</span> Как проходит работа</div>
+            <h2 class="h2">От задачи до владения — и дальше</h2>
+          </div>
+          <p class="lede">Понятный маршрут вместо хаотичного показа объектов. Для дорогой недвижимости важно видеть весь путь заранее.</p>
+        </div>
+        <div class="steps" data-reveal>
+          <div class="step"><div class="step__num">01</div><h3>Бриф</h3><p>Фиксируем цель и сценарий владения: жить, инвестировать, вести бизнес или передать в управление.</p></div>
+          <div class="step"><div class="step__num">02</div><h3>Шорт-лист</h3><p>5–12 релевантных объектов из открытой и закрытой базы с комментариями эксперта.</p></div>
+          <div class="step"><div class="step__num">03</div><h3>Аналитика</h3><p>Ставка, ликвидность, расходы, риски и сценарии владения — честно, в цифрах.</p></div>
+          <div class="step"><div class="step__num">04</div><h3>Показы</h3><p>Маршрут по объектам, сравнение вариантов и переговоры с собственниками.</p></div>
+          <div class="step"><div class="step__num">05</div><h3>Сделка</h3><p>Документы, структура оплаты и сопровождение юристов до закрытия.</p></div>
+          <div class="step"><div class="step__num">06</div><h3>Управление</h3><p>По желанию берём объект в аренду, обслуживание и отчётность.</p></div>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:PROCESS END -->
+
+    <!-- BITRIX:SUPPORT START -->
+    <section class="section section--alt" id="support">
+      <div class="wrap">
+        <div class="section-head" data-reveal>
+          <div class="eyebrow"><span>11</span> Сопровождение после сделки</div>
+          <h2 class="h2">Владение — это начало работы актива</h2>
+        </div>
+        <div class="support" data-reveal>
+          <article><span>Аренда</span><h3>Управление арендой</h3><p>Поиск и ведение арендаторов, отчётность и контроль платежей. Собственник видит чистый доход без рутины.</p></article>
+          <article><span>Сервис</span><h3>Обслуживание объекта</h3><p>Клининг, техника, мелкий ремонт и контроль состояния — объект всегда готов к показу и проживанию.</p></article>
+          <article><span>Доход</span><h3>Подготовка к доходу</h3><p>Планировка, ремонт и комплектация под максимальную арендную ставку и срок сдачи.</p></article>
+          <article><span>Право</span><h3>Право и налоги</h3><p>Сопровождение, структура владения и законная налоговая оптимизация.</p></article>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:SUPPORT END -->
+
+    <!-- BITRIX:MARKET START -->
+    <section class="section" id="market">
+      <div class="wrap">
+        <div class="section-head section-head--split" data-reveal>
+          <div>
+            <div class="eyebrow"><span>12</span> Рынок в деталях</div>
+            <h2 class="h2">Для тех, кто решает спокойно</h2>
+          </div>
+          <p class="lede">Аналитика, ответы на частые вопросы и материалы по направлениям. Без визуального шума — как справочник, а не лента новостей.</p>
+        </div>
+        <div class="idx" data-reveal>
+          <a class="idx-row" href="#">
+            <span class="idx-row__num">01</span>
+            <span class="idx-row__main"><h3>Аналитика рынка</h3><p>Ставки, динамика и спрос по направлениям — коротко и по делу.</p></span>
+            <span class="idx-row__tags"><span>Рынок</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="idx-row" href="#">
+            <span class="idx-row__num">02</span>
+            <span class="idx-row__main"><h3>Справочник по направлениям</h3><p>Чем отличается владение в Сити, на Рублёвке, в Крыму и Дубае.</p></span>
+            <span class="idx-row__tags"><span>Гид</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="idx-row" href="#">
+            <span class="idx-row__num">03</span>
+            <span class="idx-row__main"><h3>Видео и обзоры</h3><p>Объекты, башни и сценарии владения в визуальном формате.</p></span>
+            <span class="idx-row__tags"><span>Видео</span></span>
+            <span class="idx-row__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="faq" data-reveal>
+          <details class="faq-item" open>
+            <summary>Как вы отбираете объекты?</summary>
+            <div class="faq-item__body"><p>Каждый объект проходит проверку по четырём направлениям: локация и ликвидность, здание и инженерия, право и экономика. В подборку попадает только то, что прошло все четыре.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Подходит ли апартамент как инвестиция?</summary>
+            <div class="faq-item__body"><p>Да. Мы подбираем объекты с понятным спросом и прогнозируемой ставкой, считаем окупаемость в двух сценариях и можем сразу взять объект в управление.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Работаете ли вы за пределами Москва-Сити?</summary>
+            <div class="faq-item__body"><p>Да. Москва, Рублёвка, Крым и Дубай. Сити — наша сильная витрина, но мы подбираем недвижимость там, где у неё есть смысл под вашу задачу.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>Берёте ли вы объект в управление?</summary>
+            <div class="faq-item__body"><p>Да: поиск и ведение арендаторов, обслуживание, отчётность и контроль платежей. Собственник видит чистый доход и динамику актива.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:MARKET END -->
+
+    <!-- BITRIX:CONTACT-FORM START -->
+    <section class="section final" id="contact">
+      <div class="wrap final__inner" data-reveal>
+        <div>
+          <div class="eyebrow"><span>13</span> Контакт</div>
+          <h2 class="h2">Обсудим <em>вашу</em> задачу</h2>
+          <p>Расскажите, что вы хотите от недвижимости — жить, зарабатывать или сохранить капитал. Предложим сценарий и объекты из закрытой базы. Первый разбор — без обязательств.</p>
+        </div>
+        <div class="final__form">
+          <form id="finalForm" class="form" data-form="lead" data-source="index:final" novalidate>
+            <input type="hidden" name="source_page" value="index">
+            <label><span>Имя</span><input type="text" name="name" placeholder="Как к вам обращаться" required></label>
+            <label><span>Телефон</span><input type="tel" name="phone" placeholder="+7 ___ ___ __ __" required></label>
+            <label><span>Что вам интересно</span><input type="text" name="interest" placeholder="Направление, бюджет, сценарий"></label>
+            <button class="btn btn--primary btn--block" type="submit">Связаться с экспертом</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- BITRIX:CONTACT-FORM END -->
+  </main>
+
+  <!-- BITRIX:FOOTER START · include footer -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <div>
+        <b>Moscow-City.online</b>
+        <p>Недвижимость со смыслом. Подбор, инвестиции и управление активами — Москва-Сити, Москва, Рублёвка, Крым, Дубай.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Разделы</div>
+        <a href="#directions">Направления</a><a href="#scenarios">Сценарии</a><a href="#collections">Подборки</a><a href="#objects">Объекты</a><a href="#market">Рынок</a>
+      </div>
+      <div>
+        <div class="footer__col-title">Контакты</div>
+        <a href="tel:+79998258888">+7 999 825 88 88</a>
+        <a href="https://wa.me/79998258888" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://t.me/+79998258888" target="_blank" rel="noopener">Telegram</a>
+        <button type="button" data-modal-open>Заказать звонок</button>
+      </div>
+      <div>
+        <div class="footer__col-title">Компания</div>
+        <a href="#meaning">Подход</a><a href="#method">Как мы отбираем</a><a href="#process">Как работаем</a><a href="#support">Сопровождение</a>
+      </div>
+    </div>
+  </footer>
+  <!-- BITRIX:FOOTER END -->
+
+  <!-- BITRIX:LEAD-MODAL START · форма заявки (повторяемый include) -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal__scrim" data-modal-close></div>
+    <div class="modal__panel">
+      <button class="modal__close" type="button" data-modal-close aria-label="Закрыть">×</button>
+      <div class="modal__form" id="modalFormView">
+        <div class="eyebrow eyebrow--plain"><span>—</span> Заявка</div>
+        <h3 id="modalTitle">Обсудим вашу задачу</h3>
+        <p id="modalText">Оставьте контакты — эксперт предложит сценарий и объекты из закрытой базы. Первый разбор — без обязательств.</p>
+        <form id="leadForm" class="form" data-form="lead" data-source="index:modal" novalidate>
+          <input type="hidden" name="selection" id="selectionName" value="">
+          <input type="hidden" name="source_page" value="index">
+          <label><span>Имя</span><input name="name" type="text" placeholder="Как к вам обращаться" required></label>
+          <label><span>Телефон</span><input name="phone" type="tel" placeholder="+7 ___ ___ __ __" required></label>
+          <label><span>Комментарий</span><textarea name="message" placeholder="Направление, бюджет, сроки, пожелания"></textarea></label>
+          <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+      <div class="modal__success" id="modalSuccessView" hidden>
+        <h3>Заявка принята</h3>
+        <p id="modalSuccessText">Спасибо. Эксперт свяжется с вами в течение рабочего дня.</p>
+        <button class="btn btn--ghost" type="button" data-modal-close>Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BITRIX:LEAD-MODAL END -->
+  <!-- BITRIX:FLOATING-WIDGET START -->
+  <div class="floating" aria-label="Связаться">
+    <a href="https://t.me/+79998258888" target="_blank" rel="noopener" aria-label="Telegram">TG</a>
+    <a href="https://wa.me/79998258888" target="_blank" rel="noopener" aria-label="WhatsApp">WA</a>
+  </div>
+
+  <!-- BITRIX:FLOATING-WIDGET END -->
+  <script src="/new.v2/assets/app.js?v=live1" defer></script>
+</body>
+</html>
