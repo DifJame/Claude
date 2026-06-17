@@ -76,19 +76,77 @@
 .ads-city-card__link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;
   color:var(--ac-accent);font-weight:600;font-size:.9rem;min-height:44px}
 
-/* — карточка-поверхность с фото — */
-.ads-city-surface{position:relative;overflow:hidden;border-radius:var(--ac-r);border:1px solid var(--ac-line);
-  min-height:clamp(220px,26vw,300px);display:flex;flex-direction:column;justify-content:flex-end;
-  padding:clamp(1.1rem,2vw,1.6rem);isolation:isolate;
-  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur)}
-.ads-city-surface__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+/* — карточка ключевой поверхности: фото + мета + CTA — */
+.ads-city-surfaces{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-surfaces{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-surfaces{grid-template-columns:repeat(3,1fr)}}
+.ads-city-surf{display:flex;flex-direction:column;background:rgba(255,255,255,.04);
+  border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
+@media (hover:hover){.ads-city-surf:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}
+  .ads-city-surf:hover .ads-city-surf__img{transform:scale(1.06)}}
+.ads-city-surf__media{position:relative;aspect-ratio:16/10;overflow:hidden}
+.ads-city-surf__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   transform:scale(1.02);transition:transform .8s var(--ac-ease);filter:saturate(.95) contrast(1.04)}
-.ads-city-surface::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(7,17,31,.20),rgba(7,17,31,.55) 55%,rgba(7,17,31,.92))}
-.ads-city-surface h3{font-size:1.2rem;font-weight:600}
-.ads-city-surface p{color:var(--ac-ink-2);font-size:.9rem;margin-top:.35rem}
-@media (hover:hover){.ads-city-surface:hover{transform:translateY(-4px);border-color:var(--ac-accent)}
-  .ads-city-surface:hover .ads-city-surface__img{transform:scale(1.07)}}
+.ads-city-surf__badge{position:absolute;top:.8rem;left:.8rem;display:inline-flex;align-items:center;
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#fff;
+  padding:.4rem .7rem;border-radius:var(--ac-r-pill);background:rgba(7,17,31,.62);
+  border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
+.ads-city-surf__body{display:flex;flex-direction:column;flex:1;padding:clamp(1.1rem,2vw,1.5rem)}
+.ads-city-surf__name{font-size:1.2rem;font-weight:600;line-height:1.2}
+.ads-city-surf__meta{list-style:none;margin:.9rem 0;padding:0}
+.ads-city-surf__meta li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:.55rem 0;border-top:1px solid var(--ac-line)}
+.ads-city-surf__meta span{color:var(--ac-ink-3);font-size:.72rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;flex:0 0 auto}
+.ads-city-surf__meta b{color:var(--ac-ink);font-weight:600;font-size:.92rem;text-align:right;font-variant-numeric:tabular-nums}
+.ads-city-surf__desc{color:var(--ac-ink-2);font-size:.92rem;line-height:1.55;flex:1}
+.ads-city-surf__cta{margin-top:1.25rem;width:100%}
+.ads-city-surfaces-foot{margin-top:clamp(1.5rem,3vw,2.25rem);display:flex;flex-wrap:wrap;
+  gap:1rem 1.5rem;align-items:center}
+.ads-city-surfaces-foot p{color:var(--ac-ink-2);font-size:.95rem;max-width:62ch;margin:0;flex:1 1 320px}
+
+/* — подзаголовки внутри блока поверхностей — */
+.ads-city-surf-subhead{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:600;letter-spacing:-.01em;
+  margin:clamp(1.75rem,3.5vw,2.75rem) 0 1.1rem}
+.ads-city-surf-subhead:first-of-type{margin-top:0}
+
+/* — фильтры каталога (без перезагрузки) — */
+.ads-city-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.ads-city-filter{min-height:44px;padding:.5rem 1.1rem;border-radius:var(--ac-r-pill);
+  border:1px solid var(--ac-line-2);background:rgba(255,255,255,.03);color:var(--ac-ink-2);
+  font-weight:500;font-size:.9rem;cursor:pointer;
+  transition:color var(--ac-dur),border-color var(--ac-dur),background var(--ac-dur)}
+.ads-city-filter[aria-pressed="true"]{background:var(--ac-accent-strong);border-color:var(--ac-accent-strong);color:#fff}
+.ads-city-filter:focus-visible{outline:2px solid var(--ac-cyan);outline-offset:2px}
+@media (hover:hover){.ads-city-filter:hover{border-color:var(--ac-accent);color:#fff}}
+
+/* — каталог: компактные карточки — */
+.ads-city-catalog{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-catalog{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-catalog{grid-template-columns:repeat(3,1fr)}}
+.ads-city-cat{display:flex;flex-direction:column;background:rgba(255,255,255,.04);
+  border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur)}
+.ads-city-cat.is-hidden{display:none}
+@media (hover:hover){.ads-city-cat:hover{transform:translateY(-3px);border-color:var(--ac-accent)}
+  .ads-city-cat:hover .ads-city-cat__img{transform:scale(1.05)}}
+.ads-city-cat__media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.ads-city-cat__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.02);transition:transform .8s var(--ac-ease);filter:saturate(.95) contrast(1.04)}
+.ads-city-cat__badge{position:absolute;top:.6rem;left:.6rem;font-size:.66rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:.3rem .55rem;border-radius:var(--ac-r-pill);
+  background:rgba(7,17,31,.62);border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
+.ads-city-cat__body{display:flex;flex-direction:column;flex:1;padding:1rem 1.1rem 1.1rem}
+.ads-city-cat__name{font-size:1rem;font-weight:600;line-height:1.25}
+.ads-city-cat__loc{color:var(--ac-ink-3);font-size:.8rem;margin-top:.3rem}
+.ads-city-cat__info{color:var(--ac-accent);font-size:.8rem;font-weight:600;margin-top:.45rem;font-variant-numeric:tabular-nums}
+.ads-city-cat__desc{color:var(--ac-ink-2);font-size:.86rem;line-height:1.5;margin-top:.55rem;flex:1}
+.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;margin-top:.9rem;
+  color:var(--ac-accent);font-weight:600;font-size:.88rem}
+.ads-city-catalog-empty{color:var(--ac-ink-2);margin-top:1.25rem}
+.ads-city-catalog-empty[hidden]{display:none}
 
 /* — чипы «кому подходит» — */
 .ads-city-chips{display:flex;flex-wrap:wrap;gap:.6rem}
