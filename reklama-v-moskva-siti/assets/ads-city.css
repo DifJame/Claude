@@ -1,6 +1,17 @@
 /* =========================================================================
    ADS · «Реклама в Москва-Сити» — premium city-tech, светлая тема (hero тёмный).
-   Полностью изолировано под .ads-city. Без золота. Подключать отдельным файлом.
+   Полностью изолировано под .ads-city / #ads-city. Без золота.
+   Подключать отдельным файлом.
+
+   ИЗОЛЯЦИЯ ОТ СТАРОГО ШАБЛОНА САЙТА:
+   глобальный CSS Битрикса (например `img,svg{max-width:100%;height:auto}`,
+   `#content a{color:…}`, `button{color:…!important}`, `#content ul/h2{…}`)
+   не должен ломать страницу. Поэтому:
+   · все правила живут под .ads-city / #ads-city — без глобальных селекторов;
+   · размеры/заливка svg заданы явно (стрелки и иконки не «раздуваются»);
+   · критичные «белый текст на цветной кнопке» закреплены через #ads-city
+     + точечный !important (перебивают даже #content / button!important);
+   · шрифты и цвета заголовков заданы явно (не подменяются темой сайта).
    ========================================================================= */
 .ads-city, .ads-city * { box-sizing: border-box; }
 .ads-city {
@@ -11,10 +22,10 @@
   --ac-accent:#2563EB;        /* синий — текст/ссылки/иконки (AA на белом) */
   --ac-accent-strong:#2563EB; /* кнопка (бел. текст = 5.1:1 AA)   */
   --ac-accent-hover:#1D4ED8;
-  --ac-cyan:#2563EB;          /* свет.акцент -> синий (читается на белом) */
+  --ac-accent-soft:rgba(37,99,235,.12);
   /* — система — */
   --ac-r:14px; --ac-r-sm:10px; --ac-r-lg:20px; --ac-r-pill:999px;
-  --ac-wrap:1200px; --ac-pad:clamp(1.25rem,4vw,3rem); --ac-sec:clamp(3.5rem,8vw,7rem);
+  --ac-wrap:1200px; --ac-pad:clamp(1.25rem,4vw,3rem); --ac-sec:clamp(3.5rem,8vw,6.5rem);
   --ac-shadow:0 1px 2px rgba(16,24,40,.06), 0 14px 34px rgba(16,24,40,.10);
   --ac-glow:0 0 0 1px var(--ac-accent), 0 12px 30px rgba(37,99,235,.18);
   --ac-ease:cubic-bezier(.22,1,.36,1); --ac-dur:.3s;
@@ -26,30 +37,44 @@
 .ads-city img{max-width:100%;display:block}
 .ads-city a{color:inherit;text-decoration:none}
 .ads-city__wrap{max-width:var(--ac-wrap);margin-inline:auto;padding-inline:var(--ac-pad)}
+.ads-city__wrap--narrow{max-width:920px}
 .ads-city-section{padding-block:var(--ac-sec)}
 .ads-city-section--alt{background:linear-gradient(180deg,var(--ac-bg),var(--ac-bg-2))}
+
+/* — ИЗОЛЯЦИЯ: базовый «пол» для svg и шрифтов заголовков (низкая специфичность
+     через :where, чтобы компонентные правила легко перекрывали) — */
+.ads-city :where(svg){width:18px;height:18px;flex:0 0 auto;max-width:none;fill:none}
+.ads-city :where(h1,h2,h3,h4,h5,h6){font-family:var(--ac-font)}
 
 /* — типографика — */
 .ads-city-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;
   font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ac-accent);margin-bottom:1rem}
 .ads-city-eyebrow::before{content:"";width:26px;height:1px;background:var(--ac-accent)}
-.ads-city-h1{font-size:clamp(2rem,5.2vw,3.75rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;max-width:18ch}
-.ads-city-h2{font-size:clamp(1.6rem,3.4vw,2.6rem);font-weight:600;line-height:1.12;letter-spacing:-.02em}
-.ads-city-h3{font-size:1.125rem;font-weight:600;line-height:1.25}
-.ads-city-lead{font-size:clamp(1.0625rem,1.4vw,1.3rem);color:var(--ac-ink-2);max-width:60ch;margin-top:1rem}
-.ads-city-sub{color:var(--ac-ink-2);margin-top:.5rem;max-width:62ch}
-.ads-city-head{max-width:760px;margin-bottom:clamp(2rem,4vw,3rem)}
+.ads-city-h1{font-size:clamp(1.85rem,4.4vw,3.05rem);font-weight:700;line-height:1.08;
+  letter-spacing:-.02em;text-wrap:balance;color:var(--ac-ink);margin:0}
+.ads-city-h2{font-size:clamp(1.55rem,3.1vw,2.4rem);font-weight:600;line-height:1.14;
+  letter-spacing:-.02em;color:var(--ac-ink);margin:0;text-wrap:balance}
+.ads-city-h3{font-size:1.125rem;font-weight:600;line-height:1.25;color:var(--ac-ink)}
+.ads-city-lead{font-size:clamp(1.0625rem,1.4vw,1.25rem);color:var(--ac-ink-2);max-width:60ch;margin-top:1rem}
+.ads-city-sub{color:var(--ac-ink-2);margin-top:.5rem;max-width:60ch}
+
+/* — единая центрированная шапка секции: eyebrow + h2 + description — */
+.ads-city-head{display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:.85rem;max-width:760px;margin:0 auto clamp(2.25rem,4vw,3.25rem)}
+.ads-city-head>*{margin:0}
+.ads-city-head .ads-city-sub{max-width:56ch}
 
 /* — кнопки — */
 .ads-city-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
   min-height:54px;padding-inline:1.75rem;border-radius:var(--ac-r-sm);border:1px solid transparent;
-  font-weight:600;font-size:.95rem;cursor:pointer;text-align:center;
-  transition:background var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),
+  font-family:var(--ac-font);font-weight:600;font-size:.95rem;line-height:1.2;cursor:pointer;
+  text-align:center;text-decoration:none;text-transform:none;
+  transition:background var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),color var(--ac-dur),
              transform var(--ac-dur) var(--ac-ease),box-shadow var(--ac-dur)}
 .ads-city-btn--primary{background:var(--ac-accent-strong);color:#fff;box-shadow:var(--ac-shadow)}
 .ads-city-btn--ghost{background:transparent;border-color:var(--ac-line-2);color:var(--ac-ink)}
-.ads-city-btn svg{width:18px;height:18px;flex:0 0 auto}
-.ads-city-btn:focus-visible{outline:2px solid var(--ac-cyan);outline-offset:3px}
+.ads-city-btn svg{width:18px;height:18px}
+.ads-city-btn:focus-visible{outline:2px solid var(--ac-accent);outline-offset:3px}
 @media (hover:hover){
   .ads-city-btn--primary:hover{background:var(--ac-accent-hover);transform:translateY(-2px)}
   .ads-city-btn--ghost:hover{border-color:var(--ac-accent);color:var(--ac-accent)}
@@ -57,7 +82,7 @@
 
 /* — иконка-плитка — */
 .ads-city-ico{width:46px;height:46px;border-radius:var(--ac-r-sm);display:grid;place-items:center;
-  background:rgba(59,130,246,.12);border:1px solid var(--ac-line);color:var(--ac-accent);margin-bottom:1rem}
+  background:var(--ac-accent-soft);border:1px solid var(--ac-line);color:var(--ac-accent);margin-bottom:1rem}
 .ads-city-ico svg{width:24px;height:24px}
 
 /* — сетки — */
@@ -66,20 +91,25 @@
 @media (min-width:960px){.ads-city-grid--3{grid-template-columns:repeat(3,1fr)}
   .ads-city-grid--4{grid-template-columns:repeat(4,1fr)}}
 
-/* — стеклянная карточка — */
-.ads-city-card{background:var(--ac-surface);border:1px solid var(--ac-line);
+/* — карточка — */
+.ads-city-card{display:flex;flex-direction:column;background:var(--ac-surface);border:1px solid var(--ac-line);
   border-radius:var(--ac-r);padding:clamp(1.25rem,2vw,1.75rem);box-shadow:var(--ac-shadow);
   transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
-.ads-city-card p{color:var(--ac-ink-2);font-size:.95rem;margin-top:.5rem}
+.ads-city-card .ads-city-h3{margin:0}
+.ads-city-card p{color:var(--ac-ink-2);font-size:.95rem;margin:.5rem 0 0}
 @media (hover:hover){.ads-city-card:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}}
-.ads-city-card__link{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.1rem;
-  color:var(--ac-accent);font-weight:600;font-size:.9rem;min-height:44px}
+.ads-city-card__link{display:inline-flex;align-items:center;gap:.45rem;margin-top:auto;padding-top:1.1rem;
+  color:var(--ac-accent);font-weight:600;font-size:.9rem;min-height:24px}
+.ads-city-card__link svg{width:16px;height:16px}
+@media (hover:hover){.ads-city-card__link:hover{color:var(--ac-accent-hover)}
+  .ads-city-card__link:hover svg{transform:translateX(3px)}}
+.ads-city-card__link svg{transition:transform var(--ac-dur) var(--ac-ease)}
 
 /* — карточка ключевой поверхности: фото + мета + CTA — */
 .ads-city-surfaces{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
 @media (min-width:600px){.ads-city-surfaces{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:960px){.ads-city-surfaces{grid-template-columns:repeat(3,1fr)}}
-.ads-city-surf{display:flex;flex-direction:column;background:var(--ac-surface);
+.ads-city-surf{display:flex;flex-direction:column;height:100%;background:var(--ac-surface);
   border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;box-shadow:var(--ac-shadow);
   transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
 @media (hover:hover){.ads-city-surf:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}
@@ -92,14 +122,15 @@
   padding:.4rem .7rem;border-radius:var(--ac-r-pill);background:rgba(7,17,31,.62);
   border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
 .ads-city-surf__body{display:flex;flex-direction:column;flex:1;padding:clamp(1.1rem,2vw,1.5rem)}
-.ads-city-surf__name{font-size:1.2rem;font-weight:600;line-height:1.2}
-.ads-city-surf__meta{list-style:none;margin:.9rem 0;padding:0}
+.ads-city-surf__name{font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
+.ads-city-surf__meta{list-style:none;margin:.9rem 0 0;padding:0}
 .ads-city-surf__meta li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
   padding:.55rem 0;border-top:1px solid var(--ac-line)}
 .ads-city-surf__meta span{color:var(--ac-ink-3);font-size:.72rem;font-weight:600;letter-spacing:.08em;
-  text-transform:uppercase;flex:0 0 auto}
-.ads-city-surf__meta b{color:var(--ac-ink);font-weight:600;font-size:.92rem;text-align:right;font-variant-numeric:tabular-nums}
-.ads-city-surf__desc{color:var(--ac-ink-2);font-size:.92rem;line-height:1.55;flex:1}
+  text-transform:uppercase;flex:0 0 auto;line-height:1.3}
+.ads-city-surf__meta b{color:var(--ac-ink);font-weight:600;font-size:.92rem;text-align:right;
+  font-variant-numeric:tabular-nums;line-height:1.3}
+.ads-city-surf__desc{color:var(--ac-ink-2);font-size:.92rem;line-height:1.55;flex:1;margin:.9rem 0 0}
 .ads-city-surf__cta{margin-top:1.25rem;width:100%}
 .ads-city-surfaces-foot{margin-top:clamp(1.5rem,3vw,2.25rem);display:flex;flex-wrap:wrap;
   gap:1rem 1.5rem;align-items:center}
@@ -107,24 +138,24 @@
 
 /* — подзаголовки внутри блока поверхностей — */
 .ads-city-surf-subhead{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:600;letter-spacing:-.01em;
-  margin:clamp(1.75rem,3.5vw,2.75rem) 0 1.1rem}
+  color:var(--ac-ink);margin:clamp(1.75rem,3.5vw,2.75rem) 0 1.1rem}
 .ads-city-surf-subhead:first-of-type{margin-top:0}
 
 /* — фильтры каталога (без перезагрузки) — */
 .ads-city-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
 .ads-city-filter{min-height:44px;padding:.5rem 1.1rem;border-radius:var(--ac-r-pill);
   border:1px solid var(--ac-line-2);background:var(--ac-surface);color:var(--ac-ink-2);
-  font-weight:500;font-size:.9rem;cursor:pointer;
+  font-family:var(--ac-font);font-weight:500;font-size:.9rem;line-height:1.2;cursor:pointer;text-transform:none;
   transition:color var(--ac-dur),border-color var(--ac-dur),background var(--ac-dur)}
 .ads-city-filter[aria-pressed="true"]{background:var(--ac-accent-strong);border-color:var(--ac-accent-strong);color:#fff}
-.ads-city-filter:focus-visible{outline:2px solid var(--ac-cyan);outline-offset:2px}
+.ads-city-filter:focus-visible{outline:2px solid var(--ac-accent);outline-offset:2px}
 @media (hover:hover){.ads-city-filter:hover{border-color:var(--ac-accent);color:var(--ac-accent)}}
 
 /* — каталог: компактные карточки — */
 .ads-city-catalog{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
 @media (min-width:600px){.ads-city-catalog{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:960px){.ads-city-catalog{grid-template-columns:repeat(3,1fr)}}
-.ads-city-cat{display:flex;flex-direction:column;background:var(--ac-surface);
+.ads-city-cat{display:flex;flex-direction:column;height:100%;background:var(--ac-surface);
   border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;box-shadow:var(--ac-shadow);
   transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
 .ads-city-cat.is-hidden{display:none}
@@ -137,12 +168,13 @@
   letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:.3rem .55rem;border-radius:var(--ac-r-pill);
   background:rgba(7,17,31,.62);border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
 .ads-city-cat__body{display:flex;flex-direction:column;flex:1;padding:1rem 1.1rem 1.1rem}
-.ads-city-cat__name{font-size:1rem;font-weight:600;line-height:1.25}
-.ads-city-cat__loc{color:var(--ac-ink-3);font-size:.8rem;margin-top:.3rem}
-.ads-city-cat__info{color:var(--ac-accent);font-size:.8rem;font-weight:600;margin-top:.45rem;font-variant-numeric:tabular-nums}
-.ads-city-cat__desc{color:var(--ac-ink-2);font-size:.86rem;line-height:1.5;margin-top:.55rem;flex:1}
-.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.4rem;min-height:44px;margin-top:.9rem;
+.ads-city-cat__name{font-size:1rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
+.ads-city-cat__loc{color:var(--ac-ink-3);font-size:.8rem;margin:.3rem 0 0}
+.ads-city-cat__info{color:var(--ac-accent);font-size:.8rem;font-weight:600;margin:.45rem 0 0;font-variant-numeric:tabular-nums}
+.ads-city-cat__desc{color:var(--ac-ink-2);font-size:.86rem;line-height:1.5;margin:.55rem 0 0;flex:1}
+.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.4rem;min-height:24px;margin-top:1rem;padding-top:.2rem;
   color:var(--ac-accent);font-weight:600;font-size:.88rem}
+@media (hover:hover){.ads-city-cat__cta:hover{color:var(--ac-accent-hover)}}
 .ads-city-catalog-empty{color:var(--ac-ink-2);margin-top:1.25rem}
 .ads-city-catalog-empty[hidden]{display:none}
 
@@ -151,13 +183,13 @@
 .ads-city-chip{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.6rem 1.1rem;
   border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);background:var(--ac-surface);
   color:var(--ac-ink);font-weight:500;font-size:.95rem}
-.ads-city-chip svg{width:18px;height:18px;color:var(--ac-accent)}
+.ads-city-chip svg{width:18px;height:18px;color:var(--ac-accent);stroke:var(--ac-accent)}
 
 /* — «почему» — */
 .ads-city-why{display:grid;gap:.75rem}
 .ads-city-why__row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
   padding:1.1rem 0;border-top:1px solid var(--ac-line)}
-.ads-city-why__row svg{width:24px;height:24px;color:var(--ac-cyan)}
+.ads-city-why__row svg{width:24px;height:24px;color:var(--ac-accent);stroke:var(--ac-accent)}
 .ads-city-why__row b{font-weight:600}
 .ads-city-why__row span{display:block;color:var(--ac-ink-2);font-size:.95rem;margin-top:.25rem}
 
@@ -168,14 +200,15 @@
 .ads-city-step{background:var(--ac-surface);border:1px solid var(--ac-line);border-radius:var(--ac-r);
   padding:1.4rem 1.25rem;position:relative}
 .ads-city-step__n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ac-accent);font-size:.85rem;letter-spacing:.1em}
-.ads-city-step h3{margin:.6rem 0 .35rem;font-size:1.05rem}
-.ads-city-step p{color:var(--ac-ink-2);font-size:.9rem}
+.ads-city-step h3{margin:.6rem 0 .35rem;font-size:1.05rem;color:var(--ac-ink)}
+.ads-city-step p{color:var(--ac-ink-2);font-size:.9rem;margin:0}
 
 /* — FAQ (нативный, под Schema FAQPage) — */
 .ads-city-faq{border-top:1px solid var(--ac-line)}
 .ads-city-faq__item{border-bottom:1px solid var(--ac-line)}
 .ads-city-faq__item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;
-  gap:1rem;align-items:center;padding:1.15rem .25rem;font-weight:600;font-size:clamp(1rem,1.6vw,1.15rem);min-height:56px}
+  gap:1rem;align-items:center;padding:1.15rem .25rem;font-weight:600;color:var(--ac-ink);
+  font-size:clamp(1rem,1.6vw,1.15rem);min-height:56px}
 .ads-city-faq__item summary::-webkit-details-marker{display:none}
 .ads-city-faq__item summary::after{content:"+";display:grid;place-items:center;flex:0 0 auto;
   width:30px;height:30px;border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);
@@ -191,44 +224,73 @@
 .ads-city-field{display:grid;gap:.45rem}
 .ads-city-field--full{grid-column:1/-1}
 .ads-city-field label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ac-ink-3)}
-.ads-city-field .req{color:#F87171}
+.ads-city-field .req{color:#DC2626}
 .ads-city-input,.ads-city-select,.ads-city-textarea{width:100%;min-height:52px;padding:.7rem 1rem;
   background:var(--ac-bg-2);border:1px solid var(--ac-line-2);border-radius:var(--ac-r-sm);
   color:var(--ac-ink);font-size:1rem;font-family:inherit;transition:border-color var(--ac-dur),box-shadow var(--ac-dur)}
 .ads-city-textarea{min-height:104px;resize:vertical}
 .ads-city-input::placeholder,.ads-city-textarea::placeholder{color:var(--ac-ink-3)}
-.ads-city-input:focus,.ads-city-select:focus,.ads-city-textarea:focus{outline:0;border-color:var(--ac-accent);box-shadow:0 0 0 3px rgba(59,130,246,.25)}
-.ads-city-input[aria-invalid="true"]{border-color:#F87171}
-.ads-city-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%23AAB3C0' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
-.ads-city-form__note{color:var(--ac-ink-3);font-size:.8rem}
-.ads-city-form__ok{display:none;padding:1.5rem;text-align:center;border:1px solid var(--ac-accent);border-radius:var(--ac-r);background:rgba(59,130,246,.08)}
+.ads-city-input:focus,.ads-city-select:focus,.ads-city-textarea:focus{outline:0;border-color:var(--ac-accent);box-shadow:0 0 0 3px rgba(37,99,235,.22)}
+.ads-city-input[aria-invalid="true"]{border-color:#DC2626}
+.ads-city-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.ads-city-form__note{color:var(--ac-ink-3);font-size:.8rem;margin:0}
+.ads-city-form__ok{display:none;padding:1.5rem;text-align:center;border:1px solid var(--ac-accent);border-radius:var(--ac-r);background:var(--ac-accent-soft);color:var(--ac-ink)}
 .ads-city-form.is-sent .ads-city-form__ok{display:block}
-.ads-city-form.is-sent .ads-city-form__grid,.ads-city-form.is-sent .ads-city-form__submit{display:none}
+.ads-city-form.is-sent .ads-city-form__grid,.ads-city-form.is-sent .ads-city-form__submit,.ads-city-form.is-sent .ads-city-form__note{display:none}
 
 /* — HERO — */
 .ads-city-hero{position:relative;overflow:hidden;isolation:isolate;
-  padding-block:clamp(4rem,12vh,8rem);min-height:clamp(520px,80vh,820px);display:flex;align-items:center}
+  padding-block:clamp(3.5rem,9vh,6rem);min-height:clamp(440px,72vh,620px);display:flex;align-items:center}
 .ads-city-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
 .ads-city-hero::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:radial-gradient(120% 90% at 80% 10%,rgba(34,211,238,.10),transparent 55%),
-             linear-gradient(180deg,rgba(7,17,31,.55) 0%,rgba(7,17,31,.78) 60%,rgba(11,16,32,.96) 100%)}
-.ads-city-hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
-.ads-city-hero__formwrap{margin-top:clamp(2rem,4vw,3rem);max-width:920px}
-/* hero остаётся тёмным: принудительно светлый текст и кнопки поверх фото */
-.ads-city-hero{color:#fff}
-.ads-city-hero .ads-city-h1{color:#fff}
-.ads-city-hero .ads-city-lead{color:rgba(255,255,255,.9)}
-.ads-city-hero .ads-city-eyebrow{color:#A9C7FF}
-.ads-city-hero .ads-city-eyebrow::before{background:#A9C7FF}
-.ads-city-hero .ads-city-btn--ghost{background:transparent;border-color:rgba(255,255,255,.55);color:#fff}
-@media (hover:hover){.ads-city-hero .ads-city-btn--ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}}
+  background:radial-gradient(120% 90% at 78% 8%,rgba(37,99,235,.20),transparent 56%),
+             linear-gradient(180deg,rgba(7,17,31,.62) 0%,rgba(7,17,31,.74) 55%,rgba(8,14,28,.92) 100%)}
+.ads-city-hero__content{max-width:680px}
+.ads-city-hero .ads-city-eyebrow{margin-bottom:.9rem}
+.ads-city-hero .ads-city-lead{margin-top:1rem;max-width:48ch}
+.ads-city-hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.ads-city-hero__points{list-style:none;display:flex;flex-wrap:wrap;gap:.55rem 1.5rem;margin:1.6rem 0 0;padding:0}
+.ads-city-hero__points li{position:relative;padding-left:1.1rem;color:rgba(255,255,255,.82);
+  font-size:.9rem;font-weight:500;line-height:1.4}
+.ads-city-hero__points li::before{content:"";position:absolute;left:0;top:.52em;width:6px;height:6px;
+  border-radius:50%;background:var(--ac-accent);box-shadow:0 0 0 3px rgba(37,99,235,.28)}
 
 /* — финальный CTA — */
 .ads-city-final{background:radial-gradient(120% 100% at 50% 0%,rgba(37,99,235,.16),transparent 60%),var(--ac-bg-2)}
 .ads-city-final__inner{display:grid;gap:clamp(1.5rem,4vw,3rem);grid-template-columns:1fr}
+.ads-city-final .ads-city-lead{margin-top:.85rem}
 @media (min-width:900px){.ads-city-final__inner{grid-template-columns:1fr 1fr;align-items:center}}
+
+/* =========================================================================
+   ИЗОЛЯЦИЯ HARDENING — закрепляем критичный вид поверх глобальных стилей
+   старого шаблона. #ads-city даёт ID-специфичность (перебивает #content …),
+   !important — только там, где иначе «белый текст на синей кнопке» стал бы
+   невидимым (тема может ставить button{color:…!important}).
+   ========================================================================= */
+/* кнопки: синий фон + белый текст не перебить ни #content a, ни button!important */
+#ads-city .ads-city-btn--primary{background:var(--ac-accent-strong)!important;color:#fff!important;border-color:transparent}
+@media (hover:hover){#ads-city .ads-city-btn--primary:hover{background:var(--ac-accent-hover)!important}}
+#ads-city .ads-city-btn--ghost{color:var(--ac-ink)}
+/* ссылки-акценты в карточках держат синий цвет (а не #content a / a{…}) */
+#ads-city .ads-city-card__link,#ads-city .ads-city-cat__cta,#ads-city .ads-city-cat__info{color:var(--ac-accent)}
+/* фильтры: активный = белый текст на синем (читаемо при button{color!important}) */
+#ads-city .ads-city-filter{color:var(--ac-ink-2)}
+#ads-city .ads-city-filter[aria-pressed="true"]{background:var(--ac-accent-strong);border-color:var(--ac-accent-strong);color:#fff!important}
+/* списки/заголовки карточек не должны менять тема сайта (#content ul / h4) */
+#ads-city .ads-city-surf__meta{list-style:none;margin:.9rem 0 0;padding:0}
+#ads-city .ads-city-surf__name,#ads-city .ads-city-cat__name{color:var(--ac-ink)}
+/* центрированная шапка секции не «съезжает» от #content h2{text-align:left} */
+#ads-city .ads-city-head,#ads-city .ads-city-head>*{text-align:center}
+/* HERO остаётся тёмным: светлый текст/кнопки поверх фото, поверх #content h1/a */
+#ads-city .ads-city-hero{color:#fff}
+#ads-city .ads-city-hero .ads-city-h1{color:#fff}
+#ads-city .ads-city-hero .ads-city-lead{color:rgba(255,255,255,.92)}
+#ads-city .ads-city-hero .ads-city-eyebrow{color:#A9C7FF}
+#ads-city .ads-city-hero .ads-city-eyebrow::before{background:#A9C7FF}
+#ads-city .ads-city-hero .ads-city-btn--ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+@media (hover:hover){#ads-city .ads-city-hero .ads-city-btn--ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}}
 
 @media (prefers-reduced-motion:reduce){
   .ads-city *{transition-duration:.001ms!important;animation-duration:.001ms!important}
-  .ads-city-surface__img{transform:none}
+  .ads-city-surf__img,.ads-city-cat__img{transform:none}
 }

@@ -44,12 +44,19 @@ $APPLICATION->AddHeadScript("/local/ads-city/ads-city.js");
       <img class="ads-city-hero__img" src="/upload/ads-city/hero.jpg" alt="Медиафасады и digital-экраны Москва-Сити вечером" width="1920" height="1080" fetchpriority="high" decoding="async">
     </picture>
     <div class="ads-city__wrap">
-      <p class="ads-city-eyebrow">Москва-Сити · Наружная и digital-реклама</p>
-      <h1 class="ads-city-h1">Реклама на медиафасадах и digital-экранах в Москва-Сити</h1>
-      <p class="ads-city-lead">Подберём рекламные поверхности в Москва-Сити под вашу задачу: медиафасады, digital-экраны, indoor-реклама, промоакции и комплексные размещения.</p>
-      <div class="ads-city-hero__cta">
-        <a class="ads-city-btn ads-city-btn--primary" href="#ads-city-calc">Получить расчёт</a>
-        <a class="ads-city-btn ads-city-btn--ghost" href="tel:+74951234567"><svg aria-hidden="true"><use href="#ac-phone"/></svg> Позвонить</a>
+      <div class="ads-city-hero__content">
+        <p class="ads-city-eyebrow">Москва-Сити · Наружная и digital-реклама</p>
+        <h1 class="ads-city-h1">Реклама на медиафасадах и digital-экранах в Москва-Сити</h1>
+        <p class="ads-city-lead">Медиафасады, digital-экраны, indoor и промо. Подберём форматы под задачу и рассчитаем стоимость размещения.</p>
+        <div class="ads-city-hero__cta">
+          <a class="ads-city-btn ads-city-btn--primary" href="#ads-city-calc">Получить расчёт</a>
+          <a class="ads-city-btn ads-city-btn--ghost" href="tel:+74951234567"><svg aria-hidden="true"><use href="#ac-phone"/></svg> Позвонить</a>
+        </div>
+        <ul class="ads-city-hero__points">
+          <li>Подбор поверхностей под задачу</li>
+          <li>Расчёт стоимости за 1 день</li>
+          <li>Сопровождение под ключ</li>
+        </ul>
       </div>
     </div>
   </header>
@@ -452,7 +459,7 @@ $APPLICATION->AddHeadScript("/local/ads-city/ads-city.js");
 
   <!-- 9. FAQ (Microdata FAQPage) -->
   <section class="ads-city-section" aria-labelledby="ac-faq-t">
-    <div class="ads-city__wrap" style="max-width:920px">
+    <div class="ads-city__wrap ads-city__wrap--narrow">
       <div class="ads-city-head"><p class="ads-city-eyebrow">Вопросы</p><h2 class="ads-city-h2" id="ac-faq-t">Частые вопросы</h2></div>
       <div class="ads-city-faq" itemscope itemtype="https://schema.org/FAQPage">
         <details class="ads-city-faq__item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><summary itemprop="name">Сколько стоит реклама на медиафасаде в Москва-Сити?</summary><div class="ads-city-faq__a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><div itemprop="text">Стоимость зависит от поверхности, периода, частоты показов и формата ролика. Рассчитываем смету индивидуально после брифа — оставьте заявку, и мы пришлём расчёт.</div></div></details>
