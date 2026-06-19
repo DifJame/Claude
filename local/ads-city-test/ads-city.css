@@ -1,0 +1,2441 @@
+/* =========================================================================
+   ADS · «Реклама в Москва-Сити» — premium city-tech, светлая тема (hero тёмный).
+   Полностью изолировано под .ads-city / #ads-city. Без золота.
+   Подключать отдельным файлом.
+
+   ИЗОЛЯЦИЯ ОТ СТАРОГО ШАБЛОНА САЙТА:
+   глобальный CSS Битрикса (например `img,svg{max-width:100%;height:auto}`,
+   `#content a{color:…}`, `button{color:…!important}`, `#content ul/h2{…}`)
+   не должен ломать страницу. Поэтому:
+   · все правила живут под .ads-city / #ads-city — без глобальных селекторов;
+   · размеры/заливка svg заданы явно (стрелки и иконки не «раздуваются»);
+   · критичные «белый текст на цветной кнопке» закреплены через #ads-city
+     + точечный !important (перебивают даже #content / button!important);
+   · шрифты и цвета заголовков заданы явно (не подменяются темой сайта).
+   ========================================================================= */
+.ads-city, .ads-city * { box-sizing: border-box; }
+.ads-city {
+  /* — палитра — */
+  --ac-bg:#FFFFFF; --ac-bg-2:#F4F6FA; --ac-surface:#FFFFFF; --ac-surface-2:#F7F9FC;
+  --ac-ink:#0E1726; --ac-ink-2:#46566B; --ac-ink-3:#64748B;
+  --ac-line:rgba(15,23,42,.10); --ac-line-2:rgba(15,23,42,.16);
+  --ac-accent:#2563EB;        /* синий — текст/ссылки/иконки (AA на белом) */
+  --ac-accent-strong:#2563EB; /* кнопка (бел. текст = 5.1:1 AA)   */
+  --ac-accent-hover:#1D4ED8;
+  --ac-accent-soft:rgba(37,99,235,.12);
+  /* — система — */
+  --ac-r:14px; --ac-r-sm:10px; --ac-r-lg:20px; --ac-r-pill:999px;
+  --ac-wrap:1200px; --ac-pad:clamp(1.25rem,4vw,3rem); --ac-sec:clamp(3.5rem,8vw,6.5rem);
+  --ac-shadow:0 1px 2px rgba(16,24,40,.06), 0 14px 34px rgba(16,24,40,.10);
+  --ac-glow:0 0 0 1px var(--ac-accent), 0 12px 30px rgba(37,99,235,.18);
+  --ac-ease:cubic-bezier(.22,1,.36,1); --ac-dur:.3s;
+  --ac-font:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+
+  background:var(--ac-bg); color:var(--ac-ink); font-family:var(--ac-font);
+  line-height:1.6; font-size:16px; -webkit-font-smoothing:antialiased;
+}
+.ads-city img{max-width:100%;display:block}
+.ads-city a{color:inherit;text-decoration:none}
+.ads-city__wrap{max-width:var(--ac-wrap);margin-inline:auto;padding-inline:var(--ac-pad)}
+.ads-city__wrap--narrow{max-width:920px}
+.ads-city-section{padding-block:var(--ac-sec)}
+.ads-city-section--alt{background:linear-gradient(180deg,var(--ac-bg),var(--ac-bg-2))}
+
+/* — ИЗОЛЯЦИЯ: базовый «пол» для svg и шрифтов заголовков (низкая специфичность
+     через :where, чтобы компонентные правила легко перекрывали) — */
+.ads-city :where(svg){width:18px;height:18px;flex:0 0 auto;max-width:none;fill:none}
+.ads-city :where(h1,h2,h3,h4,h5,h6){font-family:var(--ac-font)}
+
+/* — типографика — */
+.ads-city-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;
+  font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ac-accent);margin-bottom:1rem}
+.ads-city-eyebrow::before{content:"";width:26px;height:1px;background:var(--ac-accent)}
+.ads-city-h1{font-size:clamp(1.85rem,4.4vw,3.05rem);font-weight:700;line-height:1.08;
+  letter-spacing:-.02em;text-wrap:balance;color:var(--ac-ink);margin:0}
+.ads-city-h2{font-size:clamp(1.55rem,3.1vw,2.4rem);font-weight:600;line-height:1.14;
+  letter-spacing:-.02em;color:var(--ac-ink);margin:0;text-wrap:balance}
+.ads-city-h3{font-size:1.125rem;font-weight:600;line-height:1.25;color:var(--ac-ink)}
+.ads-city-lead{font-size:clamp(1.0625rem,1.4vw,1.25rem);color:var(--ac-ink-2);max-width:60ch;margin-top:1rem}
+.ads-city-sub{color:var(--ac-ink-2);margin-top:.5rem;max-width:60ch}
+
+/* — единая центрированная шапка секции: eyebrow + h2 + description — */
+.ads-city-head{display:flex;flex-direction:column;align-items:center;text-align:center;
+  gap:.85rem;max-width:760px;margin:0 auto clamp(2.25rem,4vw,3.25rem)}
+.ads-city-head>*{margin:0}
+.ads-city-head .ads-city-sub{max-width:56ch}
+
+/* — кнопки — */
+.ads-city-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+  min-height:54px;padding-inline:1.75rem;border-radius:var(--ac-r-sm);border:1px solid transparent;
+  font-family:var(--ac-font);font-weight:600;font-size:.95rem;line-height:1.2;cursor:pointer;
+  text-align:center;text-decoration:none;text-transform:none;
+  transition:background var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),color var(--ac-dur),
+             transform var(--ac-dur) var(--ac-ease),box-shadow var(--ac-dur)}
+.ads-city-btn--primary{background:var(--ac-accent-strong);color:#fff;box-shadow:var(--ac-shadow)}
+.ads-city-btn--ghost{background:transparent;border-color:var(--ac-line-2);color:var(--ac-ink)}
+.ads-city-btn svg{width:18px;height:18px}
+.ads-city-btn:focus-visible{outline:2px solid var(--ac-accent);outline-offset:3px}
+@media (hover:hover){
+  .ads-city-btn--primary:hover{background:var(--ac-accent-hover);transform:translateY(-2px)}
+  .ads-city-btn--ghost:hover{border-color:var(--ac-accent);color:var(--ac-accent)}
+}
+
+/* — иконка-плитка — */
+.ads-city-ico{width:46px;height:46px;border-radius:var(--ac-r-sm);display:grid;place-items:center;
+  background:var(--ac-accent-soft);border:1px solid var(--ac-line);color:var(--ac-accent);margin-bottom:1rem}
+.ads-city-ico svg{width:24px;height:24px}
+
+/* — сетки — */
+.ads-city-grid{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-grid--2,.ads-city-grid--3,.ads-city-grid--4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-grid--3{grid-template-columns:repeat(3,1fr)}
+  .ads-city-grid--4{grid-template-columns:repeat(4,1fr)}}
+
+/* — карточка — */
+.ads-city-card{display:flex;flex-direction:column;background:var(--ac-surface);border:1px solid var(--ac-line);
+  border-radius:var(--ac-r);padding:clamp(1.25rem,2vw,1.75rem);box-shadow:var(--ac-shadow);
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
+.ads-city-card .ads-city-h3{margin:0}
+.ads-city-card p{color:var(--ac-ink-2);font-size:.95rem;margin:.5rem 0 0}
+@media (hover:hover){.ads-city-card:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}}
+.ads-city-card__link{display:inline-flex;align-items:center;gap:.45rem;margin-top:auto;padding-top:1.1rem;
+  color:var(--ac-accent);font-weight:600;font-size:.9rem;min-height:24px}
+.ads-city-card__link svg{width:16px;height:16px}
+@media (hover:hover){.ads-city-card__link:hover{color:var(--ac-accent-hover)}
+  .ads-city-card__link:hover svg{transform:translateX(3px)}}
+.ads-city-card__link svg{transition:transform var(--ac-dur) var(--ac-ease)}
+
+/* — карточка ключевой поверхности: фото + мета + CTA — */
+.ads-city-surfaces{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-surfaces{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-surfaces{grid-template-columns:repeat(3,1fr)}}
+.ads-city-surf{display:flex;flex-direction:column;height:100%;background:var(--ac-surface);
+  border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;box-shadow:var(--ac-shadow);
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
+@media (hover:hover){.ads-city-surf:hover{transform:translateY(-4px);border-color:var(--ac-accent);box-shadow:var(--ac-glow)}
+  .ads-city-surf:hover .ads-city-surf__img{transform:scale(1.06)}}
+.ads-city-surf__media{position:relative;aspect-ratio:16/10;overflow:hidden}
+.ads-city-surf__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.02);transition:transform .8s var(--ac-ease);filter:saturate(.95) contrast(1.04)}
+.ads-city-surf__badge{position:absolute;top:.8rem;left:.8rem;display:inline-flex;align-items:center;
+  font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#fff;
+  padding:.4rem .7rem;border-radius:var(--ac-r-pill);background:rgba(7,17,31,.62);
+  border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
+.ads-city-surf__body{display:flex;flex-direction:column;flex:1;padding:clamp(1.1rem,2vw,1.5rem)}
+.ads-city-surf__name{font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
+.ads-city-surf__loc{color:var(--ac-ink-3);font-size:.82rem;margin:.3rem 0 0}
+.ads-city-surf__meta{list-style:none;margin:.9rem 0 0;padding:0}
+.ads-city-surf__meta li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
+  padding:.55rem 0;border-top:1px solid var(--ac-line)}
+.ads-city-surf__meta span{color:var(--ac-ink-3);font-size:.72rem;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;flex:0 0 auto;line-height:1.3}
+.ads-city-surf__meta b{color:var(--ac-ink);font-weight:600;font-size:.92rem;text-align:right;
+  font-variant-numeric:tabular-nums;line-height:1.3}
+.ads-city-surf__desc{color:var(--ac-ink-2);font-size:.92rem;line-height:1.55;flex:1;margin:.9rem 0 0}
+.ads-city-surf__price{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem .75rem;
+  margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--ac-line)}
+.ads-city-surf__price-label{color:var(--ac-ink-3);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.ads-city-surf__price-val{color:var(--ac-ink);font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ads-city-surf__cta{margin-top:1rem;width:100%}
+.ads-city-surfaces-foot{margin-top:clamp(1.5rem,3vw,2.25rem);display:flex;flex-wrap:wrap;
+  gap:1rem 1.5rem;align-items:center}
+.ads-city-surfaces-foot p{color:var(--ac-ink-2);font-size:.95rem;max-width:62ch;margin:0;flex:1 1 320px}
+
+/* — подзаголовки внутри блока поверхностей — */
+.ads-city-surf-subhead{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:600;letter-spacing:-.01em;
+  color:var(--ac-ink);margin:clamp(1.75rem,3.5vw,2.75rem) 0 1.1rem}
+.ads-city-surf-subhead:first-of-type{margin-top:0}
+
+/* — фильтры каталога (без перезагрузки) — */
+.ads-city-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.ads-city-filter{min-height:44px;padding:.5rem 1.1rem;border-radius:var(--ac-r-pill);
+  border:1px solid var(--ac-line-2);background:var(--ac-surface);color:var(--ac-ink-2);
+  font-family:var(--ac-font);font-weight:500;font-size:.9rem;line-height:1.2;cursor:pointer;text-transform:none;
+  transition:color var(--ac-dur),border-color var(--ac-dur),background var(--ac-dur)}
+.ads-city-filter[aria-pressed="true"]{background:var(--ac-accent-strong);border-color:var(--ac-accent-strong);color:#fff}
+.ads-city-filter:focus-visible{outline:2px solid var(--ac-accent);outline-offset:2px}
+@media (hover:hover){.ads-city-filter:hover{border-color:var(--ac-accent);color:var(--ac-accent)}}
+
+/* — каталог: компактные карточки — */
+.ads-city-catalog{display:grid;gap:clamp(.85rem,1.6vw,1.25rem);grid-template-columns:1fr}
+@media (min-width:600px){.ads-city-catalog{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:960px){.ads-city-catalog{grid-template-columns:repeat(3,1fr)}}
+.ads-city-cat{display:flex;flex-direction:column;height:100%;background:var(--ac-surface);
+  border:1px solid var(--ac-line);border-radius:var(--ac-r);overflow:hidden;box-shadow:var(--ac-shadow);
+  transition:transform var(--ac-dur) var(--ac-ease),border-color var(--ac-dur),box-shadow var(--ac-dur)}
+.ads-city-cat.is-hidden{display:none}
+@media (hover:hover){.ads-city-cat:hover{transform:translateY(-3px);border-color:var(--ac-accent)}
+  .ads-city-cat:hover .ads-city-cat__img{transform:scale(1.05)}}
+.ads-city-cat__media{position:relative;aspect-ratio:16/9;overflow:hidden}
+.ads-city-cat__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transform:scale(1.02);transition:transform .8s var(--ac-ease);filter:saturate(.95) contrast(1.04)}
+.ads-city-cat__badge{position:absolute;top:.6rem;left:.6rem;font-size:.66rem;font-weight:600;
+  letter-spacing:.04em;text-transform:uppercase;color:#fff;padding:.3rem .55rem;border-radius:var(--ac-r-pill);
+  background:rgba(7,17,31,.62);border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
+.ads-city-cat__body{display:flex;flex-direction:column;flex:1;padding:1rem 1.1rem 1.1rem}
+.ads-city-cat__name{font-size:1rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
+.ads-city-cat__loc{color:var(--ac-ink-3);font-size:.8rem;margin:.3rem 0 0}
+.ads-city-cat__specs{color:var(--ac-ink-2);font-size:.78rem;margin:.5rem 0 0;font-variant-numeric:tabular-nums}
+.ads-city-cat__info{color:var(--ac-accent);font-size:.8rem;font-weight:600;margin:.45rem 0 0;font-variant-numeric:tabular-nums}
+.ads-city-cat__desc{color:var(--ac-ink-2);font-size:.86rem;line-height:1.5;margin:.55rem 0 0;flex:1}
+.ads-city-cat__foot{display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+  margin-top:.9rem;padding-top:.8rem;border-top:1px solid var(--ac-line)}
+.ads-city-cat__price{color:var(--ac-ink);font-size:.95rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.35rem;min-height:24px;flex:0 0 auto;
+  color:var(--ac-accent);font-weight:600;font-size:.85rem;white-space:nowrap}
+.ads-city-cat__cta svg{width:15px;height:15px}
+@media (hover:hover){.ads-city-cat__cta:hover{color:var(--ac-accent-hover)}
+  .ads-city-cat__cta:hover svg{transform:translateX(2px)}}
+.ads-city-cat__cta svg{transition:transform var(--ac-dur) var(--ac-ease)}
+.ads-city-catalog-empty{color:var(--ac-ink-2);margin-top:1.25rem}
+.ads-city-catalog-empty[hidden]{display:none}
+.ads-city-price-note{color:var(--ac-ink-3);font-size:.82rem;line-height:1.5;margin:1.1rem 0 0;max-width:80ch}
+
+/* — чипы «кому подходит» — */
+.ads-city-chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.ads-city-chip{display:inline-flex;align-items:center;gap:.5rem;min-height:48px;padding:.6rem 1.1rem;
+  border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);background:var(--ac-surface);
+  color:var(--ac-ink);font-weight:500;font-size:.95rem}
+.ads-city-chip svg{width:18px;height:18px;color:var(--ac-accent);stroke:var(--ac-accent)}
+
+/* — «почему» — */
+.ads-city-why{display:grid;gap:.75rem}
+.ads-city-why__row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+  padding:1.1rem 0;border-top:1px solid var(--ac-line)}
+.ads-city-why__row svg{width:24px;height:24px;color:var(--ac-accent);stroke:var(--ac-accent)}
+.ads-city-why__row b{font-weight:600}
+.ads-city-why__row span{display:block;color:var(--ac-ink-2);font-size:.95rem;margin-top:.25rem}
+
+/* — шаги — */
+.ads-city-steps{display:grid;gap:.85rem;grid-template-columns:1fr;counter-reset:s}
+@media (min-width:760px){.ads-city-steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.ads-city-steps{grid-template-columns:repeat(4,1fr)}}
+.ads-city-step{background:var(--ac-surface);border:1px solid var(--ac-line);border-radius:var(--ac-r);
+  padding:1.4rem 1.25rem;position:relative}
+.ads-city-step__n{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ac-accent);font-size:.85rem;letter-spacing:.1em}
+.ads-city-step h3{margin:.6rem 0 .35rem;font-size:1.05rem;color:var(--ac-ink)}
+.ads-city-step p{color:var(--ac-ink-2);font-size:.9rem;margin:0}
+
+/* — FAQ (нативный, под Schema FAQPage) — */
+.ads-city-faq{border-top:1px solid var(--ac-line)}
+.ads-city-faq__item{border-bottom:1px solid var(--ac-line)}
+.ads-city-faq__item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;
+  gap:1rem;align-items:center;padding:1.15rem .25rem;font-weight:600;color:var(--ac-ink);
+  font-size:clamp(1rem,1.6vw,1.15rem);min-height:56px}
+.ads-city-faq__item summary::-webkit-details-marker{display:none}
+.ads-city-faq__item summary::after{content:"+";display:grid;place-items:center;flex:0 0 auto;
+  width:30px;height:30px;border:1px solid var(--ac-line-2);border-radius:var(--ac-r-pill);
+  color:var(--ac-accent);font-size:20px;transition:transform var(--ac-dur) var(--ac-ease),background var(--ac-dur)}
+.ads-city-faq__item[open] summary::after{transform:rotate(45deg);background:var(--ac-accent-strong);color:#fff;border-color:transparent}
+.ads-city-faq__a{color:var(--ac-ink-2);padding:0 .25rem 1.2rem;max-width:80ch}
+
+/* — формы — */
+.ads-city-form{background:var(--ac-surface);border:1px solid var(--ac-line);border-radius:var(--ac-r-lg);
+  padding:clamp(1.25rem,3vw,2rem);display:grid;gap:1rem}
+.ads-city-form__grid{display:grid;gap:1rem;grid-template-columns:1fr}
+@media (min-width:680px){.ads-city-form__grid{grid-template-columns:1fr 1fr}}
+.ads-city-field{display:grid;gap:.45rem}
+.ads-city-field--full{grid-column:1/-1}
+.ads-city-field label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ac-ink-3)}
+.ads-city-field .req{color:#DC2626}
+.ads-city-input,.ads-city-select,.ads-city-textarea{width:100%;min-height:52px;padding:.7rem 1rem;
+  background:var(--ac-bg-2);border:1px solid var(--ac-line-2);border-radius:var(--ac-r-sm);
+  color:var(--ac-ink);font-size:1rem;font-family:inherit;transition:border-color var(--ac-dur),box-shadow var(--ac-dur)}
+.ads-city-textarea{min-height:104px;resize:vertical}
+.ads-city-input::placeholder,.ads-city-textarea::placeholder{color:var(--ac-ink-3)}
+.ads-city-input:focus,.ads-city-select:focus,.ads-city-textarea:focus{outline:0;border-color:var(--ac-accent);box-shadow:0 0 0 3px rgba(37,99,235,.22)}
+.ads-city-input[aria-invalid="true"]{border-color:#DC2626}
+.ads-city-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.ads-city-form__note{color:var(--ac-ink-3);font-size:.8rem;margin:0}
+.ads-city-form__ok{display:none;padding:1.5rem;text-align:center;border:1px solid var(--ac-accent);border-radius:var(--ac-r);background:var(--ac-accent-soft);color:var(--ac-ink)}
+.ads-city-form.is-sent .ads-city-form__ok{display:block}
+.ads-city-form.is-sent .ads-city-form__grid,.ads-city-form.is-sent .ads-city-form__submit,.ads-city-form.is-sent .ads-city-form__note{display:none}
+
+/* — HERO — */
+.ads-city-hero{position:relative;overflow:hidden;isolation:isolate;
+  padding-block:clamp(3.5rem,9vh,6rem);min-height:clamp(440px,72vh,620px);display:flex;align-items:center}
+.ads-city-hero__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.ads-city-hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(120% 90% at 78% 8%,rgba(37,99,235,.20),transparent 56%),
+             linear-gradient(180deg,rgba(7,17,31,.62) 0%,rgba(7,17,31,.74) 55%,rgba(8,14,28,.92) 100%)}
+.ads-city-hero__content{max-width:680px}
+.ads-city-hero .ads-city-eyebrow{margin-bottom:.9rem}
+.ads-city-hero .ads-city-lead{margin-top:1rem;max-width:48ch}
+.ads-city-hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+.ads-city-hero__points{list-style:none;display:flex;flex-wrap:wrap;gap:.55rem 1.5rem;margin:1.6rem 0 0;padding:0}
+.ads-city-hero__points li{position:relative;padding-left:1.1rem;color:rgba(255,255,255,.82);
+  font-size:.9rem;font-weight:500;line-height:1.4}
+.ads-city-hero__points li::before{content:"";position:absolute;left:0;top:.52em;width:6px;height:6px;
+  border-radius:50%;background:var(--ac-accent);box-shadow:0 0 0 3px rgba(37,99,235,.28)}
+
+/* — финальный CTA — */
+.ads-city-final{background:radial-gradient(120% 100% at 50% 0%,rgba(37,99,235,.16),transparent 60%),var(--ac-bg-2)}
+.ads-city-final__inner{display:grid;gap:clamp(1.5rem,4vw,3rem);grid-template-columns:1fr}
+.ads-city-final .ads-city-lead{margin-top:.85rem}
+@media (min-width:900px){.ads-city-final__inner{grid-template-columns:1fr 1fr;align-items:center}}
+
+/* =========================================================================
+   ИЗОЛЯЦИЯ HARDENING — закрепляем критичный вид поверх глобальных стилей
+   старого шаблона. #ads-city даёт ID-специфичность (перебивает #content …),
+   !important — только там, где иначе «белый текст на синей кнопке» стал бы
+   невидимым (тема может ставить button{color:…!important}).
+   ========================================================================= */
+/* кнопки: синий фон + белый текст не перебить ни #content a, ни button!important */
+#ads-city .ads-city-btn--primary{background:var(--ac-accent-strong)!important;color:#fff!important;border-color:transparent}
+@media (hover:hover){#ads-city .ads-city-btn--primary:hover{background:var(--ac-accent-hover)!important}}
+#ads-city .ads-city-btn--ghost{color:var(--ac-ink)}
+/* ссылки-акценты в карточках держат синий цвет (а не #content a / a{…}) */
+#ads-city .ads-city-card__link,#ads-city .ads-city-cat__cta,#ads-city .ads-city-cat__info{color:var(--ac-accent)}
+/* фильтры: активный = белый текст на синем (читаемо при button{color!important}) */
+#ads-city .ads-city-filter{color:var(--ac-ink-2)}
+#ads-city .ads-city-filter[aria-pressed="true"]{background:var(--ac-accent-strong);border-color:var(--ac-accent-strong);color:#fff!important}
+/* списки/заголовки карточек не должны менять тема сайта (#content ul / h4) */
+#ads-city .ads-city-surf__meta{list-style:none;margin:.9rem 0 0;padding:0}
+#ads-city .ads-city-surf__name,#ads-city .ads-city-cat__name{color:var(--ac-ink)}
+/* центрированная шапка секции не «съезжает» от #content h2{text-align:left} */
+#ads-city .ads-city-head,#ads-city .ads-city-head>*{text-align:center}
+/* HERO остаётся тёмным: светлый текст/кнопки поверх фото, поверх #content h1/a */
+#ads-city .ads-city-hero{color:#fff}
+#ads-city .ads-city-hero .ads-city-h1{color:#fff}
+#ads-city .ads-city-hero .ads-city-lead{color:rgba(255,255,255,.92)}
+#ads-city .ads-city-hero .ads-city-eyebrow{color:#A9C7FF}
+#ads-city .ads-city-hero .ads-city-eyebrow::before{background:#A9C7FF}
+#ads-city .ads-city-hero .ads-city-btn--ghost{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+@media (hover:hover){#ads-city .ads-city-hero .ads-city-btn--ghost:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}}
+
+@media (prefers-reduced-motion:reduce){
+  .ads-city *{transition-duration:.001ms!important;animation-duration:.001ms!important}
+  .ads-city-surf__img,.ads-city-cat__img{transform:none}
+}
+
+/* === TEST: HERO + CATALOG CTA POLISH START === */
+
+/* Hero: компактнее и спокойнее */
+.ads-city .ads-city-hero {
+  min-height: 460px !important;
+  padding: 84px 0 72px !important;
+}
+
+.ads-city .ads-city-hero .ads-city__wrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.ads-city .ads-city-hero__content {
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.ads-city .ads-city-hero .ads-city-eyebrow {
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.ads-city .ads-city-hero .ads-city-h1 {
+  max-width: 760px !important;
+  margin: 0 auto !important;
+  font-size: clamp(38px, 4.2vw, 58px) !important;
+  line-height: 1.05 !important;
+  text-align: center !important;
+}
+
+.ads-city .ads-city-hero .ads-city-lead {
+  max-width: 620px !important;
+  margin: 20px auto 0 !important;
+  text-align: center !important;
+  font-size: clamp(17px, 1.25vw, 20px) !important;
+  line-height: 1.5 !important;
+}
+
+.ads-city .ads-city-hero__cta {
+  justify-content: center !important;
+  margin-top: 28px !important;
+}
+
+.ads-city .ads-city-hero__points {
+  justify-content: center !important;
+  gap: 18px !important;
+  margin: 22px auto 0 !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* Примечание по ценам: меньше и аккуратнее */
+.ads-city .ads-city-price-note {
+  max-width: 760px !important;
+  margin: 28px auto 0 !important;
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+  background: #F4F7FB !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+  color: #64748B !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+}
+
+/* Нижний CTA под каталогом: больше не разваливается в две стороны */
+.ads-city .ads-city-surfaces-foot {
+  max-width: 900px !important;
+  margin: 32px auto 0 !important;
+  padding: 24px 28px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 24px !important;
+  align-items: center !important;
+  border-radius: 20px !important;
+  background: #FFFFFF !important;
+  border: 1px solid rgba(15,23,42,.10) !important;
+  box-shadow: 0 12px 34px rgba(16,24,40,.08) !important;
+}
+
+.ads-city .ads-city-surfaces-foot p {
+  max-width: 560px !important;
+  margin: 0 !important;
+  color: #46566B !important;
+  font-size: 17px !important;
+  line-height: 1.45 !important;
+  text-align: left !important;
+}
+
+.ads-city .ads-city-surfaces-foot .ads-city-btn {
+  min-width: 220px !important;
+  white-space: nowrap !important;
+  background: #2563EB !important;
+  color: #FFFFFF !important;
+  border-color: #2563EB !important;
+}
+
+.ads-city .ads-city-surfaces-foot .ads-city-btn:hover {
+  background: #1D4ED8 !important;
+  border-color: #1D4ED8 !important;
+  color: #FFFFFF !important;
+}
+
+/* Кнопки в карточках: короче, ровнее */
+.ads-city .ads-city-surf__cta {
+  min-height: 48px !important;
+  padding-inline: 18px !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .ads-city .ads-city-hero {
+    min-height: 420px !important;
+    padding: 58px 0 48px !important;
+  }
+
+  .ads-city .ads-city-hero .ads-city-h1 {
+    font-size: 34px !important;
+  }
+
+  .ads-city .ads-city-hero__points {
+    display: grid !important;
+    gap: 8px !important;
+  }
+
+  .ads-city .ads-city-surfaces-foot {
+    grid-template-columns: 1fr !important;
+    padding: 22px !important;
+    text-align: center !important;
+  }
+
+  .ads-city .ads-city-surfaces-foot p {
+    max-width: 100% !important;
+    text-align: center !important;
+    font-size: 16px !important;
+  }
+
+  .ads-city .ads-city-surfaces-foot .ads-city-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* === TEST: HERO + CATALOG CTA POLISH END === */
+
+/* === TEST: HERO BACKGROUND IMAGE START === */
+
+.ads-city .ads-city-hero {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(90deg, rgba(8,14,28,.94) 0%, rgba(8,14,28,.78) 34%, rgba(8,14,28,.48) 62%, rgba(8,14,28,.20) 100%),
+    linear-gradient(180deg, rgba(8,14,28,.18) 0%, rgba(8,14,28,.86) 100%),
+    url('/upload/ads-city-test/hero.webp?v=hero-city-1') center center / cover no-repeat !important;
+}
+
+.ads-city .ads-city-hero__content {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+.ads-city .ads-city-hero .ads-city-h1,
+.ads-city .ads-city-hero .ads-city-lead,
+.ads-city .ads-city-hero .ads-city-eyebrow,
+.ads-city .ads-city-hero__points {
+  color: #ffffff !important;
+}
+
+.ads-city .ads-city-hero .ads-city-lead,
+.ads-city .ads-city-hero__points {
+  color: rgba(255,255,255,.84) !important;
+}
+
+/* === TEST: HERO BACKGROUND IMAGE END === */
+
+/* === TEST: SHORT POPUP LEAD FORM START === */
+
+.ads-city-modal-open {
+  overflow: hidden !important;
+}
+
+.ads-city-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px !important;
+  font-family: Inter, Arial, sans-serif !important;
+}
+
+.ads-city-modal.is-open {
+  display: flex !important;
+}
+
+.ads-city-modal__overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(8, 14, 28, .72) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.ads-city-modal__dialog {
+  position: relative !important;
+  width: min(100%, 460px) !important;
+  border-radius: 24px !important;
+  padding: 34px !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(15, 23, 42, .10) !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, .35) !important;
+  color: #0E1726 !important;
+}
+
+.ads-city-modal__close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #F1F5F9 !important;
+  color: #0E1726 !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+.ads-city-modal__close:hover {
+  background: #E2E8F0 !important;
+}
+
+.ads-city-modal__head {
+  text-align: center !important;
+  margin-bottom: 24px !important;
+}
+
+.ads-city-modal__eyebrow {
+  margin: 0 0 8px !important;
+  color: #2563EB !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+}
+
+.ads-city-modal__head h3 {
+  margin: 0 !important;
+  color: #0E1726 !important;
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+}
+
+.ads-city-modal__head p {
+  margin: 12px 0 0 !important;
+  color: #64748B !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+}
+
+.ads-city-modal__form {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+.ads-city-modal__form label {
+  display: grid !important;
+  gap: 7px !important;
+  color: #334155 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+.ads-city-modal__form input {
+  width: 100% !important;
+  height: 52px !important;
+  border: 1px solid rgba(15, 23, 42, .14) !important;
+  border-radius: 14px !important;
+  padding: 0 16px !important;
+  background: #F8FAFC !important;
+  color: #0E1726 !important;
+  font-size: 16px !important;
+  outline: none !important;
+}
+
+.ads-city-modal__form input:focus {
+  border-color: #2563EB !important;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, .12) !important;
+  background: #ffffff !important;
+}
+
+.ads-city-modal__form .ads-city-btn {
+  width: 100% !important;
+  height: 54px !important;
+  margin-top: 4px !important;
+  justify-content: center !important;
+  background: #2563EB !important;
+  color: #ffffff !important;
+  border-color: #2563EB !important;
+}
+
+.ads-city-modal__form .ads-city-btn:hover {
+  background: #1D4ED8 !important;
+  border-color: #1D4ED8 !important;
+  color: #ffffff !important;
+}
+
+.ads-city-modal__form .ads-city-btn:disabled {
+  opacity: .7 !important;
+  cursor: wait !important;
+}
+
+.ads-city-modal__note {
+  margin: 0 !important;
+  color: #94A3B8 !important;
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+}
+
+.ads-city-modal__status {
+  min-height: 20px !important;
+  color: #2563EB !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+}
+
+@media (max-width: 520px) {
+  .ads-city-modal {
+    padding: 14px !important;
+  }
+
+  .ads-city-modal__dialog {
+    padding: 28px 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .ads-city-modal__head h3 {
+    font-size: 24px !important;
+  }
+}
+
+/* === TEST: SHORT POPUP LEAD FORM END === */
+
+/* === TEST: POPUP UX FIX START === */
+
+html.ads-city-modal-open,
+body.ads-city-modal-open {
+  overflow: hidden !important;
+}
+
+.ads-city-modal,
+.ads-city-modal *,
+.ads-city-modal *::before,
+.ads-city-modal *::after {
+  box-sizing: border-box !important;
+}
+
+.ads-city-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  z-index: 999999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px !important;
+  margin: 0 !important;
+}
+
+.ads-city-modal.is-open {
+  display: flex !important;
+}
+
+.ads-city-modal__overlay {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+.ads-city-modal__dialog {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  margin: auto !important;
+  width: min(460px, calc(100vw - 32px)) !important;
+  max-width: calc(100vw - 32px) !important;
+  max-height: calc(100dvh - 32px) !important;
+  overflow-y: auto !important;
+  padding: 32px !important;
+}
+
+.ads-city-modal__form {
+  width: 100% !important;
+}
+
+.ads-city-modal__form label,
+.ads-city-modal__form input,
+.ads-city-modal__form button {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.ads-city-modal__form input {
+  display: block !important;
+  min-width: 0 !important;
+}
+
+.ads-city-modal__success {
+  display: none !important;
+  text-align: center !important;
+  padding: 6px 0 2px !important;
+}
+
+.ads-city-modal.is-success .ads-city-modal__head,
+.ads-city-modal.is-success .ads-city-modal__form {
+  display: none !important;
+}
+
+.ads-city-modal.is-success .ads-city-modal__success {
+  display: grid !important;
+  gap: 14px !important;
+  justify-items: center !important;
+}
+
+.ads-city-modal__success-icon {
+  width: 64px !important;
+  height: 64px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 999px !important;
+  background: #2563EB !important;
+  color: #ffffff !important;
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  line-height: 1 !important;
+}
+
+.ads-city-modal__success h3 {
+  margin: 6px 0 0 !important;
+  color: #0E1726 !important;
+  font-size: 28px !important;
+  line-height: 1.15 !important;
+  font-weight: 800 !important;
+}
+
+.ads-city-modal__success p {
+  max-width: 320px !important;
+  margin: 0 !important;
+  color: #64748B !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+}
+
+.ads-city-modal__success .ads-city-btn {
+  width: 100% !important;
+  margin-top: 8px !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 520px) {
+  .ads-city-modal {
+    padding: 12px !important;
+    align-items: center !important;
+  }
+
+  .ads-city-modal__dialog {
+    width: calc(100vw - 24px) !important;
+    max-width: calc(100vw - 24px) !important;
+    max-height: calc(100dvh - 24px) !important;
+    padding: 26px 18px !important;
+    border-radius: 20px !important;
+  }
+
+  .ads-city-modal__close {
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  .ads-city-modal__head h3,
+  .ads-city-modal__success h3 {
+    font-size: 23px !important;
+  }
+
+  .ads-city-modal__head p,
+  .ads-city-modal__success p {
+    font-size: 14px !important;
+  }
+}
+
+/* === TEST: POPUP UX FIX END === */
+
+/* === TEST: CLEAN LANDING V2 START === */
+
+.ads-city .ads-city-v2-legacy-hidden {
+  display: none !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 {
+  background: #EEF3FA !important;
+  padding: 22px 0 38px !important;
+}
+
+.ads-city .ads-city-v2-section {
+  width: min(1240px, calc(100vw - 40px)) !important;
+  margin: 22px auto !important;
+  padding: clamp(42px, 5vw, 68px) clamp(20px, 3vw, 38px) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(15,23,42,.07) !important;
+}
+
+.ads-city .ads-city-v2-section--white {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-v2-section--blue {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(96,165,250,.24), transparent 34%),
+    linear-gradient(135deg, #07152E 0%, #103B7B 55%, #155EEF 100%) !important;
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-v2-head {
+  max-width: 760px !important;
+  margin: 0 auto 30px !important;
+  text-align: center !important;
+}
+
+.ads-city .ads-city-v2-kicker {
+  display: inline-flex !important;
+  margin-bottom: 12px !important;
+  padding: 7px 11px !important;
+  border-radius: 12px !important;
+  background: rgba(37,99,235,.10) !important;
+  color: #2563EB !important;
+  font-size: 12px !important;
+  line-height: 1 !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-v2-kicker {
+  background: rgba(255,255,255,.14) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+
+.ads-city .ads-city-v2-head h2,
+.ads-city .ads-city-v2-final h2 {
+  margin: 0 !important;
+  color: #0F172A !important;
+  font-size: clamp(30px, 3vw, 48px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.045em !important;
+  font-weight: 850 !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-v2-head h2,
+.ads-city .ads-city-v2-section--blue .ads-city-v2-final h2 {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-v2-head p,
+.ads-city .ads-city-v2-final p {
+  max-width: 620px !important;
+  margin: 16px auto 0 !important;
+  color: #64748B !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-v2-head p,
+.ads-city .ads-city-v2-section--blue .ads-city-v2-final p {
+  color: rgba(255,255,255,.74) !important;
+}
+
+.ads-city .ads-city-v2-carousel-nav {
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 10px !important;
+  margin: -10px 0 16px !important;
+}
+
+.ads-city .ads-city-v2-carousel-nav button {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(15,23,42,.12) !important;
+  background: #F8FAFC !important;
+  color: #0F172A !important;
+  font-size: 28px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-v2-carousel-nav button {
+  background: rgba(255,255,255,.12) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-v2-carousel-nav button:disabled {
+  opacity: .35 !important;
+  cursor: default !important;
+}
+
+.ads-city .ads-city-v2-carousel-row,
+.ads-city .ads-city-v2-task-row {
+  display: flex !important;
+  gap: 20px !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  padding: 4px 2px 12px !important;
+  scrollbar-width: none !important;
+}
+
+.ads-city .ads-city-v2-carousel-row::-webkit-scrollbar,
+.ads-city .ads-city-v2-task-row::-webkit-scrollbar {
+  display: none !important;
+}
+
+.ads-city .ads-city-v2-carousel-row > .ads-city-surf {
+  flex: 0 0 calc((100% - 40px) / 3) !important;
+  width: calc((100% - 40px) / 3) !important;
+  scroll-snap-align: start !important;
+}
+
+.ads-city .ads-city-v2-all-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+}
+
+.ads-city .ads-city-v2-card-hidden {
+  display: none !important;
+}
+
+.ads-city .ads-city-v2-loadmore {
+  display: flex !important;
+  justify-content: center !important;
+  margin-top: 28px !important;
+}
+
+.ads-city .ads-city-v2-format-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.ads-city .ads-city-v2-format-row article,
+.ads-city .ads-city-v2-task-row article,
+.ads-city .ads-city-v2-launch-grid article {
+  padding: 24px !important;
+  border-radius: 18px !important;
+  background: #F8FAFC !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+}
+
+.ads-city .ads-city-v2-task-row article {
+  flex: 0 0 calc((100% - 40px) / 3) !important;
+  width: calc((100% - 40px) / 3) !important;
+  scroll-snap-align: start !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-v2-task-row article {
+  background: rgba(255,255,255,.10) !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+
+.ads-city .ads-city-v2-format-row b,
+.ads-city .ads-city-v2-task-row b,
+.ads-city .ads-city-v2-launch-grid b {
+  display: block !important;
+  color: #0F172A !important;
+  font-size: 21px !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.ads-city .ads-city-v2-section--blue b {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-v2-format-row span,
+.ads-city .ads-city-v2-task-row span,
+.ads-city .ads-city-v2-launch-grid p {
+  display: block !important;
+  margin-top: 12px !important;
+  color: #64748B !important;
+  font-size: 15px !important;
+  line-height: 1.45 !important;
+}
+
+.ads-city .ads-city-v2-section--blue span {
+  color: rgba(255,255,255,.72) !important;
+}
+
+.ads-city .ads-city-v2-launch-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+.ads-city .ads-city-v2-launch-grid article span {
+  color: #2563EB !important;
+  font-weight: 850 !important;
+}
+
+.ads-city .ads-city-v2-final {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 26px !important;
+}
+
+.ads-city .ads-city-v2-final .ads-city-v2-kicker {
+  margin-bottom: 14px !important;
+}
+
+.ads-city .ads-city-v2-final h2,
+.ads-city .ads-city-v2-final p {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.ads-city .ads-city-v2-final-actions {
+  display: flex !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  justify-content: flex-end !important;
+}
+
+.ads-city .ads-city-v2-section .ads-city-surf,
+.ads-city .ads-city-v2-section .ads-city-card {
+  border-radius: 18px !important;
+  box-shadow: none !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-surf {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-surf h3,
+.ads-city .ads-city-v2-section--blue .ads-city-surf h4,
+.ads-city .ads-city-v2-section--blue .ads-city-surf b {
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-surf p,
+.ads-city .ads-city-v2-section--blue .ads-city-surf span,
+.ads-city .ads-city-v2-section--blue .ads-city-surf li {
+  color: #64748B !important;
+}
+
+.ads-city .ads-city-v2-section--blue .ads-city-surf .ads-city-btn,
+.ads-city .ads-city-v2-section--blue .ads-city-surf button {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-btn {
+  border-radius: 14px !important;
+}
+
+@media (max-width: 1020px) {
+  .ads-city .ads-city-v2-carousel-row > .ads-city-surf,
+  .ads-city .ads-city-v2-task-row article {
+    flex-basis: calc((100% - 20px) / 2) !important;
+    width: calc((100% - 20px) / 2) !important;
+  }
+
+  .ads-city .ads-city-v2-all-grid,
+  .ads-city .ads-city-v2-launch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .ads-city .ads-city-v2-format-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .ads-city .ads-city-v2-final {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ads-city .ads-city-v2-final-actions {
+    justify-content: flex-start !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .ads-city .ads-city-clean-landing-v2 {
+    padding: 12px 0 26px !important;
+  }
+
+  .ads-city .ads-city-v2-section {
+    width: calc(100vw - 24px) !important;
+    margin: 12px auto !important;
+    padding: 34px 16px !important;
+    border-radius: 18px !important;
+  }
+
+  .ads-city .ads-city-v2-head {
+    margin-bottom: 22px !important;
+  }
+
+  .ads-city .ads-city-v2-head h2,
+  .ads-city .ads-city-v2-final h2 {
+    font-size: 30px !important;
+  }
+
+  .ads-city .ads-city-v2-carousel-row > .ads-city-surf,
+  .ads-city .ads-city-v2-task-row article {
+    flex: 0 0 calc(100vw - 74px) !important;
+    width: calc(100vw - 74px) !important;
+    max-width: calc(100vw - 74px) !important;
+  }
+
+  .ads-city .ads-city-v2-all-grid,
+  .ads-city .ads-city-v2-launch-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ads-city .ads-city-v2-format-row {
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 14px !important;
+    scroll-snap-type: x mandatory !important;
+    padding-bottom: 10px !important;
+    scrollbar-width: none !important;
+  }
+
+  .ads-city .ads-city-v2-format-row::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .ads-city .ads-city-v2-format-row article {
+    flex: 0 0 calc(100vw - 74px) !important;
+    width: calc(100vw - 74px) !important;
+    scroll-snap-align: start !important;
+  }
+
+  .ads-city .ads-city-v2-final-actions .ads-city-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* === TEST: CLEAN LANDING V2 END === */
+
+/* === TEST: V2 BLUE TEXT FIX START === */
+
+/* Всё обычное содержимое на синих блоках делаем белым */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-head,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-head h2,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-head h3,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-head p,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-task-row article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-task-row article b,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-task-row article span,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-format-row article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-format-row article b,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-format-row article span {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-head p,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-task-row article span,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-format-row article span {
+  color: rgba(255,255,255,.74) !important;
+}
+
+/* Карточки задач на синем фоне */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-task-row article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-format-row article {
+  background: rgba(255,255,255,.11) !important;
+  border-color: rgba(255,255,255,.20) !important;
+}
+
+/* А вот карточки фасадов внутри синего блока оставляем белыми и читаемыми */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: rgba(255,255,255,.22) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf h3,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf h4,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf b {
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf p,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf span,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf li {
+  color: #64748B !important;
+}
+
+/* Кнопки внутри карточек фасадов */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-surf button {
+  color: #FFFFFF !important;
+}
+
+/* Кнопка "Показать ещё" на синем фоне */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-loadmore .ads-city-btn {
+  background: rgba(255,255,255,.14) !important;
+  border-color: rgba(255,255,255,.28) !important;
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-loadmore .ads-city-btn:hover {
+  background: rgba(255,255,255,.22) !important;
+  color: #FFFFFF !important;
+}
+
+/* Стрелки на синем фоне */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button {
+  background: rgba(255,255,255,.14) !important;
+  border-color: rgba(255,255,255,.24) !important;
+  color: #FFFFFF !important;
+}
+
+/* === TEST: V2 BLUE TEXT FIX END === */
+
+/* === TEST: V2 FINAL CTA TEXT FIX START === */
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final *,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final h1,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final h2,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final h3,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final p,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final span,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final div {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final p {
+  color: rgba(255,255,255,.76) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final .ads-city-v2-kicker {
+  color: #FFFFFF !important;
+  background: rgba(255,255,255,.14) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final .ads-city-btn--ghost {
+  color: #FFFFFF !important;
+  border-color: rgba(255,255,255,.28) !important;
+  background: rgba(255,255,255,.12) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final .ads-city-btn--ghost:hover {
+  color: #FFFFFF !important;
+  background: rgba(255,255,255,.20) !important;
+}
+
+/* Новые карточки из JSON */
+.ads-city .ads-city-v2-json-surf {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+.ads-city .ads-city-v2-json-surf .ads-city-surf__media img {
+  width: 100% !important;
+  height: 220px !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.ads-city .ads-city-v2-json-surf .ads-city-surf__body {
+  padding: 20px !important;
+}
+
+/* === TEST: V2 FINAL CTA TEXT FIX END === */
+
+/* === TEST: FINAL ALL SURFACES FROM JSON START === */
+
+.ads-city .ads-city-v2-json-card {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__media {
+  height: 220px !important;
+  overflow: hidden !important;
+  background: #E2E8F0 !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__body {
+  padding: 20px !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__name {
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__price {
+  color: #2563EB !important;
+  font-weight: 850 !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__meta span {
+  color: #64748B !important;
+}
+
+.ads-city .ads-city-v2-json-card .ads-city-surf__meta b {
+  color: #0F172A !important;
+}
+
+@media (max-width: 680px) {
+  .ads-city .ads-city-v2-json-card .ads-city-surf__media {
+    height: 200px !important;
+  }
+}
+
+/* === TEST: FINAL ALL SURFACES FROM JSON END === */
+
+/* === TEST: STABLE ALL FACADES JSON RENDER START === */
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card {
+  overflow: hidden !important;
+  background: #ffffff !important;
+  border-radius: 18px !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__media {
+  height: 220px !important;
+  overflow: hidden !important;
+  background: #E2E8F0 !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__media img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__body {
+  padding: 20px !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__name {
+  color: #0F172A !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__price {
+  margin-top: 8px !important;
+  color: #2563EB !important;
+  font-weight: 850 !important;
+  font-size: 17px !important;
+  line-height: 1.2 !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__desc {
+  margin: 12px 0 0 !important;
+  color: #64748B !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__meta span {
+  color: #64748B !important;
+}
+
+.ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__meta b {
+  color: #0F172A !important;
+}
+
+@media (max-width: 680px) {
+  .ads-city .ads-city-v2-all-grid .ads-city-stable-facade-card .ads-city-surf__media {
+    height: 190px !important;
+  }
+}
+
+/* === TEST: STABLE ALL FACADES JSON RENDER END === */
+
+/* === TEST: UX POLISH RADIUS ARROWS STEPS CTA START === */
+
+/* 1. Уменьшаем закругления по всей новой лендинговой части */
+.ads-city .ads-city-clean-landing-v2,
+.ads-city .ads-city-clean-landing-v2 * {
+  --ads-radius-xs: 8px;
+  --ads-radius-sm: 10px;
+  --ads-radius-md: 14px;
+  --ads-radius-lg: 18px;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 [class*="badge"],
+.ads-city .ads-city-clean-landing-v2 [class*="pill"],
+.ads-city .ads-city-clean-landing-v2 [class*="tag"] {
+  border-radius: 10px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 button {
+  border-radius: 12px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf,
+.ads-city .ads-city-clean-landing-v2 [class*="card"] {
+  border-radius: 16px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final,
+.ads-city .ads-city-clean-landing-v2 [class*="cta"],
+.ads-city .ads-city-clean-landing-v2 [class*="hero"] {
+  border-radius: 18px !important;
+}
+
+/* 2. Кнопки карусели уводим по бокам, чтобы не толкали контент */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section,
+.ads-city .ads-city-clean-landing-v2 section,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-featured,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-formats,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks {
+  position: relative !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 54% !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 8 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+  position: absolute !important;
+  top: 0 !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  border-radius: 12px !important;
+  transform: translateY(-50%) !important;
+  pointer-events: auto !important;
+  background: rgba(37, 99, 235, .92) !important;
+  border: 1px solid rgba(255,255,255,.22) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, .18) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+  left: -18px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+  right: -18px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:disabled {
+  opacity: .36 !important;
+  cursor: default !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  background: rgba(29, 78, 216, .98) !important;
+}
+
+/* Убираем возможную пустую высоту от старого расположения стрелок */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-head .ads-city-v2-carousel-nav {
+  margin: 0 !important;
+}
+
+/* 3. Блок "Как запускаемся": номер в угол, всё по левому краю */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article {
+  text-align: left !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  padding: 28px 26px !important;
+  min-height: 168px !important;
+  border-radius: 16px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article > * {
+  text-align: left !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article > span:first-child,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article > b:first-child,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article > strong:first-child,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article > div:first-child {
+  align-self: flex-start !important;
+  margin: 0 0 10px 0 !important;
+  color: #2563EB !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  font-weight: 900 !important;
+  letter-spacing: .04em !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article h3,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article h4,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article b {
+  text-align: left !important;
+  margin-left: 0 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article p,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article span {
+  text-align: left !important;
+}
+
+/* 4. Финальный CTA: убираем плашку "ЗАЯВКА" */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final [class*="kicker"],
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final [class*="badge"],
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final [class*="pill"],
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final [class*="tag"] {
+  display: none !important;
+}
+
+/* Чтобы финальный CTA стал компактнее после удаления плашки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final {
+  padding-top: 54px !important;
+  padding-bottom: 54px !important;
+}
+
+/* Мобильная адаптация стрелок */
+@media (max-width: 760px) {
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav {
+    top: 52% !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 10px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+    left: 6px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+    right: 6px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-steps-ux article {
+    padding: 22px !important;
+    min-height: 145px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-final {
+    padding-top: 38px !important;
+    padding-bottom: 38px !important;
+  }
+}
+
+/* === TEST: UX POLISH RADIUS ARROWS STEPS CTA END === */
+
+/* === TEST: MINIMAL RADIUS CLEAR ARROWS START === */
+
+/* Минимальные закругления по всей новой странице */
+.ads-city .ads-city-clean-landing-v2,
+.ads-city .ads-city-clean-landing-v2 * {
+  --ads-radius-xs: 3px;
+  --ads-radius-sm: 4px;
+  --ads-radius-md: 6px;
+  --ads-radius-lg: 8px;
+}
+
+/* Маленькие плашки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 [class*="badge"],
+.ads-city .ads-city-clean-landing-v2 [class*="pill"],
+.ads-city .ads-city-clean-landing-v2 [class*="tag"] {
+  border-radius: 5px !important;
+}
+
+/* Кнопки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 button {
+  border-radius: 6px !important;
+}
+
+/* Карточки */
+.ads-city .ads-city-clean-landing-v2 article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf,
+.ads-city .ads-city-clean-landing-v2 [class*="card"],
+.ads-city .ads-city-clean-landing-v2 [class*="item"] {
+  border-radius: 8px !important;
+}
+
+/* Большие секции / CTA / hero */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final,
+.ads-city .ads-city-clean-landing-v2 [class*="cta"],
+.ads-city .ads-city-clean-landing-v2 [class*="hero"],
+.ads-city .ads-city-clean-landing-v2 [class*="section"] {
+  border-radius: 10px !important;
+}
+
+/* Фасады и медиа внутри карточек */
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf__media,
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf__media img {
+  border-radius: 0 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf {
+  overflow: hidden !important;
+}
+
+/* Стрелки каруселей: без плашек, просто крупные стрелки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 52% !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 12 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+  position: absolute !important;
+  top: 0 !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+
+  color: #2563EB !important;
+  font-size: 38px !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  pointer-events: auto !important;
+  opacity: .95 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+  left: -30px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+  right: -30px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  background: transparent !important;
+  color: #1D4ED8 !important;
+  transform: translateY(-50%) scale(1.08) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:disabled {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  opacity: .22 !important;
+}
+
+/* На синих секциях стрелки белые */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button,
+.ads-city .ads-city-clean-landing-v2 [style*="blue"] .ads-city-v2-carousel-nav button {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  color: rgba(255,255,255,.86) !important;
+}
+
+/* Убираем любые остатки старых плашек у стрелок */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::before,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::after {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Мобилка: стрелки чуть внутрь, чтобы не вылезали за экран */
+@media (max-width: 760px) {
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    font-size: 32px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+    left: 4px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+    right: 4px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 article,
+  .ads-city .ads-city-clean-landing-v2 .ads-city-surf,
+  .ads-city .ads-city-clean-landing-v2 [class*="card"],
+  .ads-city .ads-city-clean-landing-v2 [class*="item"] {
+    border-radius: 7px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-btn,
+  .ads-city .ads-city-clean-landing-v2 button {
+    border-radius: 5px !important;
+  }
+}
+
+/* === TEST: MINIMAL RADIUS CLEAR ARROWS END === */
+
+/* === TEST: HEADER AND CAROUSEL ARROWS FINAL FIX START === */
+
+/* 1. Шапка: режем лишние закругления */
+body .header,
+body .site-header,
+body .top-header,
+body .header-wrapper,
+body .header__inner,
+body .main-header,
+body .navbar,
+body .nav,
+body .menu,
+body .menu-item,
+body .header a,
+body .header button,
+body .site-header a,
+body .site-header button,
+body .top-header a,
+body .top-header button {
+  border-radius: 6px !important;
+}
+
+body .header [class*="btn"],
+body .site-header [class*="btn"],
+body .top-header [class*="btn"],
+body .navbar [class*="btn"] {
+  border-radius: 6px !important;
+}
+
+/* Если в шапке есть круглые/пузырчатые элементы */
+body .header [class*="pill"],
+body .header [class*="badge"],
+body .header [class*="tag"],
+body .site-header [class*="pill"],
+body .site-header [class*="badge"],
+body .site-header [class*="tag"] {
+  border-radius: 5px !important;
+}
+
+/* 2. Контейнеры каруселей готовим под боковые стрелки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-featured,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-formats,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section,
+.ads-city .ads-city-clean-landing-v2 section {
+  position: relative !important;
+}
+
+/* 3. Убираем nav из потока, чтобы он НЕ сдвигал контент */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  inset: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  z-index: 40 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Если nav был внутри заголовка, он больше не должен ломать высоту */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-head .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  top: 50% !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 4. Сами кнопки: только стрелка, без плашки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+  position: absolute !important;
+  top: 50% !important;
+
+  width: 54px !important;
+  height: 54px !important;
+  min-width: 54px !important;
+  min-height: 54px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  transform: translateY(-50%) !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  color: #2563EB !important;
+  opacity: .98 !important;
+
+  font-size: 0 !important;
+  line-height: 1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Ставим стрелки через псевдоэлемент, чтобы не зависеть от старого текста внутри кнопки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::before {
+  display: block !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  color: currentColor !important;
+  font-size: 48px !important;
+  line-height: 1 !important;
+  font-weight: 500 !important;
+  font-family: Arial, sans-serif !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child::before {
+  content: "‹" !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child::before {
+  content: "›" !important;
+}
+
+/* Полностью гасим старые плашки/подложки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::after {
+  content: none !important;
+  display: none !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button > * {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Позиция по бокам блока */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+  left: -34px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+  right: -34px !important;
+}
+
+/* Hover */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  color: #1D4ED8 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* Disabled */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:disabled {
+  opacity: .22 !important;
+  cursor: default !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* На синих блоках стрелки белые */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-nav button {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button:hover:not(:disabled),
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  color: rgba(255,255,255,.84) !important;
+}
+
+/* 5. Минимальные закругления ещё жёстче */
+.ads-city .ads-city-clean-landing-v2 .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 button:not(.ads-city-v2-carousel-nav button) {
+  border-radius: 5px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 [class*="badge"],
+.ads-city .ads-city-clean-landing-v2 [class*="pill"],
+.ads-city .ads-city-clean-landing-v2 [class*="tag"] {
+  border-radius: 4px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf,
+.ads-city .ads-city-clean-landing-v2 [class*="card"],
+.ads-city .ads-city-clean-landing-v2 [class*="item"] {
+  border-radius: 6px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final,
+.ads-city .ads-city-clean-landing-v2 [class*="hero"],
+.ads-city .ads-city-clean-landing-v2 [class*="section"] {
+  border-radius: 8px !important;
+}
+
+/* Мобилка */
+@media (max-width: 760px) {
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::before {
+    font-size: 38px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+    left: 0 !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+    right: 0 !important;
+  }
+}
+
+/* === TEST: HEADER AND CAROUSEL ARROWS FINAL FIX END === */
+
+/* === TEST: HEADER BUTTONS AND REAL CAROUSEL ARROWS FIX START === */
+
+/* 1. Шапка: кнопкам такие же минимальные углы */
+body header button,
+body header .btn,
+body header .button,
+body header [class*="btn"],
+body header [class*="button"],
+body header [class*="callback"],
+body header [class*="phone"],
+body header [class*="call"],
+body header a[href^="tel"],
+body #header button,
+body #header .btn,
+body #header .button,
+body #header [class*="btn"],
+body #header [class*="button"],
+body #header [class*="callback"],
+body #header [class*="phone"],
+body #header [class*="call"],
+body #header a[href^="tel"],
+body .header button,
+body .header .btn,
+body .header .button,
+body .header [class*="btn"],
+body .header [class*="button"],
+body .header [class*="callback"],
+body .header [class*="phone"],
+body .header [class*="call"],
+body .header a[href^="tel"],
+body .site-header button,
+body .site-header .btn,
+body .site-header .button,
+body .site-header [class*="btn"],
+body .site-header [class*="button"],
+body .site-header [class*="callback"],
+body .site-header [class*="phone"],
+body .site-header [class*="call"],
+body .site-header a[href^="tel"],
+body .top-header button,
+body .top-header .btn,
+body .top-header .button,
+body .top-header [class*="btn"],
+body .top-header [class*="button"],
+body .top-header [class*="callback"],
+body .top-header [class*="phone"],
+body .top-header [class*="call"],
+body .top-header a[href^="tel"] {
+  border-radius: 5px !important;
+}
+
+/* На случай если внутри кнопки есть вложенная обёртка с радиусом */
+body header button *,
+body header .btn *,
+body header .button *,
+body header [class*="btn"] *,
+body header [class*="button"] *,
+body #header button *,
+body #header .btn *,
+body #header .button *,
+body #header [class*="btn"] *,
+body #header [class*="button"] *,
+body .header button *,
+body .header .btn *,
+body .header .button *,
+body .header [class*="btn"] *,
+body .header [class*="button"] * {
+  border-radius: 5px !important;
+}
+
+/* 2. Обёртка карусели: стрелки будут жить относительно ряда карточек, а не всего блока */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+/* Чтобы стрелки не обрезались родителями */
+.ads-city .ads-city-clean-landing-v2,
+.ads-city .ads-city-clean-landing-v2 section,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-featured,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-formats,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks {
+  overflow: visible !important;
+}
+
+/* 3. Сам nav больше не занимает место и не сдвигает контент */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 50% !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+  z-index: 50 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 4. Кнопки-стрелки: вообще без плашек */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button {
+  position: absolute !important;
+  top: 0 !important;
+  width: 46px !important;
+  height: 46px !important;
+  min-width: 46px !important;
+  min-height: 46px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  transform: translateY(-50%) !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  color: #2563EB !important;
+  opacity: 1 !important;
+
+  font-size: 0 !important;
+  line-height: 1 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Рисуем нормальные стрелки поверх старого содержимого */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button::before {
+  display: block !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  color: currentColor !important;
+  font-size: 46px !important;
+  line-height: 1 !important;
+  font-weight: 400 !important;
+  font-family: Arial, sans-serif !important;
+  text-shadow: 0 3px 12px rgba(15, 23, 42, .18) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:first-child::before {
+  content: "‹" !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:last-child::before {
+  content: "›" !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Позиция ровно по бокам ряда карточек */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:first-child {
+  left: -38px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:last-child {
+  right: -38px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  background: transparent !important;
+  color: #1D4ED8 !important;
+  box-shadow: none !important;
+  transform: translateY(-50%) scale(1.08) !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:disabled {
+  opacity: .2 !important;
+  cursor: default !important;
+}
+
+/* На синих секциях стрелки белые */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button {
+  color: #FFFFFF !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button::before,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button::before {
+  text-shadow: 0 3px 14px rgba(0,0,0,.26) !important;
+}
+
+/* На мобилке стрелки внутрь, чтобы их не съел край экрана */
+@media (max-width: 760px) {
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button::before {
+    font-size: 38px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:first-child {
+    left: 2px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-shell > .ads-city-v2-carousel-nav button:last-child {
+    right: 2px !important;
+  }
+}
+
+/* === TEST: HEADER BUTTONS AND REAL CAROUSEL ARROWS FIX END === */
+
+/* === TEST: REAL CHEVRONS HEADER RADIUS FIX START === */
+
+/* 1. Кнопки в hero / шапке / странице рекламы: минимальные углы */
+.ads-city .ads-city-btn,
+.ads-city a.ads-city-btn,
+.ads-city button.ads-city-btn,
+.ads-city .ads-city-hero .ads-city-btn,
+.ads-city .ads-city-hero a,
+.ads-city .ads-city-hero button,
+.ads-city .ads-city-v2-final .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 .ads-city-btn,
+.ads-city .ads-city-clean-landing-v2 button,
+.ads-city .ads-city-clean-landing-v2 a[class*="btn"],
+.ads-city [class*="button"],
+.ads-city [class*="btn"] {
+  border-radius: 6px !important;
+}
+
+/* Специально добиваем большие CTA-кнопки в верхнем hero */
+.ads-city .ads-city-hero__actions a,
+.ads-city .ads-city-hero__actions button,
+.ads-city .ads-city-hero-actions a,
+.ads-city .ads-city-hero-actions button,
+.ads-city .ads-city-hero .ads-city-btn--primary,
+.ads-city .ads-city-hero .ads-city-btn--ghost,
+.ads-city .ads-city-hero .ads-city-btn--outline {
+  border-radius: 6px !important;
+}
+
+/* Если внутри кнопок есть вложенные обёртки */
+.ads-city .ads-city-btn *,
+.ads-city [class*="btn"] *,
+.ads-city [class*="button"] * {
+  border-radius: 6px !important;
+}
+
+/* 2. Общие минимальные радиусы */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-kicker,
+.ads-city .ads-city-clean-landing-v2 [class*="badge"],
+.ads-city .ads-city-clean-landing-v2 [class*="pill"],
+.ads-city .ads-city-clean-landing-v2 [class*="tag"] {
+  border-radius: 4px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 article,
+.ads-city .ads-city-clean-landing-v2 .ads-city-surf,
+.ads-city .ads-city-clean-landing-v2 [class*="card"],
+.ads-city .ads-city-clean-landing-v2 [class*="item"] {
+  border-radius: 6px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-final,
+.ads-city .ads-city-clean-landing-v2 [class*="hero"],
+.ads-city .ads-city-clean-landing-v2 [class*="section"] {
+  border-radius: 8px !important;
+}
+
+/* 3. Возвращаем nav в нормальную геометрию: поверх карточек, но без влияния на контент */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-featured,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-formats,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section,
+.ads-city .ads-city-clean-landing-v2 section {
+  position: relative !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 50% !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 60 !important;
+  pointer-events: none !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 4. Кнопки стрелок: невидимый кликабельный контейнер, без плашки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+  position: absolute !important;
+  top: 0 !important;
+
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+
+  color: #2563EB !important;
+  opacity: 1 !important;
+
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: -9999px !important;
+
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Убираем старые текстовые символы и любые плашки */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button > * {
+  display: none !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* 5. Рисуем нормальный chevron через border, а не через кривой символ */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::before {
+  content: "" !important;
+  display: block !important;
+
+  width: 15px !important;
+  height: 15px !important;
+
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  border-left: 3px solid currentColor !important;
+  border-bottom: 3px solid currentColor !important;
+  box-shadow: none !important;
+
+  transform-origin: center !important;
+}
+
+/* Левая стрелка */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+  left: -12px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child::before {
+  transform: translate(-35%, -50%) rotate(45deg) !important;
+}
+
+/* Правая стрелка */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+  right: -12px !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child::before {
+  transform: translate(-65%, -50%) rotate(-135deg) !important;
+}
+
+/* Hover */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:hover:not(:disabled) {
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #1D4ED8 !important;
+}
+
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:hover:not(:disabled)::before {
+  border-left-width: 4px !important;
+  border-bottom-width: 4px !important;
+}
+
+/* Disabled */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:disabled {
+  opacity: .22 !important;
+  cursor: default !important;
+}
+
+/* На синем фоне стрелки белые */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-nav button {
+  color: #FFFFFF !important;
+}
+
+/* Если белые стрелки теряются на светлом месте внутри синего блока */
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-section--blue .ads-city-v2-carousel-nav button::before,
+.ads-city .ads-city-clean-landing-v2 .ads-city-v2-tasks .ads-city-v2-carousel-nav button::before {
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.24)) !important;
+}
+
+/* Мобилка */
+@media (max-width: 760px) {
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button::before {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:first-child {
+    left: 2px !important;
+  }
+
+  .ads-city .ads-city-clean-landing-v2 .ads-city-v2-carousel-nav button:last-child {
+    right: 2px !important;
+  }
+}
+
+/* === TEST: REAL CHEVRONS HEADER RADIUS FIX END === */
