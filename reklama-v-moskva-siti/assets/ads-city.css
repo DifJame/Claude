@@ -123,6 +123,7 @@
   border:1px solid var(--ac-line-2);backdrop-filter:blur(6px)}
 .ads-city-surf__body{display:flex;flex-direction:column;flex:1;padding:clamp(1.1rem,2vw,1.5rem)}
 .ads-city-surf__name{font-size:1.2rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
+.ads-city-surf__loc{color:var(--ac-ink-3);font-size:.82rem;margin:.3rem 0 0}
 .ads-city-surf__meta{list-style:none;margin:.9rem 0 0;padding:0}
 .ads-city-surf__meta li{display:flex;justify-content:space-between;gap:1rem;align-items:baseline;
   padding:.55rem 0;border-top:1px solid var(--ac-line)}
@@ -131,7 +132,11 @@
 .ads-city-surf__meta b{color:var(--ac-ink);font-weight:600;font-size:.92rem;text-align:right;
   font-variant-numeric:tabular-nums;line-height:1.3}
 .ads-city-surf__desc{color:var(--ac-ink-2);font-size:.92rem;line-height:1.55;flex:1;margin:.9rem 0 0}
-.ads-city-surf__cta{margin-top:1.25rem;width:100%}
+.ads-city-surf__price{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.25rem .75rem;
+  margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--ac-line)}
+.ads-city-surf__price-label{color:var(--ac-ink-3);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.ads-city-surf__price-val{color:var(--ac-ink);font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.ads-city-surf__cta{margin-top:1rem;width:100%}
 .ads-city-surfaces-foot{margin-top:clamp(1.5rem,3vw,2.25rem);display:flex;flex-wrap:wrap;
   gap:1rem 1.5rem;align-items:center}
 .ads-city-surfaces-foot p{color:var(--ac-ink-2);font-size:.95rem;max-width:62ch;margin:0;flex:1 1 320px}
@@ -170,13 +175,21 @@
 .ads-city-cat__body{display:flex;flex-direction:column;flex:1;padding:1rem 1.1rem 1.1rem}
 .ads-city-cat__name{font-size:1rem;font-weight:600;line-height:1.25;color:var(--ac-ink);margin:0}
 .ads-city-cat__loc{color:var(--ac-ink-3);font-size:.8rem;margin:.3rem 0 0}
+.ads-city-cat__specs{color:var(--ac-ink-2);font-size:.78rem;margin:.5rem 0 0;font-variant-numeric:tabular-nums}
 .ads-city-cat__info{color:var(--ac-accent);font-size:.8rem;font-weight:600;margin:.45rem 0 0;font-variant-numeric:tabular-nums}
 .ads-city-cat__desc{color:var(--ac-ink-2);font-size:.86rem;line-height:1.5;margin:.55rem 0 0;flex:1}
-.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.4rem;min-height:24px;margin-top:1rem;padding-top:.2rem;
-  color:var(--ac-accent);font-weight:600;font-size:.88rem}
-@media (hover:hover){.ads-city-cat__cta:hover{color:var(--ac-accent-hover)}}
+.ads-city-cat__foot{display:flex;align-items:center;justify-content:space-between;gap:.75rem;
+  margin-top:.9rem;padding-top:.8rem;border-top:1px solid var(--ac-line)}
+.ads-city-cat__price{color:var(--ac-ink);font-size:.95rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2}
+.ads-city-cat__cta{display:inline-flex;align-items:center;gap:.35rem;min-height:24px;flex:0 0 auto;
+  color:var(--ac-accent);font-weight:600;font-size:.85rem;white-space:nowrap}
+.ads-city-cat__cta svg{width:15px;height:15px}
+@media (hover:hover){.ads-city-cat__cta:hover{color:var(--ac-accent-hover)}
+  .ads-city-cat__cta:hover svg{transform:translateX(2px)}}
+.ads-city-cat__cta svg{transition:transform var(--ac-dur) var(--ac-ease)}
 .ads-city-catalog-empty{color:var(--ac-ink-2);margin-top:1.25rem}
 .ads-city-catalog-empty[hidden]{display:none}
+.ads-city-price-note{color:var(--ac-ink-3);font-size:.82rem;line-height:1.5;margin:1.1rem 0 0;max-width:80ch}
 
 /* — чипы «кому подходит» — */
 .ads-city-chips{display:flex;flex-wrap:wrap;gap:.6rem}
