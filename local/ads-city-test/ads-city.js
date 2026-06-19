@@ -215,70 +215,11 @@
       document.documentElement.classList.remove('ads-city-modal-open');
     }
 
-    document.addEventListener('click', function (e) {
-      var close = e.target.closest('[data-ac-modal-close]');
-      if (close) {
-        e.preventDefault();
-        closeModal();
-        return;
-      }
-
-      var trigger = e.target.closest('.ads-city a, .ads-city button');
-      if (!trigger) return;
-
-      var text = (trigger.textContent || '').trim().toLowerCase();
-      var href = trigger.getAttribute('href') || '';
-
-      var shouldOpen =
-        href === '#ads-city-calc' ||
-        text.indexOf('получить расчёт') !== -1 ||
-        text.indexOf('получить расчет') !== -1 ||
-        text.indexOf('получить подборку') !== -1 ||
-        text.indexOf('подобрать') !== -1 ||
-        text.indexOf('рассчитать') !== -1;
-
-      if (shouldOpen && !trigger.closest('.ads-city-modal')) {
-        e.preventDefault();
-        openModal(trigger);
-      }
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      status.textContent = '';
-      var btn = form.querySelector('button[type="submit"]');
-      btn.disabled = true;
-      btn.textContent = 'Отправляем...';
-
-      fetch(action, {
-        method: 'POST',
-        body: new FormData(form),
-        credentials: 'same-origin'
-      })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-          if (data && data.status === 'success') {
-            status.textContent = 'Спасибо! Заявка отправлена.';
-            form.reset();
-            sessidInput.value = getSessid();
-            setTimeout(closeModal, 1200);
-          } else {
-            status.textContent = (data && data.message) ? data.message : 'Не удалось отправить заявку.';
-          }
-        })
-        .catch(function () {
-          status.textContent = 'Ошибка отправки. Попробуйте ещё раз.';
-        })
-        .finally(function () {
-          btn.disabled = false;
-          btn.textContent = 'Отправить заявку';
-        });
-    });
+    /* ВАЖНО: обработчики click/keydown/submit этого блока НАМЕРЕННО отключены.
+       Единый контроллер попапа — блок «POPUP UX FIX» ниже. Раньше здесь были
+       свои click + submit, из-за чего на одну отправку формы уходило ДВА POST
+       на ads-lead.php → дубль заявки в Telegram и на email. Этот блок теперь
+       только создаёт разметку модалки, поведение целиком в «POPUP UX FIX». */
   });
 })();
 /* === TEST: SHORT POPUP LEAD FORM END === */
@@ -516,33 +457,15 @@
     return clone;
   }
 
-  function initCarousel(block) {
-    var row = block.querySelector('[data-v2-row]');
-    var prev = block.querySelector('[data-v2-prev]');
-    var next = block.querySelector('[data-v2-next]');
-    if (!row || !prev || !next) return;
-
-    function step() {
-      return Math.max(280, Math.round(row.clientWidth * 0.88));
-    }
-
-    function update() {
-      var max = row.scrollWidth - row.clientWidth - 4;
-      prev.disabled = row.scrollLeft <= 4;
-      next.disabled = row.scrollLeft >= max || max <= 4;
-    }
-
-    prev.addEventListener('click', function () {
-      row.scrollBy({ left: -step(), behavior: 'smooth' });
-    });
-
-    next.addEventListener('click', function () {
-      row.scrollBy({ left: step(), behavior: 'smooth' });
-    });
-
-    row.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    setTimeout(update, 80);
+  /* Стрелки каруселей убраны: листаем свайпом/нативным скроллом.
+     Здесь только прячем подсказку «Листайте →» после первого скролла. */
+  function initSwipeHint(row) {
+    if (!row || !row.parentNode) return;
+    var hint = row.parentNode.querySelector('.ads-city-v2-swipe-hint');
+    if (!hint) return;
+    row.addEventListener('scroll', function () {
+      if (row.scrollLeft > 8) hint.classList.add('is-hidden');
+    }, { passive: true });
   }
 
   function sectionHeader(kicker, title, text) {
@@ -560,11 +483,8 @@
 
     shell.innerHTML = ''
       + sectionHeader('Поверхности', title, text)
-      + '<div class="ads-city-v2-carousel-nav">'
-      + '  <button type="button" data-v2-prev aria-label="Назад">‹</button>'
-      + '  <button type="button" data-v2-next aria-label="Вперёд">›</button>'
-      + '</div>'
-      + '<div class="ads-city-v2-carousel-row" data-v2-row></div>';
+      + '<div class="ads-city-v2-carousel-row" data-v2-row></div>'
+      + '<div class="ads-city-v2-swipe-hint" aria-hidden="true">Листайте<span>→</span></div>';
 
     var row = shell.querySelector('[data-v2-row]');
     cards.forEach(function (card) {
@@ -650,16 +570,13 @@
       + '  <article><b>Медиакубы</b><span>Эффектные digital-форматы в заметных точках.</span></article>'
       + '  <article><b>Indoor</b><span>Экраны внутри башен, галерей и деловых пространств.</span></article>'
       + '  <article><b>Спецпроекты</b><span>Промо, события, бренд-зоны и нестандартные интеграции.</span></article>'
-      + '</div>';
+      + '</div>'
+      + '<div class="ads-city-v2-swipe-hint" aria-hidden="true">Листайте<span>→</span></div>';
 
     var tasks = document.createElement('section');
     tasks.className = 'ads-city-v2-section ads-city-v2-section--blue ads-city-v2-tasks';
     tasks.innerHTML = ''
       + sectionHeader('Задачи', 'Какие задачи решаем', 'Не просто показываем экран, а подбираем размещение под понятную бизнес-задачу.')
-      + '<div class="ads-city-v2-carousel-nav">'
-      + '  <button type="button" data-v2-prev aria-label="Назад">‹</button>'
-      + '  <button type="button" data-v2-next aria-label="Вперёд">›</button>'
-      + '</div>'
       + '<div class="ads-city-v2-task-row" data-v2-row>'
       + '  <article><b>Охватная реклама</b><span>Быстро получить видимость в деловом центре.</span></article>'
       + '  <article><b>Запуск бренда</b><span>Громко выйти на премиальную аудиторию.</span></article>'
@@ -667,7 +584,8 @@
       + '  <article><b>Трафик в локацию</b><span>Привести людей в ресторан, офис, шоурум или ТЦ.</span></article>'
       + '  <article><b>Имидж</b><span>Поддержать статус бренда в Москва-Сити.</span></article>'
       + '  <article><b>Спецпроект</b><span>Собрать нестандартную рекламную механику.</span></article>'
-      + '</div>';
+      + '</div>'
+      + '<div class="ads-city-v2-swipe-hint" aria-hidden="true">Листайте<span>→</span></div>';
 
     var launch = document.createElement('section');
     launch.className = 'ads-city-v2-section ads-city-v2-section--white ads-city-v2-launch';
@@ -715,7 +633,7 @@
       child.classList.add('ads-city-v2-legacy-hidden');
     });
 
-    landing.querySelectorAll('.ads-city-v2-featured, .ads-city-v2-tasks').forEach(initCarousel);
+    landing.querySelectorAll('.ads-city-v2-carousel-row, .ads-city-v2-task-row, .ads-city-v2-format-row').forEach(initSwipeHint);
   });
 })();
 /* === TEST: CLEAN LANDING V2 END === */
@@ -983,132 +901,6 @@
 
 
 
-/* === TEST: CAROUSEL EXACT CARD SCROLL START === */
-(function () {
-  if (window.__adsCityCarouselExactCardScroll) return;
-  window.__adsCityCarouselExactCardScroll = true;
-
-  function ready(fn) {
-    if (document.readyState !== 'loading') fn();
-    else document.addEventListener('DOMContentLoaded', fn);
-  }
-
-  function isMobile() {
-    return window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
-  }
-
-  function findRow(section) {
-    if (!section) return null;
-
-    return section.querySelector(
-      '[data-v2-row], ' +
-      '.ads-city-v2-featured-row, ' +
-      '.ads-city-v2-format-row, ' +
-      '.ads-city-v2-task-row, ' +
-      '.ads-city-v2-row, ' +
-      '.ads-city-v2-cards'
-    );
-  }
-
-  function getCards(row) {
-    if (!row) return [];
-
-    return Array.prototype.slice.call(row.children).filter(function (el) {
-      var style = window.getComputedStyle(el);
-      return style.display !== 'none' && el.offsetWidth > 0;
-    });
-  }
-
-  function nearestCardIndex(row, cards) {
-    var rowCenter = row.scrollLeft + row.clientWidth / 2;
-    var bestIndex = 0;
-    var bestDistance = Infinity;
-
-    cards.forEach(function (card, index) {
-      var cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      var distance = Math.abs(cardCenter - rowCenter);
-
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        bestIndex = index;
-      }
-    });
-
-    return bestIndex;
-  }
-
-  function scrollToCard(row, card) {
-    if (!row || !card) return;
-
-    var left = card.offsetLeft - (row.clientWidth - card.offsetWidth) / 2;
-
-    row.scrollTo({
-      left: Math.max(0, left),
-      behavior: 'smooth'
-    });
-  }
-
-  function bindNav(nav) {
-    if (!nav || nav.dataset.exactCardScrollBound === '1') return;
-
-    var section = nav.closest(
-      '.ads-city-v2-featured, ' +
-      '.ads-city-v2-formats, ' +
-      '.ads-city-v2-tasks, ' +
-      '.ads-city-v2-section, ' +
-      'section'
-    );
-
-    var row = findRow(section);
-    if (!row) return;
-
-    var buttons = nav.querySelectorAll('button');
-    if (buttons.length < 2) return;
-
-    nav.dataset.exactCardScrollBound = '1';
-
-    buttons[0].addEventListener('click', function (e) {
-      if (isMobile()) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      var cards = getCards(row);
-      if (!cards.length) return;
-
-      var index = nearestCardIndex(row, cards);
-      scrollToCard(row, cards[Math.max(0, index - 1)]);
-    }, true);
-
-    buttons[1].addEventListener('click', function (e) {
-      if (isMobile()) return;
-
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      var cards = getCards(row);
-      if (!cards.length) return;
-
-      var index = nearestCardIndex(row, cards);
-      scrollToCard(row, cards[Math.min(cards.length - 1, index + 1)]);
-    }, true);
-  }
-
-  function init() {
-    var root = document.querySelector('.ads-city-clean-landing-v2');
-    if (!root) return;
-
-    var navs = root.querySelectorAll('.ads-city-v2-carousel-nav');
-    navs.forEach(bindNav);
-  }
-
-  ready(function () {
-    init();
-    setTimeout(init, 300);
-    setTimeout(init, 1000);
-    setTimeout(init, 2000);
-  });
-})();
-/* === TEST: CAROUSEL EXACT CARD SCROLL END === */
+/* Блок «CAROUSEL EXACT CARD SCROLL» удалён: он навешивал обработчики на
+   стрелки каруселей (capture + stopImmediatePropagation). Стрелки убраны —
+   листание идёт нативным свайпом, дополнительный JS не нужен. */

@@ -2439,3 +2439,52 @@ body .header [class*="button"] * {
 }
 
 /* === TEST: REAL CHEVRONS HEADER RADIUS FIX END === */
+
+/* === CLEANUP: свайп-карусели без стрелок + фикс вертикального скролла на моб. === */
+/* 1. Прячем любые остаточные стрелки-навигации каруселей */
+.ads-city .ads-city-v2-carousel-nav { display: none !important; }
+
+/* 2. Горизонтальные ленты: разрешаем только горизонтальный пан, вертикальный
+      свайп уходит странице (раньше mandatory-снап «залипал» на телефоне). */
+.ads-city .ads-city-v2-carousel-row,
+.ads-city .ads-city-v2-task-row,
+.ads-city .ads-city-v2-format-row {
+  touch-action: pan-x !important;
+  overscroll-behavior-x: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+@media (max-width: 760px) {
+  .ads-city .ads-city-v2-carousel-row,
+  .ads-city .ads-city-v2-task-row,
+  .ads-city .ads-city-v2-format-row {
+    scroll-snap-type: x proximity !important;
+  }
+}
+
+/* 3. Swipe-hint — намёк, что карточки листаются (только на мобиле) */
+.ads-city .ads-city-v2-swipe-hint {
+  display: none;
+  align-items: center;
+  gap: .4em;
+  margin: 10px 2px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--ac-ink-3, #64748B);
+  transition: opacity .3s ease;
+}
+.ads-city .ads-city-v2-swipe-hint span {
+  display: inline-block;
+  animation: ads-city-swipe 1.6s ease-in-out infinite;
+}
+.ads-city .ads-city-v2-swipe-hint.is-hidden { opacity: 0; }
+@media (max-width: 760px) {
+  .ads-city .ads-city-v2-swipe-hint { display: inline-flex; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ads-city .ads-city-v2-swipe-hint span { animation: none; }
+}
+@keyframes ads-city-swipe {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
