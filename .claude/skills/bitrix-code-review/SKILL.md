@@ -1,6 +1,6 @@
 ---
 name: bitrix-code-review
-description: Use when reviewing code changes, diffs, commits, or pull requests in the Moscow-city.online Bitrix/PHP repository. Focus on bugs, encoding, lead forms, production safety, regressions, and minimal safe patches.
+description: Use when reviewing code changes, diffs, commits, or pull requests in the Moscow-city.online Bitrix/PHP repository. Focus on bugs, encoding, lead forms, production safety, indexation safety, regressions, and minimal safe patches.
 ---
 
 # Bitrix Code Review
@@ -19,6 +19,27 @@ Use this skill before committing, merging, or deploying changes in the Moscow-ci
 - Be careful with `local/ads-city-test/data/surfaces.json`; it contains ad surface data.
 - Do not remove existing Bitrix component logic without proving it is unused.
 
+## Indexation safety rules
+
+Do not break the current indexation of Moscow-city.online.
+
+Before approving or suggesting changes, check that the patch does not accidentally:
+
+- add `noindex`, `nofollow`, or `X-Robots-Tag` to important public pages
+- change `robots.txt` in a way that blocks public pages, images, CSS, JS, or service sections
+- remove or damage `sitemap.xml` / sitemap generation
+- change canonical URLs without a clear reason
+- remove or duplicate important `title`, `description`, or H1 tags
+- create duplicate H1 on a page
+- remove existing indexed real estate pages while the new real estate site is still in development
+- break existing public URLs or slugs without 301 redirects
+- turn public pages into empty, hidden, JS-only, or non-rendered content for crawlers
+- add redirects, authorization checks, or status codes that make public pages unavailable
+- hide important page text in a way that search engines cannot read
+- accidentally point the test page canonical to the wrong production URL or vice versa
+
+If a change affects SEO or indexation, mark it as a risk and require manual verification in Yandex Webmaster and Google Search Console before production deployment.
+
 ## Review checklist
 
 Check:
@@ -33,8 +54,9 @@ Check:
 8. JSON structure validity
 9. accidental edits to production files
 10. large unnecessary rewrites
-11. SEO / indexation regressions if templates changed
-12. rollback path
+11. SEO / indexation regressions
+12. robots, sitemap, canonical, title, description, H1, redirects, and status codes when relevant
+13. rollback path
 
 ## Output format
 
@@ -53,4 +75,4 @@ If there are no serious issues, say so directly, but still list manual checks.
 
 ## Review style
 
-Be strict but practical. The goal is to keep the site alive, leads working, and production untouched unless explicitly requested.
+Be strict but practical. The goal is to keep the site alive, leads working, indexation intact, and production untouched unless explicitly requested.
